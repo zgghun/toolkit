@@ -1,15 +1,12 @@
-package zgg.toolkit.logtool;
+package zgg.toolkit.core;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * @author zgg
- */
 @SpringBootApplication
-public class ToolkitLogApplication {
+public class ToolkitCoreApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ToolkitLogApplication.class, args);
+		SpringApplication.run(ToolkitCoreApplication.class, args);
 	}
 }
