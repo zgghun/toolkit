@@ -20,6 +20,7 @@
 
     <modules>
         <module>toolkit-api</module>
+        <module>toolkit-log</module>
     </modules>
 
     <properties>
