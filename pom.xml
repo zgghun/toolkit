@@ -21,6 +21,7 @@
     <modules>
         <module>toolkit-api</module>
         <module>toolkit-log</module>
+        <module>toolkit-core</module>
     </modules>
 
     <properties>
