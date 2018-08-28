@@ -1,7 +1,6 @@
 package zgg.toolkit.core.exception;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -31,7 +30,7 @@ public class GlobalExceptionHandler {
         if (ex instanceof BaseException) {
             result = new BaseResult(2, "error", ex.getMessage());
         } else {
-
+            logger.error(ex.toString());
         }
         if (RequestType.WEB.equals(getRequestType(req))) {
             String errorPage = ERROR_PAGE_PREFIX + "/501.html";
@@ -43,7 +42,7 @@ public class GlobalExceptionHandler {
         }
         if (RequestType.AJAX.equals(getRequestType(req))) {
             try {
-                String str = JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
+                String str = JSON.toJSONString(result);
                 rep.setContentType("application/json;charset=UTF-8");
                 rep.getWriter().print(str);
             } catch (IOException e) {
@@ -52,7 +51,7 @@ public class GlobalExceptionHandler {
         }
     }
 
-    private static RequestType getRequestType(HttpServletRequest request) {
+    private RequestType getRequestType(HttpServletRequest request) {
         String with = request.getHeader("X-Requested-With");
         if (with == null) {
             return RequestType.WEB;
