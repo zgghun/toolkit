@@ -8,11 +8,11 @@ import zgg.toolkit.core.bean.BaseResult;
 
 public class BaseController {
 
-    protected BaseResult result(){
+    protected BaseResult baseResult(){
         return new BaseResult();
     }
 
-    protected BaseResult result(Object date){
+    protected BaseResult baseResult(Object date){
         return new BaseResult(date);
     }
 }
