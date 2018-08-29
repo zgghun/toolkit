@@ -32,6 +32,7 @@ public class GlobalExceptionHandler {
         } else {
             logger.error(ex.toString());
         }
+        // 普通web请求，发生异常跳转错误页面
         if (RequestType.WEB.equals(getRequestType(req))) {
             String errorPage = ERROR_PAGE_PREFIX + "/501.html";
             try {
@@ -40,6 +41,7 @@ public class GlobalExceptionHandler {
                 e.printStackTrace();
             }
         }
+        // ajax请求，发生异常返回 json 数据
         if (RequestType.AJAX.equals(getRequestType(req))) {
             try {
                 String str = JSON.toJSONString(result);
