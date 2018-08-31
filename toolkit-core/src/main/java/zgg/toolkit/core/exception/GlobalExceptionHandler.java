@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import zgg.toolkit.core.bean.BaseResult;
+import zgg.toolkit.core.bean.CommonResult;
 import zgg.toolkit.core.enums.RequestType;
 
 import javax.servlet.ServletException;
@@ -26,9 +26,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public void exceptionHandler(HttpServletRequest req, HttpServletResponse rep, Exception ex) {
-        BaseResult result = new BaseResult();
+        CommonResult result = new CommonResult();
         if (ex instanceof BaseException) {
-            result = new BaseResult(2, "error", ex.getMessage());
+            result = new CommonResult(2, "error", ex.getMessage());
         } else {
             logger.error(ex.toString());
         }

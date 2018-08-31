@@ -16,4 +16,13 @@ public class User {
     private Integer age;
     private LocalDate birthday;
 
+    public User() {
+    }
+
+    public User(Integer id, String username, Integer age, LocalDate birthday) {
+        this.id = id;
+        this.username = username;
+        this.age = age;
+        this.birthday = birthday;
+    }
 }
