@@ -1,4 +1,4 @@
-package zgg.toolkit.core.bean;
+package zgg.toolkit.core.page;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package zgg.toolkit.core.controller;
 
-import zgg.toolkit.core.bean.BaseResult;
+import zgg.toolkit.core.bean.CommonResult;
 
 /**
  * Created by zgg on 2018/08/27
@@ -8,11 +8,11 @@ import zgg.toolkit.core.bean.BaseResult;
 
 public class BaseController {
 
-    protected BaseResult baseResult(){
-        return new BaseResult();
+    protected CommonResult commonResult(){
+        return new CommonResult();
     }
 
-    protected BaseResult baseResult(Object date){
-        return new BaseResult(date);
+    protected CommonResult commonResult(Object date){
+        return new CommonResult(date);
     }
 }
