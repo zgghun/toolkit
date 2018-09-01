@@ -3,6 +3,7 @@ package zgg.toolkit.core.exception;
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import zgg.toolkit.core.bean.CommonResult;
@@ -45,7 +46,7 @@ public class GlobalExceptionHandler {
         if (RequestType.AJAX.equals(getRequestType(req))) {
             try {
                 String str = JSON.toJSONString(result);
-                rep.setContentType("application/json;charset=UTF-8");
+                rep.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                 rep.getWriter().print(str);
             } catch (IOException e) {
                 e.printStackTrace();
