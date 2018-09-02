@@ -2,21 +2,23 @@ package zgg.toolkit.core.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import zgg.toolkit.core.bean.CommonResult;
-import zgg.toolkit.core.page.PageList;
-import zgg.toolkit.core.page.PageParam;
+import zgg.toolkit.core.bean.Student;
 import zgg.toolkit.core.bean.User;
 import zgg.toolkit.core.exception.BaseException;
+import zgg.toolkit.core.page.PageList;
+import zgg.toolkit.core.page.PageParam;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,10 +29,18 @@ import java.util.List;
 public class TestController extends BaseController{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @PostMapping("/page2")
+    public CommonResult testBody(@RequestBody Student user){
+        logger.info(user.toString());
+        return commonResult();
+    }
+
+
     @GetMapping("/page")
     public CommonResult testPage(PageParam page){
+        User user = new User(999999999999999999L, "AAA", 17, LocalDateTime.now(), LocalDate.now(), LocalTime.now(), new Date());
         List<User> users = Arrays.asList(
-                new User(12, "AAA", 17, LocalDate.now()),
+                user,
                 new User()
         );
         PageList<User> pageList = new PageList<>(users, 20, page);

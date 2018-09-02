@@ -15,11 +15,29 @@ import java.util.List;
  */
 
 @Configuration
+//@EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
-
+//
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-
+//        MappingJackson2HttpMessageConverter jacksonConverter = new MappingJackson2HttpMessageConverter();
+//        JavaTimeModule javaTimeModule = new JavaTimeModule();
+//        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+//        javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd********")));
+//        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
+//
+//
+////         大数序列化后，Long转json精度丢失的问题
+//        SimpleModule simpleModule = new SimpleModule();
+//        simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
+//        simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
+//        simpleModule.addSerializer(BigInteger.class, ToStringSerializer.instance);
+//
+//        ObjectMapper objectMapper = jacksonConverter.getObjectMapper();
+//        objectMapper.registerModule(javaTimeModule);
+//        jacksonConverter.setObjectMapper(objectMapper);
+//
+//        converters.add(jacksonConverter);
     }
 
 }
