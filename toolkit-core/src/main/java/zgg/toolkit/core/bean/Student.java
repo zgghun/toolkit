@@ -1,5 +1,6 @@
 package zgg.toolkit.core.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -12,20 +13,21 @@ import java.util.Date;
  */
 
 @Data
-public class User {
+public class Student {
     private Long id;
     private String username;
     private Integer age;
 
+    @JsonFormat(pattern = "yyyy|MM|dd HH:mm:ss")
     private LocalDateTime localDateTime;
     private LocalDate localDate;
     private LocalTime localTime;
     private Date date;
 
-    public User() {
+    public Student() {
     }
 
-    public User(Long id, String username, Integer age, LocalDateTime localDateTime,LocalDate localDate, LocalTime localTime, Date date) {
+    public Student(Long id, String username, Integer age, LocalDateTime localDateTime, LocalDate localDate, LocalTime localTime, Date date) {
         this.id = id;
         this.username = username;
         this.age = age;

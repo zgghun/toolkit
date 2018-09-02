@@ -28,11 +28,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public void exceptionHandler(HttpServletRequest req, HttpServletResponse rep, Exception ex) {
         CommonResult result = new CommonResult();
+
         if (ex instanceof BaseException) {
             result = new CommonResult(2, "error", ex.getMessage());
-        } else {
-            logger.error(ex.toString());
         }
+        result= new CommonResult(3, "error", ex.getMessage());
+        logger.error(ex.toString());
+
+
         // 普通web请求，发生异常跳转错误页面
         if (RequestType.WEB.equals(getRequestType(req))) {
             String errorPage = ERROR_PAGE_PREFIX + "/501.html";
