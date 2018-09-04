@@ -38,7 +38,7 @@ public class TestController extends BaseController{
 
     @GetMapping("/page")
     public CommonResult testPage(PageParam page){
-        User user = new User(999999999999999999L, "AAA", 17, LocalDateTime.now(), LocalDate.now(), LocalTime.now(), new Date());
+        User user = new User(999999999999999999L, "AAA", 17, LocalDateTime.now(), LocalDate.now(), LocalTime.now(), new Date(), null);
         List<User> users = Arrays.asList(
                 user,
                 new User()
