@@ -14,7 +14,7 @@ public class CommonResult {
     public CommonResult() {
         this.code = 200;
         this.message = "ok";
-        this.data = null;
+        this.data = "";
     }
 
     public CommonResult(Object data) {
