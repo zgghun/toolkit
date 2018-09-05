@@ -30,9 +30,9 @@ public class TestController extends BaseController{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @PostMapping("/page2")
-    public CommonResult testBody(@RequestBody Student user){
+    public CommonResult testBody(Student user){
         logger.info(user.toString());
-        return commonResult();
+        return commonResult(user);
     }
 
 
