@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import zgg.toolkit.core.bean.CommonResult;
+import zgg.toolkit.core.model.CommonResult;
 import zgg.toolkit.core.enums.RequestType;
 
 import javax.servlet.ServletException;

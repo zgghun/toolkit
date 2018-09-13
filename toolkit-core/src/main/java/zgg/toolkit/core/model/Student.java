@@ -1,4 +1,4 @@
-package zgg.toolkit.core.bean;
+package zgg.toolkit.core.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
