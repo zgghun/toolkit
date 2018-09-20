@@ -20,5 +20,11 @@ public class PageParam {
         this.pageSize = pageSize;
     }
 
+    public Integer getPageIndex() {
+        return (pageIndex == null || pageIndex < 1) ? 1 : pageIndex;
+    }
 
+    public Integer getPageSize() {
+        return (pageSize == null || pageSize < 1) ? 20 : pageSize;
+    }
 }

@@ -1,7 +1,6 @@
 package zgg.toolkit.core.page;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,8 +8,7 @@ import java.util.Collection;
 /**
  * Created by zgg on 2018/08/29
  */
-@Getter
-@Setter
+@Data
 public class PageList<T> extends ArrayList<T> {
     private Integer pageIndex;
     private Integer pageSize;

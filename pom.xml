@@ -23,6 +23,7 @@
         <module>toolkit-log</module>
         <module>toolkit-core</module>
         <module>toolkit-bug</module>
+        <module>toolkit-system</module>
     </modules>
 
     <properties>

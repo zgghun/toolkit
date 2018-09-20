@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 
     private static final String ERROR_PAGE_PREFIX = "/error";
 
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(Exception.class)
     public void exceptionHandler(HttpServletRequest req, HttpServletResponse rep, Exception ex) {
         CommonResult result = new CommonResult();
 

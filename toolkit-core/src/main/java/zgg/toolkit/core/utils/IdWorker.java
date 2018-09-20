@@ -71,9 +71,9 @@ public class IdWorker {
         this.datacenterId = datacenterId;
     }
 
-    private static IdWorker idWorker = new IdWorker(0, 1);
+    private static IdWorker idWorker = new IdWorker(0, 0);
 
-    public static long getId(){
+    public static long getNextId(){
         return idWorker.nextId();
     }
 
