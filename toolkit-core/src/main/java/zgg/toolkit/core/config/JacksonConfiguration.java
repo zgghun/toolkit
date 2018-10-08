@@ -33,7 +33,7 @@ public class JacksonConfiguration {
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer customizeJackson2ObjectMapper() {
         return (Jackson2ObjectMapperBuilder builder) -> {
-            // Java8 java.time 全局序列化和反序列化设置
+            // Java8 java.time 全局序列化和反序列化设置，覆盖默认日期格式
             JavaTimeModule javaTimeModule = new JavaTimeModule();
             javaTimeModule
                     .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateConsts.YMDHMS)))
