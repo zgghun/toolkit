@@ -36,6 +36,7 @@
     </properties>
 
     <dependencies>
+
         <!--工具类-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
