@@ -43,7 +43,7 @@ public class JacksonConfiguration {
                     .addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateConsts.YMD)))
                     .addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateConsts.HMS)));
 
-            // 解决 Long 型数据精度丢失问题, 把过大的数转为字符串，（java中long型数据范围超出了js中数值范围原因造成的）
+            // 解决 Long 型数据精度丢失问题, 把过大的数转为字符串，（java中long型数据范围超出了js中数值范围）
             SimpleModule simpleModule = new SimpleModule();
             simpleModule.addSerializer(BigInteger.class, ToStringSerializer.instance)
                     .addSerializer(Long.class, ToStringSerializer.instance)
