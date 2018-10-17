@@ -25,19 +25,23 @@ public class GlobalExceptionHandler {
 
     private static final String ERROR_PAGE_PREFIX = "/error";
 
+    @ExceptionHandler(BaseException.class)
+    public void baseExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BaseException ex){
+        logger.error(ex.toString());
+        CommonResult result = new CommonResult();
+        errorDeal(req, rep, result);
+    }
+
     @ExceptionHandler(Exception.class)
     public void exceptionHandler(HttpServletRequest req, HttpServletResponse rep, Exception ex) {
-        CommonResult result = new CommonResult();
-
-        if (ex instanceof BaseException) {
-            result = new CommonResult(2, "error", ex.getMessage());
-        }
-        result= new CommonResult(3, "error", ex.getMessage());
+        CommonResult result = new CommonResult(3, "error", ex.getMessage());
         logger.error(ex.toString());
+        errorDeal(req, rep, result);
+    }
 
-
-        // 普通web请求，发生异常跳转错误页面
-        if (RequestType.WEB.equals(getRequestType(req))) {
+    // web请求和ajax请求错误处理
+    private void errorDeal(HttpServletRequest req, HttpServletResponse rep, CommonResult result) {
+        if (RequestType.WEB == getRequestType(req)) {
             String errorPage = ERROR_PAGE_PREFIX + "/501.html";
             try {
                 req.getRequestDispatcher(errorPage).forward(req, rep);
@@ -45,8 +49,7 @@ public class GlobalExceptionHandler {
                 e.printStackTrace();
             }
         }
-        // ajax请求，发生异常返回 json 数据
-        if (RequestType.AJAX.equals(getRequestType(req))) {
+        if (RequestType.AJAX == getRequestType(req)) {
             try {
                 String str = new Gson().toJson(result);
                 rep.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
@@ -56,6 +59,7 @@ public class GlobalExceptionHandler {
             }
         }
     }
+
 
     private RequestType getRequestType(HttpServletRequest request) {
         String with = request.getHeader("X-Requested-With");
