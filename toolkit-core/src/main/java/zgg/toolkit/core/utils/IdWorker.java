@@ -51,6 +51,12 @@ public class IdWorker {
     // 数据标识id部分
     private final long datacenterId;
 
+    private static final IdWorker INSTANCE = new IdWorker(0, 0);
+
+    public static long nextId(){
+        return INSTANCE.generateNextId();
+    }
+
     private IdWorker() {
         this.datacenterId = getDatacenterId(maxDatacenterId);
         this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
@@ -71,16 +77,11 @@ public class IdWorker {
         this.datacenterId = datacenterId;
     }
 
-    private static IdWorker idWorker = new IdWorker(0, 0);
-
-    public static long getNextId(){
-        return idWorker.nextId();
-    }
 
     /**
      * 获取下一个ID
      */
-    public synchronized long nextId() {
+    public synchronized long generateNextId() {
         long timestamp = timeGen();
         if (timestamp < lastTimestamp) {
             throw new RuntimeException(String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
@@ -164,7 +165,7 @@ public class IdWorker {
         IdWorker idWorker = new IdWorker(0, 0);
         LocalTime start = LocalTime.now();
         for (int i = 0; i < 10; i++) {
-            System.out.println(idWorker.nextId());
+            System.out.println(idWorker.generateNextId());
         }
 //        LocalTime end = LocalTime.now();
 //        System.out.println(start);
