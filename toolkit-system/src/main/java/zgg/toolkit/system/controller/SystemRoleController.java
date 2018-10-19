@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import zgg.toolkit.core.controller.BaseController;
-import zgg.toolkit.system.pojo.dto.RoleSaveDto;
-import zgg.toolkit.system.pojo.entity.Role;
+import zgg.toolkit.system.model.dto.RoleSaveDto;
+import zgg.toolkit.system.model.entity.Role;
 import zgg.toolkit.system.service.RoleService;
 
 /**

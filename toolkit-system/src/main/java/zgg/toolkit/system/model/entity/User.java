@@ -1,9 +1,11 @@
-package zgg.toolkit.system.pojo.entity;
+package zgg.toolkit.system.model.entity;
+
+import zgg.toolkit.core.enums.StatusEnum;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Table(name = "sys_user")
 public class User {
@@ -31,13 +33,30 @@ public class User {
     /**
      * 账号状态 enable、disable、delete
      */
-    private String status;
+    private StatusEnum status;
 
     @Column(name = "create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @Column(name = "update_time")
-    private Date updateTime;
+    private LocalDateTime updateTime;
+
+    public User(Long id, String username, String tel, String email, String password, String avatar, String gender, StatusEnum status, LocalDateTime createTime, LocalDateTime updateTime) {
+        this.id = id;
+        this.username = username;
+        this.tel = tel;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.gender = gender;
+        this.status = status;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public User() {
+        super();
+    }
 
     /**
      * @return id
@@ -150,7 +169,7 @@ public class User {
      *
      * @return status - 账号状态 enable、disable、delete
      */
-    public String getStatus() {
+    public StatusEnum getStatus() {
         return status;
     }
 
@@ -159,35 +178,35 @@ public class User {
      *
      * @param status 账号状态 enable、disable、delete
      */
-    public void setStatus(String status) {
+    public void setStatus(StatusEnum status) {
         this.status = status;
     }
 
     /**
      * @return create_time
      */
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
     /**
      * @param createTime
      */
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
     /**
      * @return update_time
      */
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
     /**
      * @param updateTime
      */
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 }

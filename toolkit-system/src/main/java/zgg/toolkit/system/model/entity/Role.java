@@ -1,4 +1,4 @@
-package zgg.toolkit.system.pojo.entity;
+package zgg.toolkit.system.model.entity;
 
 import javax.persistence.*;
 

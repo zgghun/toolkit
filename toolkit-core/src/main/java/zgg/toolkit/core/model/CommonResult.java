@@ -1,6 +1,7 @@
 package zgg.toolkit.core.model;
 
 import lombok.Data;
+import zgg.toolkit.core.enums.ResultEnum;
 
 /**
  * Created by zgg on 2018/08/27
@@ -12,20 +13,20 @@ public class CommonResult {
     private Object data;
 
     public CommonResult() {
-        this.code = 200;
-        this.message = "ok";
+        this.code = ResultEnum.OK.getCode();
+        this.message = ResultEnum.OK.getNote();
         this.data = "";
     }
 
     public CommonResult(Object data) {
-        this.code = 200;
-        this.message = "ok";
-        this.data = data;
+        this.code = ResultEnum.OK.getCode();
+        this.message = ResultEnum.OK.getNote();
+        this.data = data == null ? "" : data;
     }
 
-    public CommonResult(Integer code, String message, Object data) {
-        this.code = code;
-        this.message = message;
+    public CommonResult(ResultEnum resultEnum, Object data) {
+        this.code = resultEnum.getCode();
+        this.message = resultEnum.getNote();
         this.data = data;
     }
 
