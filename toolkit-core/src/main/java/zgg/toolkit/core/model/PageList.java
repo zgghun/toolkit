@@ -1,7 +1,6 @@
 package zgg.toolkit.core.model;
 
 import com.github.pagehelper.Page;
-import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +9,6 @@ import java.util.List;
 /**
  * Created by zgg on 2018/08/29
  */
-@Data
 public class PageList<T> extends ArrayList<T> {
     private Integer pageNum;
     private Integer pageSize;
@@ -19,13 +17,6 @@ public class PageList<T> extends ArrayList<T> {
     public PageList() {
         super();
     }
-
-//    public PageList(Collection<? extends T> c, PageParam page) {
-//        super(c);
-//        this.pageNum = page.getPageNum();
-//        this.pageSize = page.getPageSize();
-//        this.total = (long) c.size();
-//    }
 
     private PageList(Collection<? extends T> c, Integer pageNum, Integer pageSize, Long total) {
         super(c);
@@ -40,5 +31,29 @@ public class PageList<T> extends ArrayList<T> {
             return new PageList(list, page.getPageNum(), page.getPageSize(), page.getTotal());
         }
         return null;
+    }
+
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
     }
 }

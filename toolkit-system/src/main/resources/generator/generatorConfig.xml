@@ -4,7 +4,9 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <!--MybatisGenerator 配置参考 https://blog.csdn.net/isea533/article/details/42102297-->
+    <!--Mybatis Generator 配置参考 https://blog.csdn.net/isea533/article/details/42102297-->
+    <!--Mybatis Generator对于生成的实体和mapper.java默认采取直接覆盖操作，所有不要再自动生成的文件里添加自己的方法，-->
+    <!--而生成的xml只会覆盖它自动生成的内容，用户添加的会保留-->
     <properties resource="application.properties"/>
 
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
@@ -21,15 +23,26 @@
                         password="${spring.datasource.password}">
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="zgg.toolkit.system.pojo.entity" targetProject="src/main/java"/>
+        <javaTypeResolver>
+            <!--http://www.mybatis.org/generator/configreference/javaTypeResolver.html-->
+            <property name="forceBigDecimals" value="true"/>
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="zgg.toolkit.system.model.entity" targetProject="src/main/java">
+            <property name="constructorBased" value="true"/>
+        </javaModelGenerator>
 
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
 
         <javaClientGenerator targetPackage="zgg.toolkit.system.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="sys_permission" domainObjectName="Permission"></table>
-        <table tableName="sys_role" domainObjectName="Role"></table>
-        <table tableName="sys_user" domainObjectName="User"></table>
+        <!--<table tableName="sys_permission" domainObjectName="Permission"></table>-->
+        <!--<table tableName="sys_role" domainObjectName="Role"></table>-->
+        <table tableName="sys_user" domainObjectName="User">
+            <!--<columnOverride column="gender" javaType="zgg.toolkit.core.enums.GenderEnum"/>-->
+            <columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>
+        </table>
     </context>
 </generatorConfiguration>
