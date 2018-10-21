@@ -1,9 +1,9 @@
 package zgg.toolkit.system;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import tk.mybatis.spring.annotation.MapperScan;
 import zgg.toolkit.core.ToolkitCoreApplication;
 
 /**
@@ -11,13 +11,13 @@ import zgg.toolkit.core.ToolkitCoreApplication;
  */
 @MapperScan(basePackages = "zgg.toolkit.system.mapper")
 @SpringBootApplication
-public class SystemApplication {
+public class ToolkitSystemApplication {
 
     public static void main(String[] args) {
         Class[] objects = new Class[]{
                 ToolkitCoreApplication.class,
 //                ToolkitApiApplication.class,
-                SystemApplication.class};
+                ToolkitSystemApplication.class};
         new SpringApplicationBuilder(objects).web(WebApplicationType.SERVLET).run(args);
     }
 }
