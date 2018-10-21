@@ -9,6 +9,7 @@ import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.service.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by zgg on 2018/10/18
@@ -18,6 +19,12 @@ import javax.validation.Valid;
 public class SystemUserController extends BaseController {
     @Autowired
     private UserService userService;
+
+    @RequestMapping("/list")
+    public Object findUser(){
+        List<User> users = userService.listUser();
+        return commonResult(users);
+    }
 
     @RequestMapping("/saveUser")
     public Object saveUser(@Valid UserSaveDto dto){

@@ -3,8 +3,6 @@ package zgg.toolkit.system.model.dto;
 import lombok.Data;
 import zgg.toolkit.core.enums.StatusEnum;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +15,5 @@ public class RoleSaveDto {
     @NotBlank
     private String name;
     @NotNull
-    @Enumerated(EnumType.STRING)
     private StatusEnum status;
 }

@@ -3,7 +3,7 @@ package zgg.toolkit.core.enums;
 /**
  * Created by zgg on 2018/10/18
  */
-public enum StatusEnum {
+public enum StatusEnum{
     // 启用
     ENABLE,
     // 停用
