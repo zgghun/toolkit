@@ -16,7 +16,6 @@ public class ToolkitSystemApplication {
     public static void main(String[] args) {
         Class[] objects = new Class[]{
                 ToolkitCoreApplication.class,
-//                ToolkitApiApplication.class,
                 ToolkitSystemApplication.class};
         new SpringApplicationBuilder(objects).web(WebApplicationType.SERVLET).run(args);
     }

@@ -36,6 +36,7 @@ public class GlobalExceptionHandler {
         errorDeal(req, rep, result);
     }
 
+    // 参数校验错误
     @ExceptionHandler(BindException.class)
     public void bindingExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BindException ex) {
         logger.error(ex.toString());
