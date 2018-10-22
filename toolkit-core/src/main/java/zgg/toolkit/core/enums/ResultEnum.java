@@ -3,7 +3,7 @@ package zgg.toolkit.core.enums;
 /**
  * Created by zgg on 2018/10/19
  */
-public enum ResultEnum implements BaseEnum{
+public enum ResultEnum {
 
     BIND_ERROR(101, "参数绑定错误"),
     FAIL(100, "系统异常"),

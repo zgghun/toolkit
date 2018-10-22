@@ -3,7 +3,7 @@ package zgg.toolkit.core.enums;
 /**
  * Created by zgg on 2018/10/18
  */
-public enum GenderEnum implements BaseEnum{
+public enum GenderEnum {
     // 男
     MALE,
     // 女
