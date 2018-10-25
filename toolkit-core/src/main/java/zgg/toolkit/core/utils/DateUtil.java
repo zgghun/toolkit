@@ -1,11 +1,10 @@
-package zgg.toolkit.core.constant;
+package zgg.toolkit.core.utils;
 
 /**
- * Created by zgg on 2018/09/03
- * Date 相关产量
+ * Created by zgg on 2018/10/25
  */
 
-public class DateConsts {
+public class DateUtil {
     public static final String YMDHMS = "yyyy-MM-dd HH:mm:ss";
     public static final String YMD = "yyyy-MM-dd";
     public static final String HMS = "HH:mm:ss";

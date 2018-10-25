@@ -35,6 +35,7 @@
 
         <javaModelGenerator targetPackage="zgg.toolkit.system.model.entity" targetProject="src/main/java">
             <property name="constructorBased" value="true"/>
+            <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
@@ -42,11 +43,11 @@
         <javaClientGenerator targetPackage="zgg.toolkit.system.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="sys_permission" domainObjectName="Permission"></table>
+        <!--<table tableName="sys_permission" domainObjectName="Permission"></table>-->
         <table tableName="sys_role" domainObjectName="Role"></table>
-        <table tableName="sys_user" domainObjectName="User">
-            <columnOverride column="gender" javaType="zgg.toolkit.core.enums.GenderEnum"/>
-            <columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>
-        </table>
+        <!--<table tableName="sys_user" domainObjectName="User">-->
+            <!--<columnOverride column="gender" javaType="zgg.toolkit.core.enums.GenderEnum"/>-->
+            <!--<columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

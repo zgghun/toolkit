@@ -95,7 +95,7 @@ public class Role {
      * @mbg.generated
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     /**
@@ -119,6 +119,6 @@ public class Role {
      * @mbg.generated
      */
     public void setStatus(String status) {
-        this.status = status;
+        this.status = status == null ? null : status.trim();
     }
 }

@@ -51,7 +51,7 @@ public class IdWorker {
     // 数据标识id部分
     private final long datacenterId;
 
-    private static final IdWorker INSTANCE = new IdWorker(0, 0);
+    private static IdWorker INSTANCE = new IdWorker(0, 0);
 
     public static long nextId(){
         return INSTANCE.generateNextId();
