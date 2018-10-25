@@ -29,7 +29,7 @@
         <javaTypeResolver>
             <!--http://www.mybatis.org/generator/configreference/javaTypeResolver.html-->
             <property name="forceBigDecimals" value="true"/>
-            <!--要求MGB版本1.3.7及以上，以支持java8 time-->
+            <!--MGB版本1.3.7及以上才支持java8 time-->
             <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
 
