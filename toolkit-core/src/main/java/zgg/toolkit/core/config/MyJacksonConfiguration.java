@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilde
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import zgg.toolkit.core.constant.DateConsts;
+import zgg.toolkit.core.utils.DateUtil;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -28,7 +28,7 @@ import java.time.format.DateTimeFormatter;
  * 参考 https://github.com/FasterXML/jackson-docs/wiki/JacksonHowToCustomSerializers
  **/
 @Configuration
-public class JacksonConfiguration {
+public class MyJacksonConfiguration {
 
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer customizeJackson2ObjectMapper() {
@@ -36,12 +36,12 @@ public class JacksonConfiguration {
             // Java8 java.time 全局序列化和反序列化设置，覆盖默认日期格式
             JavaTimeModule javaTimeModule = new JavaTimeModule();
             javaTimeModule
-                    .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateConsts.YMDHMS)))
-                    .addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DateConsts.YMD)))
-                    .addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateConsts.HMS)))
-                    .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DateConsts.YMDHMS)))
-                    .addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateConsts.YMD)))
-                    .addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateConsts.HMS)));
+                    .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.YMDHMS)))
+                    .addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DateUtil.YMD)))
+                    .addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateUtil.HMS)))
+                    .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DateUtil.YMDHMS)))
+                    .addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateUtil.YMD)))
+                    .addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateUtil.HMS)));
 
             // 解决 Long 型数据精度丢失问题, 把过大的数转为字符串，（java中long型数据范围超出了js中数值范围）
             SimpleModule simpleModule = new SimpleModule();
