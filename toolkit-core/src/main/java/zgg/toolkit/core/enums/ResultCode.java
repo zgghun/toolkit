@@ -7,6 +7,7 @@ public enum ResultCode {
 
     BIND_ERROR(201, "参数绑定错误"),
 
+    MORE_THAN_ONE_ERROT(104, "查出多个结果"),
     SYSTEM_ERROR(103, "系统异常"),
 
     UNAUTHORIZED(102, "未授权"),

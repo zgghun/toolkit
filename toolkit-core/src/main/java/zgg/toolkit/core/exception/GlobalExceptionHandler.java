@@ -32,11 +32,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BaseException.class)
     public void baseExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BaseException ex) {
         logger.error(ex.toString());
-        CommonResult result = new CommonResult();
+        CommonResult result = new CommonResult(ex.getResultCode());
         errorDeal(req, rep, result);
     }
 
-    // 参数校验错误
+    // 参数绑定错误
     @ExceptionHandler(BindException.class)
     public void bindingExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BindException ex) {
         logger.error(ex.toString());
