@@ -21,7 +21,7 @@ public class UserController extends BaseController {
     private UserService userService;
 
     @RequestMapping("/list")
-    public Object findUser(){
+    public Object listUser(){
         List<User> users = userService.listUser();
         return commonResult(users);
     }

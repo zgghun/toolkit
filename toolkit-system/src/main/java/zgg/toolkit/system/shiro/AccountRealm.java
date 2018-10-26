@@ -9,7 +9,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import zgg.toolkit.core.constant.GlobalConstant;
 import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.model.vo.LoginInfo;
@@ -20,7 +19,7 @@ import java.util.List;
 /**
  * Created by zgg on 2018/10/25
  */
-@Component
+//@Component
 public class AccountRealm extends AuthorizingRealm {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
