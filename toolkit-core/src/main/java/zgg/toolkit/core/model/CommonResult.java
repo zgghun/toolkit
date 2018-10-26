@@ -1,7 +1,7 @@
 package zgg.toolkit.core.model;
 
 import lombok.Data;
-import zgg.toolkit.core.enums.ResultEnum;
+import zgg.toolkit.core.enums.ResultCode;
 
 /**
  * Created by zgg on 2018/08/27
@@ -13,18 +13,24 @@ public class CommonResult {
     private Object data;
 
     public CommonResult() {
-        this.code = ResultEnum.OK.getCode();
-        this.message = ResultEnum.OK.getNote();
+        this.code = ResultCode.OK.getCode();
+        this.message = ResultCode.OK.getNote();
+        this.data = "";
+    }
+
+    public CommonResult(ResultCode resultCode){
+        this.code = resultCode.getCode();
+        this.message = resultCode.getNote();
         this.data = "";
     }
 
     public CommonResult(Object data) {
-        this.code = ResultEnum.OK.getCode();
-        this.message = ResultEnum.OK.getNote();
+        this.code = ResultCode.OK.getCode();
+        this.message = ResultCode.OK.getNote();
         this.data = data == null ? "" : data;
     }
 
-    public CommonResult(ResultEnum resultEnum, Object data) {
+    public CommonResult(ResultCode resultEnum, Object data) {
         this.code = resultEnum.getCode();
         this.message = resultEnum.getNote();
         this.data = data;

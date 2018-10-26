@@ -8,7 +8,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import zgg.toolkit.core.enums.RequestType;
-import zgg.toolkit.core.enums.ResultEnum;
+import zgg.toolkit.core.enums.ResultCode;
 import zgg.toolkit.core.model.CommonResult;
 
 import javax.servlet.ServletException;
@@ -43,13 +43,13 @@ public class GlobalExceptionHandler {
         Map<String, String> map = new HashMap<>(16);
         ex.getFieldErrors()
                 .forEach(it -> map.put(it.getField(), it.getDefaultMessage()));
-        CommonResult result = new CommonResult(ResultEnum.BIND_ERROR, map);
+        CommonResult result = new CommonResult(ResultCode.BIND_ERROR, map);
         errorDeal(req, rep, result);
     }
 
     @ExceptionHandler(Exception.class)
     public void exceptionHandler(HttpServletRequest req, HttpServletResponse rep, Exception ex) {
-        CommonResult result = new CommonResult(ResultEnum.SYSTEM_ERROR, ex.getMessage());
+        CommonResult result = new CommonResult(ResultCode.SYSTEM_ERROR, ex.getMessage());
         logger.error(ex.toString());
         errorDeal(req, rep, result);
     }
