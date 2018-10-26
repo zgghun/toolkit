@@ -27,14 +27,14 @@ public class RoleService {
             Role role = new Role();
             role.setId(IdWorker.nextId());
             role.setName(dto.getName());
-            role.setStatus(StatusEnum.ENABLE.name());
+            role.setStatus(StatusEnum.ENABLE);
             roleMapper.insert(role);
             return role;
         }else {
             Role role = new Role();
             role.setId(dto.getId());
             role.setName(dto.getName());
-            role.setStatus(dto.getStatus().name());
+            role.setStatus(dto.getStatus());
             roleMapper.updateByPrimaryKey(role);
             return role;
         }

@@ -1,8 +1,6 @@
 package zgg.toolkit.core.config;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -13,8 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * 可配置 配置拦截器、CORS、MessageConverter 等等
  */
 
-@Configuration
-@EnableWebMvc
+//@Configuration
+//@EnableWebMvc
 public class MyWebMvcConfig implements WebMvcConfigurer {
 
     // 全局跨域配置 https://docs.spring.io/spring/docs/5.0.10.RELEASE/spring-framework-reference/web.html#mvc-cors

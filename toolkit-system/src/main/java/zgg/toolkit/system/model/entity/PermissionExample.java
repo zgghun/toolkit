@@ -2,6 +2,7 @@ package zgg.toolkit.system.model.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import zgg.toolkit.core.enums.StatusEnum;
 
 public class PermissionExample {
     /**
@@ -454,76 +455,6 @@ public class PermissionExample {
             return (Criteria) this;
         }
 
-        public Criteria andModulePathIsNull() {
-            addCriterion("module_path is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathIsNotNull() {
-            addCriterion("module_path is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathEqualTo(String value) {
-            addCriterion("module_path =", value, "modulePath");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathNotEqualTo(String value) {
-            addCriterion("module_path <>", value, "modulePath");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathGreaterThan(String value) {
-            addCriterion("module_path >", value, "modulePath");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathGreaterThanOrEqualTo(String value) {
-            addCriterion("module_path >=", value, "modulePath");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathLessThan(String value) {
-            addCriterion("module_path <", value, "modulePath");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathLessThanOrEqualTo(String value) {
-            addCriterion("module_path <=", value, "modulePath");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathLike(String value) {
-            addCriterion("module_path like", value, "modulePath");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathNotLike(String value) {
-            addCriterion("module_path not like", value, "modulePath");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathIn(List<String> values) {
-            addCriterion("module_path in", values, "modulePath");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathNotIn(List<String> values) {
-            addCriterion("module_path not in", values, "modulePath");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathBetween(String value1, String value2) {
-            addCriterion("module_path between", value1, value2, "modulePath");
-            return (Criteria) this;
-        }
-
-        public Criteria andModulePathNotBetween(String value1, String value2) {
-            addCriterion("module_path not between", value1, value2, "modulePath");
-            return (Criteria) this;
-        }
-
         public Criteria andPerNameIsNull() {
             addCriterion("per_name is null");
             return (Criteria) this;
@@ -804,62 +735,62 @@ public class PermissionExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(String value) {
+        public Criteria andStatusEqualTo(StatusEnum value) {
             addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(String value) {
+        public Criteria andStatusNotEqualTo(StatusEnum value) {
             addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(String value) {
+        public Criteria andStatusGreaterThan(StatusEnum value) {
             addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(String value) {
+        public Criteria andStatusGreaterThanOrEqualTo(StatusEnum value) {
             addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(String value) {
+        public Criteria andStatusLessThan(StatusEnum value) {
             addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(String value) {
+        public Criteria andStatusLessThanOrEqualTo(StatusEnum value) {
             addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLike(String value) {
+        public Criteria andStatusLike(StatusEnum value) {
             addCriterion("status like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotLike(String value) {
+        public Criteria andStatusNotLike(StatusEnum value) {
             addCriterion("status not like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<String> values) {
+        public Criteria andStatusIn(List<StatusEnum> values) {
             addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<String> values) {
+        public Criteria andStatusNotIn(List<StatusEnum> values) {
             addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(String value1, String value2) {
+        public Criteria andStatusBetween(StatusEnum value1, StatusEnum value2) {
             addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(String value1, String value2) {
+        public Criteria andStatusNotBetween(StatusEnum value1, StatusEnum value2) {
             addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }

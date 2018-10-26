@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public void exceptionHandler(HttpServletRequest req, HttpServletResponse rep, Exception ex) {
-        CommonResult result = new CommonResult(ResultEnum.FAIL, ex.getMessage());
+        CommonResult result = new CommonResult(ResultEnum.SYSTEM_ERROR, ex.getMessage());
         logger.error(ex.toString());
         errorDeal(req, rep, result);
     }

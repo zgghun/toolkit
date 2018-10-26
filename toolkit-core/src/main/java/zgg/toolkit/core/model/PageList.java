@@ -25,6 +25,7 @@ public class PageList<T> extends ArrayList<T> {
         this.total = total;
     }
 
+    @SuppressWarnings("unchecked")
     public static PageList pageResult(List list) {
         if (list instanceof Page<?>) {
             Page<?> page = (Page) list;

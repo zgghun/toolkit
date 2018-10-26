@@ -169,7 +169,7 @@ public class User {
      * @mbg.generated
      */
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username == null ? null : username.trim();
     }
 
     /**
@@ -193,7 +193,7 @@ public class User {
      * @mbg.generated
      */
     public void setTel(String tel) {
-        this.tel = tel;
+        this.tel = tel == null ? null : tel.trim();
     }
 
     /**
@@ -217,7 +217,7 @@ public class User {
      * @mbg.generated
      */
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email == null ? null : email.trim();
     }
 
     /**
@@ -241,7 +241,7 @@ public class User {
      * @mbg.generated
      */
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     /**
@@ -265,7 +265,7 @@ public class User {
      * @mbg.generated
      */
     public void setAvatar(String avatar) {
-        this.avatar = avatar;
+        this.avatar = avatar == null ? null : avatar.trim();
     }
 
     /**

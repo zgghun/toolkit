@@ -16,7 +16,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sys/user")
-public class SystemUserController extends BaseController {
+public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 

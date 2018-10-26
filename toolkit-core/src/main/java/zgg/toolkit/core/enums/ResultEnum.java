@@ -5,8 +5,13 @@ package zgg.toolkit.core.enums;
  */
 public enum ResultEnum {
 
-    BIND_ERROR(101, "参数绑定错误"),
-    FAIL(100, "系统异常"),
+    BIND_ERROR(201, "参数绑定错误"),
+
+    SYSTEM_ERROR(103, "系统异常"),
+
+    UNAUTHORIZED(102, "未授权"),
+    UNAUTHENTICATED(101, "未登录"),
+
     OK(1, "成功");
 
     private int code;

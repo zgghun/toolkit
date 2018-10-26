@@ -1,10 +1,9 @@
 package zgg.toolkit.system.mapper;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.model.entity.UserExample;
-
-import java.util.List;
 
 public interface UserMapper {
     /**
