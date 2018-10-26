@@ -23,8 +23,9 @@ public class MyWebMvcConfig implements WebMvcConfigurer {
                 .allowedMethods("PUT", "DELETE")
                 .allowedHeaders("header1", "header2", "header3")
                 .exposedHeaders("header1", "header2")
-                // 允许跨域传cookie
-                .allowCredentials(true).maxAge(3600);
+                // 允许跨域传递凭证，如传cookie, 用于解决跨域传递shiro的sessionId
+                .allowCredentials(true)
+                .maxAge(3600);
 
                 /*
                     jquery的ajax的post方法请求：

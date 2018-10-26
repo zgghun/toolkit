@@ -3,7 +3,7 @@ package zgg.toolkit.core.enums;
 /**
  * Created by zgg on 2018/10/19
  */
-public enum ResultEnum {
+public enum ResultCode {
 
     BIND_ERROR(201, "参数绑定错误"),
 
@@ -17,7 +17,7 @@ public enum ResultEnum {
     private int code;
     private String note;
 
-    ResultEnum(int code, String note) {
+    ResultCode(int code, String note) {
         this.code = code;
         this.note = note;
     }

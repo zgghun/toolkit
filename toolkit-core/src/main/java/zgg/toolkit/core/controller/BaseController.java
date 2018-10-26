@@ -1,5 +1,6 @@
 package zgg.toolkit.core.controller;
 
+import zgg.toolkit.core.enums.ResultCode;
 import zgg.toolkit.core.model.CommonResult;
 
 /**
@@ -8,11 +9,15 @@ import zgg.toolkit.core.model.CommonResult;
 
 public class BaseController {
 
-    protected CommonResult commonResult(){
+    protected CommonResult commonResult() {
         return new CommonResult();
     }
 
-    protected CommonResult commonResult(Object date){
+    protected CommonResult commonResult(ResultCode resultCode) {
+        return new CommonResult(resultCode);
+    }
+
+    protected CommonResult commonResult(Object date) {
         return new CommonResult(date);
     }
 }
