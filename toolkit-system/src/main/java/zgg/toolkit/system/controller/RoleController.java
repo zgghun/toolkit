@@ -13,7 +13,7 @@ import zgg.toolkit.system.service.RoleService;
  */
 @RestController
 @RequestMapping("/sys/role")
-public class SystemRoleController extends BaseController {
+public class RoleController extends BaseController {
 
     @Autowired
     private RoleService roleService;
