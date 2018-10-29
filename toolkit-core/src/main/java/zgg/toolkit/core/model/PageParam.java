@@ -25,18 +25,18 @@ public class PageParam {
     }
 
     public Integer getPageNum() {
-        return (pageNum == null || pageNum < 1) ? 1 : pageNum;
+        return pageNum;
     }
 
     public Integer getPageSize() {
-        return (pageSize == null || pageSize < 1) ? 20 : pageSize;
+        return pageSize;
     }
 
     public void setPageNum(Integer pageNum) {
-        this.pageNum = pageNum;
+        this.pageNum = pageNum < 1 ? 1 : pageNum;
     }
 
     public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+        this.pageSize = pageSize < 1 ? 20 : pageSize;
     }
 }
