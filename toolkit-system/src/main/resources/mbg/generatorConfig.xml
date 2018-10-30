@@ -46,6 +46,7 @@
         <javaClientGenerator targetPackage="zgg.toolkit.system.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
+        <!-- ************* 数据表数据表数据表 *************-->
         <table tableName="sys_permission" domainObjectName="Permission">
             <columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>
         </table>

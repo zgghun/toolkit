@@ -11,10 +11,10 @@
       <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="tel" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="avatar" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="zgg.toolkit.core.enums.GenderEnum" jdbcType="VARCHAR" />
-      <arg column="status" javaType="zgg.toolkit.core.enums.StatusEnum" jdbcType="VARCHAR" />
+      <arg column="gender" javaType="zgg.toolkit.core.enums.GenderEnum" jdbcType="CHAR" />
+      <arg column="status" javaType="zgg.toolkit.core.enums.StatusEnum" jdbcType="CHAR" />
       <arg column="create_time" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP" />
       <arg column="update_time" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP" />
     </constructor>
@@ -148,8 +148,8 @@
       gender, status, create_time, 
       update_time)
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{email,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="zgg.toolkit.system.model.entity.User">
@@ -204,16 +204,16 @@
         #{email,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+        #{password,jdbcType=CHAR},
       </if>
       <if test="avatar != null">
         #{avatar,jdbcType=VARCHAR},
       </if>
       <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
+        #{gender,jdbcType=CHAR},
       </if>
       <if test="status != null">
-        #{status,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -253,16 +253,16 @@
         email = #{record.email,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=CHAR},
       </if>
       <if test="record.avatar != null">
         avatar = #{record.avatar,jdbcType=VARCHAR},
       </if>
       <if test="record.gender != null">
-        gender = #{record.gender,jdbcType=VARCHAR},
+        gender = #{record.gender,jdbcType=CHAR},
       </if>
       <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=CHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -285,10 +285,10 @@
       username = #{record.username,jdbcType=VARCHAR},
       tel = #{record.tel,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=CHAR},
       avatar = #{record.avatar,jdbcType=VARCHAR},
-      gender = #{record.gender,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=CHAR},
+      status = #{record.status,jdbcType=CHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -312,16 +312,16 @@
         email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+        password = #{password,jdbcType=CHAR},
       </if>
       <if test="avatar != null">
         avatar = #{avatar,jdbcType=VARCHAR},
       </if>
       <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
+        gender = #{gender,jdbcType=CHAR},
       </if>
       <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -341,10 +341,10 @@
     set username = #{username,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      status = #{status,jdbcType=CHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
