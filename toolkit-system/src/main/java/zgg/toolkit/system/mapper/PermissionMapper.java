@@ -1,10 +1,9 @@
 package zgg.toolkit.system.mapper;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import zgg.toolkit.system.model.entity.Permission;
 import zgg.toolkit.system.model.entity.PermissionExample;
-
-import java.util.List;
 
 public interface PermissionMapper {
     /**

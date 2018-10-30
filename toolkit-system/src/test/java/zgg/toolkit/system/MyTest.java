@@ -1,6 +1,8 @@
 package zgg.toolkit.system;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import zgg.toolkit.core.utils.HelpUtils;
 
 import java.util.ArrayList;
@@ -11,11 +13,15 @@ import java.util.List;
  * Created by zgg on 2018/10/25
  */
 public class MyTest {
+    private static final Logger log = LoggerFactory.getLogger(MyTest.class);
+
+
     @Test
     public void test3() {
         String str = "123456";
         String str2 = HelpUtils.md5(str);
         System.out.println(str2);
+        log.debug(str2.length() + "");
         System.out.println("e10adc3949ba59abbe56e057f20f883e");
     }
 

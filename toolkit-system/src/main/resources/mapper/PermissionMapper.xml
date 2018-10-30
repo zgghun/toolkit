@@ -15,7 +15,7 @@
       <arg column="per_code" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="icon" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="status" javaType="zgg.toolkit.core.enums.StatusEnum" jdbcType="VARCHAR" />
+      <arg column="status" javaType="zgg.toolkit.core.enums.StatusEnum" jdbcType="CHAR" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -147,7 +147,7 @@
       icon, sort, status)
     values (#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{moduleName,jdbcType=VARCHAR}, 
       #{modeleCode,jdbcType=VARCHAR}, #{perName,jdbcType=VARCHAR}, #{perCode,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR})
+      #{icon,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{status,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="zgg.toolkit.system.model.entity.Permission">
     <!--
@@ -210,7 +210,7 @@
         #{sort,jdbcType=INTEGER},
       </if>
       <if test="status != null">
-        #{status,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -256,7 +256,7 @@
         sort = #{record.sort,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -277,7 +277,7 @@
       per_code = #{record.perCode,jdbcType=VARCHAR},
       icon = #{record.icon,jdbcType=VARCHAR},
       sort = #{record.sort,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=VARCHAR}
+      status = #{record.status,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -311,7 +311,7 @@
         sort = #{sort,jdbcType=INTEGER},
       </if>
       <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -329,7 +329,7 @@
       per_code = #{perCode,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
-      status = #{status,jdbcType=VARCHAR}
+      status = #{status,jdbcType=CHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

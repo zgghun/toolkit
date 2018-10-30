@@ -1,5 +1,7 @@
 package zgg.toolkit.system.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zgg.toolkit.core.enums.ResultCode;
@@ -45,7 +47,7 @@ public class AccountService {
             return users.get(0);
         }
         if (users.size() > 1){
-            throw new BaseException(ResultCode.MORE_THAN_ONE_ERROT);
+            throw new BaseException(ResultCode.MORE_THAN_ONE_ERROR);
         }
         return null;
     }

@@ -10,7 +10,7 @@
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="note" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="status" javaType="zgg.toolkit.core.enums.StatusEnum" jdbcType="VARCHAR" />
+      <arg column="status" javaType="zgg.toolkit.core.enums.StatusEnum" jdbcType="CHAR" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -140,7 +140,7 @@
     insert into sys_role (id, name, note, 
       status)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR})
+      #{status,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="zgg.toolkit.system.model.entity.Role">
     <!--
@@ -173,7 +173,7 @@
         #{note,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        #{status,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -204,7 +204,7 @@
         note = #{record.note,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -220,7 +220,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       note = #{record.note,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR}
+      status = #{record.status,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -239,7 +239,7 @@
         note = #{note,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -252,7 +252,7 @@
     update sys_role
     set name = #{name,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR}
+      status = #{status,jdbcType=CHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
