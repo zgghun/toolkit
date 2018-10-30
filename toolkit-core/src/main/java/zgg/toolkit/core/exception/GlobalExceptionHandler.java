@@ -29,12 +29,9 @@ public class GlobalExceptionHandler {
 
     private static final String ERROR_PAGE_PREFIX = "/error";
 
-    @ExceptionHandler(BaseException.class)
-    public void baseExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BaseException ex) {
-        logger.error(ex.toString());
-        CommonResult result = new CommonResult(ex.getResultCode());
-        errorDeal(req, rep, result);
-    }
+    // TODO 没有权限错误
+
+    // TODO 未登录错误
 
     // 参数绑定错误
     @ExceptionHandler(BindException.class)
@@ -47,6 +44,7 @@ public class GlobalExceptionHandler {
         errorDeal(req, rep, result);
     }
 
+    // 其他错误
     @ExceptionHandler(Exception.class)
     public void exceptionHandler(HttpServletRequest req, HttpServletResponse rep, Exception ex) {
         CommonResult result = new CommonResult(ResultCode.SYSTEM_ERROR, ex.getMessage());
