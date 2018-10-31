@@ -36,6 +36,7 @@
         <tk-mybatis.version>2.0.4</tk-mybatis.version>
         <page-helper.version>1.2.9</page-helper.version>
         <shiro.version>1.4.0</shiro.version>
+        <shiro-redis.version>3.1.0</shiro-redis.version>
     </properties>
 
     <dependencies>
@@ -61,6 +62,12 @@
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-spring</artifactId>
                 <version>${shiro.version}</version>
+            </dependency>
+            <!-- shiro-redis https://github.com/alexxiyang/shiro-redis-spring-tutorial-->
+            <dependency>
+                <groupId>org.crazycake</groupId>
+                <artifactId>shiro-redis</artifactId>
+                <version>${shiro-redis.version}</version>
             </dependency>
             <!--Mybatis相关 https://github.com/abel533/MyBatis-Spring-Boot-->
             <dependency>

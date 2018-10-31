@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zgg.toolkit.core.enums.StatusEnum;
 import zgg.toolkit.core.utils.IdWorker;
-import zgg.toolkit.system.mapper.RoleMapper;
+import zgg.toolkit.system.mapper.autogen.RoleMapper;
 import zgg.toolkit.system.model.dto.RoleSaveDto;
 import zgg.toolkit.system.model.entity.Role;
 

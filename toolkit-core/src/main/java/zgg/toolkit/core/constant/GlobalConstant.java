@@ -6,6 +6,6 @@ package zgg.toolkit.core.constant;
  */
 
 public class GlobalConstant {
-    //session中存放用户信息的key值
+    //session中存放用户信息,包括基本信息、权限信息、可访问模块
     public static final String SESSION_LOGIN_INFO = "loginInfo";
 }
