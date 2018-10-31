@@ -1,4 +1,4 @@
-package zgg.toolkit.system.mapper;
+package zgg.toolkit.system.mapper.autogen;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;

@@ -1,15 +1,22 @@
 package zgg.toolkit.system.service;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import zgg.toolkit.core.constant.GlobalConstant;
 import zgg.toolkit.core.enums.ResultCode;
 import zgg.toolkit.core.exception.BaseException;
 import zgg.toolkit.core.utils.HelpUtils;
-import zgg.toolkit.system.mapper.UserMapper;
+import zgg.toolkit.system.mapper.AccountMapper;
+import zgg.toolkit.system.mapper.autogen.UserMapper;
 import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.model.entity.UserExample;
+import zgg.toolkit.system.model.vo.LoginInfo;
 
 import java.util.List;
 
@@ -18,8 +25,35 @@ import java.util.List;
  */
 @Service
 public class AccountService {
+    private static final Logger log = LoggerFactory.getLogger(AccountService.class);
+
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private AccountMapper accountMapper;
+
+
+    /**
+     * 登陆
+     * @param username  用户名、电话、邮箱
+     * @param password  明文密码
+     * @param captcha   验证码
+     */
+    public LoginInfo login(String username, String password, String captcha) {
+        UsernamePasswordToken token = new UsernamePasswordToken(username, HelpUtils.md5(password));
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(token);
+        } catch (AuthenticationException e) {
+            log.debug("登陆错误：{}", e.getMessage());
+            throw e;
+        }
+        User user = (User) subject.getPrincipals().getPrimaryPrincipal();
+        // 把登陆信息存到session中,同时返回登陆信息
+        LoginInfo loginInfo = this.getLoginInfo(user.getId());
+        SecurityUtils.getSubject().getSession().setAttribute(GlobalConstant.SESSION_LOGIN_INFO, loginInfo);
+        return loginInfo;
+    }
 
     /**
      * shiro 查询用户
@@ -50,5 +84,14 @@ public class AccountService {
             throw new BaseException(ResultCode.MORE_THAN_ONE_ERROR);
         }
         return null;
+    }
+
+    /**
+     * 获取用户信息、权限、可访问模块
+     * @param userId
+     * @return
+     */
+    public LoginInfo getLoginInfo(Long userId) {
+        return accountMapper.getLoginUserInfo(userId);
     }
 }

@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 public class HelpUtils {
     public static final char[] DIGITS_LOWER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
-    // 从 commons-codec 搬的
+    // MD5加密 ，从 commons-codec 复制的
     public static String md5(String str) {
         byte[] bs = new byte[]{};
         try {
@@ -33,10 +33,12 @@ public class HelpUtils {
 
     }
 
+    // 字符串全是数字验证
     public static boolean isNumeric(String str) {
         return StringUtils.isNumeric(str);
     }
 
+    // 字符串查询
     public static boolean contains(String str, String searchStr) {
         return StringUtils.contains(str, searchStr);
     }

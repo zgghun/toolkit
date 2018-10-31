@@ -40,25 +40,25 @@
         </javaModelGenerator>
 
         <!--xml文件-->
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+        <sqlMapGenerator targetPackage="mapper.autogen" targetProject="src/main/resources"/>
 
         <!--mapper文件-->
-        <javaClientGenerator targetPackage="zgg.toolkit.system.mapper" targetProject="src/main/java"
+        <javaClientGenerator targetPackage="zgg.toolkit.system.mapper.autogen" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
         <!-- ************* 数据表数据表数据表 *************-->
-        <table tableName="sys_permission" domainObjectName="Permission">
-            <columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>
-        </table>
-        <table tableName="sys_role" domainObjectName="Role">
-            <columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>
-        </table>
-        <table tableName="sys_role_permission" domainObjectName="RolePermission"/>
-        <table tableName="sys_user" domainObjectName="User">
-            <columnOverride column="gender" javaType="zgg.toolkit.core.enums.GenderEnum"/>
-            <columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>
-        </table>
-        <table tableName="sys_user_extend" domainObjectName="UserExtend"/>
+        <!--<table tableName="sys_permission" domainObjectName="Permission">-->
+            <!--<columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>-->
+        <!--</table>-->
+        <!--<table tableName="sys_role" domainObjectName="Role">-->
+            <!--<columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>-->
+        <!--</table>-->
+        <!--<table tableName="sys_role_permission" domainObjectName="RolePermission"/>-->
+        <!--<table tableName="sys_user" domainObjectName="User">-->
+            <!--<columnOverride column="gender" javaType="zgg.toolkit.core.enums.GenderEnum"/>-->
+            <!--<columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>-->
+        <!--</table>-->
+        <!--<table tableName="sys_user_extend" domainObjectName="UserExtend"/>-->
         <table tableName="sys_user_role" domainObjectName="UserRole"/>
     </context>
 </generatorConfiguration>

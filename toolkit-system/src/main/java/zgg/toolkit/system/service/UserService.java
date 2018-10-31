@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import zgg.toolkit.core.enums.GenderEnum;
 import zgg.toolkit.core.service.BaseService;
 import zgg.toolkit.core.utils.IdWorker;
-import zgg.toolkit.system.mapper.UserMapper;
+import zgg.toolkit.system.mapper.autogen.UserMapper;
 import zgg.toolkit.system.model.dto.UserSaveDto;
 import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.model.entity.UserExample;
