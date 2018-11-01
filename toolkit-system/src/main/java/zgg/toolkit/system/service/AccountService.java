@@ -40,6 +40,7 @@ public class AccountService {
      * @param captcha   验证码
      */
     public LoginInfo login(String username, String password, String captcha) {
+        String temp = HelpUtils.md5(password);
         UsernamePasswordToken token = new UsernamePasswordToken(username, HelpUtils.md5(password));
         Subject subject = SecurityUtils.getSubject();
         try {

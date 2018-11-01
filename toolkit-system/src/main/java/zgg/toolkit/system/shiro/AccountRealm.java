@@ -12,6 +12,8 @@ import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.model.vo.LoginInfo;
 import zgg.toolkit.system.service.AccountService;
 
+import java.util.List;
+
 /**
  * Created by zgg on 2018/10/25
  */
@@ -28,7 +30,8 @@ public class AccountRealm extends AuthorizingRealm {
         LoginInfo loginInfo = accountService.getLoginInfo(user.getId());
         //为当前用户设置角色和权限
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.addStringPermissions(loginInfo.getPermissions());
+        List<String> permissions = loginInfo.getPermissions();
+        authorizationInfo.addStringPermissions(permissions);
         return authorizationInfo;
     }
 
