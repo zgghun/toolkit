@@ -13,7 +13,7 @@ public enum ResultCode {
     UNAUTHORIZED(102, "未授权"),
     UNAUTHENTICATED(101, "未登录"),
 
-    OK(1, "成功");
+    OK(1, "OK");
 
     private int code;
     private String note;

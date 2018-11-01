@@ -1,8 +1,10 @@
 package zgg.toolkit.system.shiro;
 
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.crazycake.shiro.RedisManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -23,13 +25,14 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/static/**", "anon");
+//        filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/sys/account/logout", "logout");
         filterChainDefinitionMap.put("/sys/account/login", "anon");
+        filterChainDefinitionMap.put("/sys/account/captcha", "anon");
         filterChainDefinitionMap.put("/**", "authc");
 
-        // 前后端分离后，登陆地址告诉前段未登录
-//        shiroFilterFactoryBean.setLoginUrl("/sys/account/unauth");
+        // 通过shiro设置登陆地址（默认login.jsp），由于前后分离了，此地址用于未登录时返回未登录异常信息
+        shiroFilterFactoryBean.setLoginUrl("/sys/account/unauth");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
@@ -47,39 +50,39 @@ public class ShiroConfiguration {
     }
 
     // 开启shiro注解支持
-//    @Bean
-//    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(){
-//        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
-//        advisor.setSecurityManager(securityManager());
-//        return advisor;
-//    }
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(){
+        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
+        advisor.setSecurityManager(securityManager());
+        return advisor;
+    }
 
     @Bean
     public AccountRealm accountRealm() {
         return new AccountRealm();
     }
 
-/*    @Bean
-    public SessionManager sessionManager(){
-        MyShiroSessionManager sessionManager = new MyShiroSessionManager();
-        sessionManager.setSessionDAO(redisSessionDAO());
-        return null;
-    }
-
-    @Bean
-    public RedisCacheManager cacheManager(){
-        RedisCacheManager redisCacheManager = new RedisCacheManager();
-        redisCacheManager.setRedisManager(redisManager());
-        return redisCacheManager;
-    }
-
-    @Bean
-    public RedisSessionDAO redisSessionDAO(){
-        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
-        redisSessionDAO.setRedisManager(redisManager());
-        return redisSessionDAO;
-    }
-
+//    @Bean
+//    public SessionManager sessionManager(){
+//        MyShiroSessionManager sessionManager = new MyShiroSessionManager();
+//        sessionManager.setSessionDAO(redisSessionDAO());
+//        return null;
+//    }
+//
+//    @Bean
+//    public RedisCacheManager cacheManager(){
+//        RedisCacheManager redisCacheManager = new RedisCacheManager();
+//        redisCacheManager.setRedisManager(redisManager());
+//        return redisCacheManager;
+//    }
+//
+//    @Bean
+//    public RedisSessionDAO redisSessionDAO(){
+//        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+//        redisSessionDAO.setRedisManager(redisManager());
+//        return redisSessionDAO;
+//    }
+//
     @Bean
     public RedisManager redisManager(){
         RedisManager redisManager = new RedisManager();
@@ -90,6 +93,6 @@ public class ShiroConfiguration {
 //        redisManager.setPassword("123456");
 //        redisManager.setJedisPoolConfig(new JedisPoolConfig());
         return redisManager;
-    }*/
+    }
 
 }

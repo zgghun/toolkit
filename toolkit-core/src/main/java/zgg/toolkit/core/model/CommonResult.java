@@ -33,7 +33,7 @@ public class CommonResult {
     public CommonResult(ResultCode resultEnum, Object data) {
         this.code = resultEnum.getCode();
         this.message = resultEnum.getNote();
-        this.data = data;
+        this.data = data == null ? "" : data;
     }
 
 
