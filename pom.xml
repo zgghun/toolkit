@@ -29,6 +29,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <java.version>1.8</java.version>
         <gson.version>2.8.5</gson.version>
         <commons-lang3.version>3.8</commons-lang3.version>
@@ -36,7 +37,6 @@
         <tk-mybatis.version>2.0.4</tk-mybatis.version>
         <page-helper.version>1.2.9</page-helper.version>
         <shiro.version>1.4.0</shiro.version>
-        <shiro-redis.version>3.1.0</shiro-redis.version>
     </properties>
 
     <dependencies>
@@ -57,17 +57,11 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- shiro https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
+            <!-- shiro http://shiro.apache.org/spring-boot.html -->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-spring</artifactId>
                 <version>${shiro.version}</version>
-            </dependency>
-            <!-- shiro-redis https://github.com/alexxiyang/shiro-redis-spring-tutorial-->
-            <dependency>
-                <groupId>org.crazycake</groupId>
-                <artifactId>shiro-redis</artifactId>
-                <version>${shiro-redis.version}</version>
             </dependency>
             <!--Mybatis相关 https://github.com/abel533/MyBatis-Spring-Boot-->
             <dependency>
