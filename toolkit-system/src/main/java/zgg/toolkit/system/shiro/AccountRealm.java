@@ -12,14 +12,15 @@ import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.model.vo.LoginInfo;
 import zgg.toolkit.system.service.AccountService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by zgg on 2018/10/25
  */
-//@Component
 public class AccountRealm extends AuthorizingRealm {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private AccountService accountService;
 
@@ -31,6 +32,10 @@ public class AccountRealm extends AuthorizingRealm {
         //为当前用户设置角色和权限
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         List<String> permissions = loginInfo.getPermissions();
+        // 不知道什么原因，permissions为null的话shiro会报空指针异常
+        if (permissions == null) {
+            permissions = new ArrayList<>();
+        }
         authorizationInfo.addStringPermissions(permissions);
         return authorizationInfo;
     }
@@ -43,7 +48,7 @@ public class AccountRealm extends AuthorizingRealm {
         String password = new String((char[]) token.getCredentials());
         User user = accountService.getUser(username, password);
         if (user == null) {
-            throw new UnknownAccountException();
+            throw new UnknownAccountException("用户名或密码错误");
         }
         // 去掉密码
         user.setPassword("");
