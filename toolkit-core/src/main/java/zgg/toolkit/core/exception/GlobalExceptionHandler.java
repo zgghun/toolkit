@@ -29,10 +29,6 @@ public class GlobalExceptionHandler {
 
     private static final String ERROR_PAGE_PREFIX = "/error";
 
-    // TODO 没有权限错误
-
-    // 未登录错误，直接由 AccountController 转发了
-
     // 参数绑定错误
     @ExceptionHandler(BindException.class)
     public void bindingExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BindException ex) {
@@ -45,15 +41,29 @@ public class GlobalExceptionHandler {
     }
 
     // 其他错误
-    @ExceptionHandler(Exception.class)
-    public void exceptionHandler(HttpServletRequest req, HttpServletResponse rep, Exception ex) {
-        CommonResult result = new CommonResult(ResultCode.SYSTEM_ERROR, ex.getMessage());
+    @ExceptionHandler(BaseException.class)
+    public void baseExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BaseException ex) {
         logger.error(ex.toString());
+        CommonResult result;
+        if (ex.getMessage() != null){
+            result = new CommonResult(ex.getResultCode());
+        }else {
+            result = new CommonResult(ResultCode.BASE_ERROR, ex.getMessage());
+        }
         errorDeal(req, rep, result);
     }
 
+    // 系统错误
+    @ExceptionHandler(Exception.class)
+    public void exceptionHandler(HttpServletRequest req, HttpServletResponse rep, Exception ex) {
+        logger.error(ex.toString());
+        CommonResult result = new CommonResult(ResultCode.ERROR, ex.getMessage());
+        errorDeal(req, rep, result);
+    }
+
+
     // web请求和ajax请求错误处理
-    private void errorDeal(HttpServletRequest req, HttpServletResponse rep, CommonResult result) {
+    protected void errorDeal(HttpServletRequest req, HttpServletResponse rep, CommonResult result) {
         if (RequestType.WEB == getRequestType(req)) {
             String errorPage = ERROR_PAGE_PREFIX + "/501.html";
             try {
