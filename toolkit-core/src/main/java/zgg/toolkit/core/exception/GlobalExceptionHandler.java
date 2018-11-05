@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
 
     // TODO 没有权限错误
 
-    // TODO 未登录错误
+    // 未登录错误，直接由 AccountController 转发了
 
     // 参数绑定错误
     @ExceptionHandler(BindException.class)
