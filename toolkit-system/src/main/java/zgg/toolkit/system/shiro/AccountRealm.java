@@ -19,7 +19,7 @@ import java.util.List;
  * Created by zgg on 2018/10/25
  */
 public class AccountRealm extends AuthorizingRealm {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static Logger logger = LoggerFactory.getLogger(AccountRealm.class);
 
     @Autowired
     private AccountService accountService;
@@ -48,7 +48,7 @@ public class AccountRealm extends AuthorizingRealm {
         String password = new String((char[]) token.getCredentials());
         User user = accountService.getUser(username, password);
         if (user == null) {
-            throw new UnknownAccountException("用户名或密码错误");
+            throw new AccountException();
         }
         // 去掉密码
         user.setPassword("");

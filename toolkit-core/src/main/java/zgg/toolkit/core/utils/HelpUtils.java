@@ -7,9 +7,28 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by zgg on 2018/10/26
+ * 工具类
  */
 
 public class HelpUtils {
+    public static boolean isNotBlank(String str){
+        return StringUtils.isNotBlank(str);
+    }
+
+    public static boolean isBlank(String str){
+        return StringUtils.isBlank(str);
+    }
+
+    // 字符串全是数字验证
+    public static boolean isNumeric(String str) {
+        return StringUtils.isNumeric(str);
+    }
+
+    // 字符串查询
+    public static boolean contains(String str, String searchStr) {
+        return StringUtils.contains(str, searchStr);
+    }
+
     public static final char[] DIGITS_LOWER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
     // MD5加密 ，从 commons-codec 复制的
@@ -31,15 +50,5 @@ public class HelpUtils {
         }
         return new String(out);
 
-    }
-
-    // 字符串全是数字验证
-    public static boolean isNumeric(String str) {
-        return StringUtils.isNumeric(str);
-    }
-
-    // 字符串查询
-    public static boolean contains(String str, String searchStr) {
-        return StringUtils.contains(str, searchStr);
     }
 }

@@ -21,8 +21,6 @@ public class MyTest {
         String str = "admin";
         String str2 = HelpUtils.md5(str);
         System.out.println(str2);
-        log.debug(str2.length() + "");
-        System.out.println("e10adc3949ba59abbe56e057f20f883e");
     }
 
     @Test
