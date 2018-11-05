@@ -16,7 +16,7 @@ target/
 *.iml
 *.ipr
 **/rebel.xml
-**/application.properties
+application.properties
 
 ### NetBeans ###
 /nbproject/private/
