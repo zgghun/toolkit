@@ -18,7 +18,7 @@ public class MyTest {
 
     @Test
     public void test3() {
-        String str = "admin";
+        String str = "123456";
         String str2 = HelpUtils.md5(str);
         System.out.println(str2);
     }

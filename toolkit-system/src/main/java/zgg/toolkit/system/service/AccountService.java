@@ -3,6 +3,7 @@ package zgg.toolkit.system.service;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +41,6 @@ public class AccountService {
      * @param captcha   验证码
      */
     public LoginInfo login(String username, String password, String captcha) {
-        String temp = HelpUtils.md5(password);
         UsernamePasswordToken token = new UsernamePasswordToken(username, HelpUtils.md5(password));
         Subject subject = SecurityUtils.getSubject();
         try {
@@ -52,7 +52,9 @@ public class AccountService {
         User user = (User) subject.getPrincipals().getPrimaryPrincipal();
         // 把登陆信息存到session中,同时返回登陆信息
         LoginInfo loginInfo = this.getLoginInfo(user.getId());
-        SecurityUtils.getSubject().getSession().setAttribute(GlobalConstant.SESSION_LOGIN_INFO, loginInfo);
+        Session session = SecurityUtils.getSubject().getSession();
+        session.setAttribute(GlobalConstant.SESSION_LOGIN_INFO, loginInfo);
+        session.removeAttribute(GlobalConstant.SESSION_CAPTCHA);
         return loginInfo;
     }
 

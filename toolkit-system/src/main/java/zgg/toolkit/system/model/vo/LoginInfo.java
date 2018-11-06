@@ -2,6 +2,7 @@ package zgg.toolkit.system.model.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import java.util.Map;
  * 包括 基础信息、权限信息...
  */
 @Data
-public class LoginInfo {
+public class LoginInfo implements Serializable {
     private Long userId;
     private String username;
     private String tel;
