@@ -52,6 +52,7 @@ public class AccountService {
         User user = (User) subject.getPrincipals().getPrimaryPrincipal();
         // 把登陆信息存到session中,同时返回登陆信息
         LoginInfo loginInfo = this.getLoginInfo(user.getId());
+
         Session session = SecurityUtils.getSubject().getSession();
         session.setAttribute(GlobalConstant.SESSION_LOGIN_INFO, loginInfo);
         session.removeAttribute(GlobalConstant.SESSION_CAPTCHA);

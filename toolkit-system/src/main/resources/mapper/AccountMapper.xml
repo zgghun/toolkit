@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="zgg.toolkit.system.mapper.AccountMapper">
     <select id="getLoginUserInfo" resultType="zgg.toolkit.system.model.vo.LoginInfo">
-        SELECT * FROM sys_user LIMIT 1
+        SELECT
+            a.id AS userId,
+            a.username,
+            a.tel,
+            a.avatar
+        FROM sys_user a
+            LEFT JOIN sys_user_role b ON b.user_id = a.id
+            LEFT JOIN sys_role c ON c.id = b.role_id
+            LEFT JOIN sys_role_permission d ON d.role_id = c.id
+            LEFT JOIN sys_permission e ON e.id = d.per_id
+        WHERE a.id = #{userId}
     </select>
 </mapper>
