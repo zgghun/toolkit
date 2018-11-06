@@ -25,6 +25,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.botaruibo</groupId>
+            <artifactId>xvcode</artifactId>
+        </dependency>
+        <dependency>
             <groupId>zgg.toolkit</groupId>
             <artifactId>toolkit-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>

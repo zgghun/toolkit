@@ -37,7 +37,7 @@
 
         <!--实体类和example-->
         <javaModelGenerator targetPackage="zgg.toolkit.system.model.entity" targetProject="src/main/java">
-            <property name="constructorBased" value="true"/>
+            <property name="constructorBased" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
