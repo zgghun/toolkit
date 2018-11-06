@@ -56,9 +56,9 @@ public class AccountController extends SystemBaseController {
     }
 
     // 获取登录用户权限信息
-    @RequestMapping("/loginInfo")
+    @GetMapping("/loginInfo")
     public Object getLoginUserInfo() {
-        return this.getLoginInfo();
+        return commonResult(this.getLoginInfo());
     }
 
     // 登陆
@@ -69,7 +69,7 @@ public class AccountController extends SystemBaseController {
     }
 
     // 获取验证码
-    @RequestMapping("/captcha")
+    @GetMapping("/captcha")
     public void generatorCaptcha(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("image/jpeg");//设置相应类型,告诉浏览器输出的内容为图片
         response.setHeader("Pragma", "No-cache");//设置响应头信息，告诉浏览器不要缓存此内容
