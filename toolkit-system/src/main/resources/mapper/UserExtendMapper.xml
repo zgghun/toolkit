@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zgg.toolkit.system.mapper.UserExtendMapper">
+    <select id="findUser" resultType="zgg.toolkit.system.model.entity.User">
+        SELECT a.*
+        FROM sys_user a
+        <where>
+            <if test="gender != null">
+                a.gender = #{gender}
+            </if>
+            <if test="status != null">
+                AND a.status = #{status}
+            </if>
+            <if test="startTime != null">
+                AND a.create_time &gt;= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND a.create_time &lt;= #{endTime}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND concat_ws('|', a.username, a.tel, a.email) LIKE "%"#{keyword}"%"
+            </if>
+        </where>
+        ORDER BY a.create_time DESC
+    </select>
+</mapper>
