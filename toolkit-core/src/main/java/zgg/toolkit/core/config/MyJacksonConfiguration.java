@@ -50,7 +50,6 @@ public class MyJacksonConfiguration {
                     .addSerializer(Long.TYPE, ToStringSerializer.instance);
 
             builder.modules(javaTimeModule, simpleModule);
-
         };
     }
 

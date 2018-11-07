@@ -33,10 +33,10 @@ public class PageParam {
     }
 
     public void setPageNum(Integer pageNum) {
-        this.pageNum = pageNum < 1 ? 1 : pageNum;
+        this.pageNum = (pageNum == null || pageNum < 1) ? 1 : pageNum;
     }
 
     public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize < 1 ? 20 : pageSize;
+        this.pageSize = (pageSize == null || pageSize < 1) ? 20 : pageSize;
     }
 }

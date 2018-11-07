@@ -16,6 +16,7 @@ public class LoginInfo implements Serializable {
     private Long userId;
     private String username;
     private String tel;
+    private String avatar;
 
     // 用户可访问模块，模块结构交由前端控制，后端仅告知启用哪些模块
     private List<Map<String, String>> modules;
