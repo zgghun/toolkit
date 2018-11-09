@@ -3,18 +3,23 @@ package zgg.toolkit.system.service;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import zgg.toolkit.core.enums.StatusEnum;
 import zgg.toolkit.core.model.PageList;
 import zgg.toolkit.core.model.PageParam;
 import zgg.toolkit.core.service.BaseService;
 import zgg.toolkit.core.utils.HelpUtils;
 import zgg.toolkit.core.utils.IdWorker;
+import zgg.toolkit.system.base.SystemBaseService;
 import zgg.toolkit.system.mapper.UserExtendMapper;
+import zgg.toolkit.system.mapper.autogen.UserDetailMapper;
 import zgg.toolkit.system.mapper.autogen.UserMapper;
-import zgg.toolkit.system.model.dto.UserExtendSaveDto;
+import zgg.toolkit.system.model.dto.UserDetailSaveDto;
 import zgg.toolkit.system.model.dto.UserQuery;
 import zgg.toolkit.system.model.dto.UserSaveDto;
 import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.model.entity.UserDetail;
+import zgg.toolkit.system.model.entity.UserExample;
 import zgg.toolkit.system.model.vo.LoginInfo;
 
 import javax.validation.constraints.NotEmpty;
@@ -25,12 +30,14 @@ import java.util.List;
  * Created by zgg on 2018/10/18
  */
 @Service
-public class UserService extends BaseService {
+public class UserService extends SystemBaseService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
-    private UserExtendMapper userExtendMapper;
+    private UserDetailMapper userDetailMapper;
 
+    @Autowired
+    private UserExtendMapper userExtendMapper;
 
 
     public PageList<User> findUser(UserQuery query, PageParam pageParam) {
@@ -63,13 +70,24 @@ public class UserService extends BaseService {
         }
     }
 
-    public void deleteUser(@NotEmpty List<Long> ids) {
-
+    @Transactional
+    public void deleteUser(List<Long> ids) {
+        UserExample example = new UserExample();
+        example.or().andIdIn(ids);
+        User user = new User();
+        user.setStatus(StatusEnum.DELETE);
+        userMapper.updateByExampleSelective(user, example);
+        System.out.println(1111);
     }
 
-    public UserDetail saveUserExtend(UserExtendSaveDto dto, LoginInfo loginInfo) {
+    public UserDetail saveUserDetail(UserDetailSaveDto dto, LoginInfo loginInfo) {
         UserDetail userDetail = new UserDetail();
         HelpUtils.copyProperties(dto, userDetail);
         return userDetail;
+    }
+
+    public UserDetail getUserDetail(Long id) {
+        UserDetail detail = userDetailMapper.selectByPrimaryKey(id);
+        return detail;
     }
 }

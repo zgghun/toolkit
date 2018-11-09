@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import zgg.toolkit.core.enums.RequestType;
 import zgg.toolkit.core.enums.ResultCode;
 import zgg.toolkit.core.model.CommonResult;
@@ -21,6 +22,7 @@ import java.util.Map;
 /**
  * 全局异常处理类
  * Created by zgg on 2018/08/27
+ * 可使用@RestControllerAdvice 直接返回 json 对象
  */
 
 @ControllerAdvice
@@ -28,6 +30,13 @@ public class GlobalExceptionHandler {
     private Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     private static final String ERROR_PAGE_PREFIX = "/error";
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public void noHandlerFoundExceptionHandler(HttpServletRequest req, HttpServletResponse rep, NoHandlerFoundException ex){
+        logger.error(ex.toString());
+        CommonResult result = new CommonResult(ResultCode.ADDRESS_ERROR);
+        errorDeal(req, rep, result);
+    }
 
     // 参数绑定错误
     @ExceptionHandler(BindException.class)
