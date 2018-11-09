@@ -13,6 +13,7 @@ import zgg.toolkit.core.constant.GlobalConstant;
 import zgg.toolkit.core.enums.ResultCode;
 import zgg.toolkit.core.exception.BaseException;
 import zgg.toolkit.core.utils.HelpUtils;
+import zgg.toolkit.system.base.SystemBaseService;
 import zgg.toolkit.system.mapper.AccountMapper;
 import zgg.toolkit.system.mapper.autogen.UserMapper;
 import zgg.toolkit.system.model.entity.User;
@@ -25,7 +26,7 @@ import java.util.List;
  * Created by zgg on 2018/10/25
  */
 @Service
-public class AccountService {
+public class AccountService extends SystemBaseService {
     private static final Logger log = LoggerFactory.getLogger(AccountService.class);
 
     @Autowired
@@ -36,9 +37,10 @@ public class AccountService {
 
     /**
      * 登陆
-     * @param username  用户名、电话、邮箱
-     * @param password  明文密码
-     * @param captcha   验证码
+     *
+     * @param username 用户名、电话、邮箱
+     * @param password 明文密码
+     * @param captcha  验证码
      */
     public LoginInfo login(String username, String password, String captcha) {
         UsernamePasswordToken token = new UsernamePasswordToken(username, HelpUtils.md5(password));
@@ -81,10 +83,10 @@ public class AccountService {
         }
         criteria.andPasswordEqualTo(password);
         List<User> users = userMapper.selectByExample(example);
-        if (users.size() == 1){
+        if (users.size() == 1) {
             return users.get(0);
         }
-        if (users.size() > 1){
+        if (users.size() > 1) {
             throw new BaseException(ResultCode.MORE_THAN_ONE_ERROR);
         }
         return null;
@@ -92,6 +94,7 @@ public class AccountService {
 
     /**
      * 获取用户信息、权限、可访问模块
+     *
      * @param userId
      * @return
      */

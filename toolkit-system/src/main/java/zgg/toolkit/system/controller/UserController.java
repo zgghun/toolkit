@@ -1,15 +1,12 @@
 package zgg.toolkit.system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import zgg.toolkit.core.model.PageList;
 import zgg.toolkit.core.model.PageParam;
 import zgg.toolkit.system.base.SystemBaseController;
 import zgg.toolkit.system.model.dto.DeleteBatchDto;
-import zgg.toolkit.system.model.dto.UserExtendSaveDto;
+import zgg.toolkit.system.model.dto.UserDetailSaveDto;
 import zgg.toolkit.system.model.dto.UserQuery;
 import zgg.toolkit.system.model.dto.UserSaveDto;
 import zgg.toolkit.system.model.entity.User;
@@ -27,9 +24,15 @@ public class UserController extends SystemBaseController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/extend/save")
-    public Object saveUserExtend(@Valid UserExtendSaveDto dto){
-        UserDetail extend =  userService.saveUserExtend(dto, getLoginInfo());
+    @GetMapping("/detail/get")
+    public Object getUserExtend(@RequestParam Long id){
+        UserDetail detail = userService.getUserDetail(id);
+        return commonResult(detail);
+    }
+
+    @PostMapping("/detail/save")
+    public Object saveUserDetail(@Valid UserDetailSaveDto dto){
+        UserDetail extend =  userService.saveUserDetail(dto, getLoginInfo());
         return commonResult(extend);
     }
 
@@ -42,7 +45,6 @@ public class UserController extends SystemBaseController {
     @GetMapping("/list")
     public Object listUser(UserQuery query, PageParam pageParam){
         PageList<User> users = userService.findUser(query, pageParam);
-        System.out.println(users.toString());
         return commonResult(users);
     }
 

@@ -5,16 +5,16 @@ package zgg.toolkit.core.enums;
  */
 public enum ResultCode {
 
-    BIND_ERROR(201, "参数绑定错误"),
+    LOGIN_ERROR(203, "用户名或密码错误"),
+    UNAUTHORIZED(202, "未授权"),
+    UNAUTHENTICATED(201, "未登录"),
+    BASE_ERROR(200, "其他异常"),
 
-    MORE_THAN_ONE_ERROR(201, "查出多个结果"),
+    BIND_ERROR(103, "参数绑定错误"),
+    MORE_THAN_ONE_ERROR(102, "查出多个结果"),
+    ADDRESS_ERROR(101, "请求地址不存在"),
+    ERROR(100, "系统异常"),
 
-    LOGIN_ERROR(103, "用户名或密码错误"),
-    UNAUTHORIZED(102, "未授权"),
-    UNAUTHENTICATED(101, "未登录"),
-
-    BASE_ERROR(3, "其他异常"),
-    ERROR(2, "系统异常"),
     OK(1, "OK");
 
     private int code;

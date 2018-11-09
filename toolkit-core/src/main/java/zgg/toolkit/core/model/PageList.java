@@ -18,14 +18,14 @@ public class PageList<T>{
     public PageList() {
     }
 
-    private PageList(List list, Integer pageNum, Integer pageSize, Long total) {
+    public PageList(List<T> list, Integer pageNum, Integer pageSize, Long total) {
         this.list = list;
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.total = total;
     }
 
-    public PageList(List list) {
+    public PageList(List<T> list) {
         this.list = list;
         if (list instanceof Page<?>) {
             Page<?> page = (Page) list;
