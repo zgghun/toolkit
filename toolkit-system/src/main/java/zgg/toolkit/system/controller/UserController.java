@@ -5,10 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import zgg.toolkit.core.model.PageList;
 import zgg.toolkit.core.model.PageParam;
 import zgg.toolkit.system.base.SystemBaseController;
-import zgg.toolkit.system.model.dto.DeleteBatchDto;
-import zgg.toolkit.system.model.dto.UserDetailSaveDto;
-import zgg.toolkit.system.model.dto.UserQuery;
-import zgg.toolkit.system.model.dto.UserSaveDto;
+import zgg.toolkit.system.model.dto.*;
 import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.model.entity.UserDetail;
 import zgg.toolkit.system.service.UserService;
@@ -42,8 +39,8 @@ public class UserController extends SystemBaseController {
         return commonResult();
     }
 
-    @GetMapping("/list")
-    public Object listUser(UserQuery query, PageParam pageParam){
+    @GetMapping("/find")
+    public Object findUser(UserQuery query, PageParam pageParam){
         PageList<User> users = userService.findUser(query, pageParam);
         return commonResult(users);
     }
@@ -52,5 +49,11 @@ public class UserController extends SystemBaseController {
     public Object saveUser(@Valid UserSaveDto dto){
         User user = userService.saveUser(dto);
         return commonResult(user);
+    }
+
+    @PostMapping("/setRole")
+    public Object setUserRole(@Valid UserRoleSetDto dto){
+        userService.setUserRole(dto);
+        return commonResult();
     }
 }

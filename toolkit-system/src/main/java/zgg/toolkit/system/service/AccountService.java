@@ -53,11 +53,11 @@ public class AccountService extends SystemBaseService {
         }
         User user = (User) subject.getPrincipals().getPrimaryPrincipal();
         // 把登陆信息存到session中,同时返回登陆信息
-//        LoginInfo loginInfo = this.getLoginInfo(user.getId());
-//
-//        Session session = SecurityUtils.getSubject().getSession();
-//        session.setAttribute(GlobalConstant.SESSION_LOGIN_INFO, loginInfo);
-//        session.removeAttribute(GlobalConstant.SESSION_CAPTCHA);
+        LoginInfo loginInfo = this.getLoginInfo(user.getId());
+
+        Session session = SecurityUtils.getSubject().getSession();
+        session.setAttribute(GlobalConstant.SESSION_LOGIN_INFO, loginInfo);
+        session.removeAttribute(GlobalConstant.SESSION_CAPTCHA);
         return new LoginInfo();
     }
 
@@ -99,6 +99,14 @@ public class AccountService extends SystemBaseService {
      * @return
      */
     public LoginInfo getLoginInfo(Long userId) {
-        return accountMapper.getLoginUserInfo(userId);
+        User user = userMapper.selectByPrimaryKey(userId);
+        LoginInfo loginInfo = new LoginInfo();
+        loginInfo.setUserId(userId);
+        loginInfo.setUsername(user.getUsername());
+        loginInfo.setTel(user.getTel());
+        loginInfo.setAvatar(user.getAvatar());
+
+
+        return loginInfo;
     }
 }

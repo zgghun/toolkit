@@ -8,9 +8,14 @@
             <if test="gender != null">
                 a.gender = #{gender}
             </if>
-            <if test="status != null">
-                AND a.status = #{status}
-            </if>
+            <choose>
+                <when test="status != null">
+                    AND a.status = #{status}
+                </when>
+                <otherwise>
+                    AND a.status != 'DELETE'
+                </otherwise>
+            </choose>
             <if test="startTime != null">
                 AND a.create_time &gt;= #{startTime}
             </if>

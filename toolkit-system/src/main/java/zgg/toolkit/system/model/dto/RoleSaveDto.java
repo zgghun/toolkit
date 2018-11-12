@@ -16,4 +16,6 @@ public class RoleSaveDto {
     private String name;
     @NotNull
     private StatusEnum status;
+
+    private String note;
 }

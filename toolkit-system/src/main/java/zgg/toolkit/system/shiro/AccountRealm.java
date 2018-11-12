@@ -51,7 +51,7 @@ public class AccountRealm extends AuthorizingRealm {
             throw new AccountException();
         }
         // 去掉密码
-        user.setPassword("");
+        user.setPassword("********");
         return new SimpleAuthenticationInfo(user, password, getName());
     }
 }
