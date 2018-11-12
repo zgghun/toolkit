@@ -40,7 +40,7 @@ public class AccountController extends SystemBaseController {
     private UserService userService;
 
 
-    // 找回密码
+    // TODO 找回密码，直接重置
 
     // 退出
     @GetMapping("/logout")
@@ -71,8 +71,10 @@ public class AccountController extends SystemBaseController {
     // 获取验证码
     @GetMapping("/captcha")
     public void generatorCaptcha(HttpServletRequest request, HttpServletResponse response) {
-        response.setContentType("image/jpeg");//设置相应类型,告诉浏览器输出的内容为图片
-        response.setHeader("Pragma", "No-cache");//设置响应头信息，告诉浏览器不要缓存此内容
+        //设置相应类型,告诉浏览器输出的内容为图片
+        response.setContentType("image/jpeg");
+        //设置响应头信息，告诉浏览器不要缓存此内容
+        response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expire", 0);
         HttpSession session = request.getSession();
@@ -95,7 +97,7 @@ public class AccountController extends SystemBaseController {
         return commonResult(user);
     }
 
-    // 未登录错误
+    // 未登跳转地址
     @RequestMapping("/unauth")
     public Object unAuthentication() {
         return commonResult(ResultCode.UNAUTHENTICATED);

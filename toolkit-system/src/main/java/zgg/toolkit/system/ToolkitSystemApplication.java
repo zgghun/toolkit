@@ -11,7 +11,7 @@ import zgg.toolkit.core.ToolkitCoreApplication;
  * @author zgg
  */
 @EnableTransactionManagement
-@MapperScan(basePackages = {"zgg.toolkit.system.mapper", "zgg.toolkit.system.mapper.autogen"})
+@MapperScan(basePackages = {"zgg.toolkit.system.mapper"})
 @SpringBootApplication
 public class ToolkitSystemApplication {
 
