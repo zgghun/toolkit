@@ -2,7 +2,6 @@ package zgg.toolkit.core.model;
 
 import lombok.Data;
 import zgg.toolkit.core.enums.ResultCode;
-import zgg.toolkit.core.utils.HelpUtils;
 
 /**
  * Created by zgg on 2018/08/27
@@ -52,12 +51,8 @@ public class CommonResult {
      */
     public CommonResult(ResultCode resultCode, Object error) {
         this.code = resultCode.getCode();
-        this.data = "";
-        if (error != null && HelpUtils.isNotBlank(error.toString())) {
-            this.message = error.toString();
-        } else {
-            this.message = resultCode.getNote();
-        }
+        this.message = resultCode.getNote();
+        this.data = error;
     }
 
 
