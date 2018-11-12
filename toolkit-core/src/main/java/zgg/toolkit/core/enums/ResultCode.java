@@ -10,7 +10,7 @@ public enum ResultCode {
     OK(1, "OK"),
 
     ERROR(100, "系统异常"),
-    ADDRESS_ERROR(101, "请求地址不存在"),
+    PATH_ERROR(101, "请求地址不存在"),
     MORE_THAN_ONE_ERROR(102, "查出多个结果"),
     BIND_ERROR(103, "参数绑定错误"),
 
