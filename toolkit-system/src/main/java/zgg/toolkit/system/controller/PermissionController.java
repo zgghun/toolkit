@@ -25,8 +25,8 @@ public class PermissionController extends SystemBaseController {
     private PermissionService permissionService;
 
     @GetMapping("/find")
-    public Object findPermission(){
-        List<PermissionVO> perVO = permissionService.findPermission();
+    public Object findPermission(String moduleName){
+        List<PermissionVO> perVO = permissionService.findPermission(moduleName);
         return commonResult(perVO);
     }
 

@@ -13,13 +13,17 @@ import zgg.toolkit.core.constant.GlobalConstant;
 import zgg.toolkit.core.enums.ResultCode;
 import zgg.toolkit.core.exception.BaseException;
 import zgg.toolkit.core.utils.HelpUtils;
+import zgg.toolkit.core.utils.JsonUtils;
 import zgg.toolkit.system.base.SystemBaseService;
 import zgg.toolkit.system.mapper.AccountMapper;
 import zgg.toolkit.system.mapper.autogen.UserMapper;
+import zgg.toolkit.system.model.entity.Permission;
 import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.model.entity.UserExample;
 import zgg.toolkit.system.model.vo.LoginInfo;
+import zgg.toolkit.system.model.vo.PermissionVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,6 +37,10 @@ public class AccountService extends SystemBaseService {
     private UserMapper userMapper;
     @Autowired
     private AccountMapper accountMapper;
+    @Autowired
+    private PermissionService permissionService;
+
+
 
 
     /**
@@ -53,7 +61,7 @@ public class AccountService extends SystemBaseService {
         }
         User user = (User) subject.getPrincipals().getPrimaryPrincipal();
         // 把登陆信息存到session中,同时返回登陆信息
-        LoginInfo loginInfo = this.getLoginInfo(user.getId());
+        LoginInfo loginInfo = this.getLoginInfo(user);
 
         Session session = SecurityUtils.getSubject().getSession();
         session.setAttribute(GlobalConstant.SESSION_LOGIN_INFO, loginInfo);
@@ -98,14 +106,26 @@ public class AccountService extends SystemBaseService {
      * @param userId
      * @return
      */
-    public LoginInfo getLoginInfo(Long userId) {
-        User user = userMapper.selectByPrimaryKey(userId);
+    public LoginInfo getLoginInfo(User user) {
         LoginInfo loginInfo = new LoginInfo();
-        loginInfo.setUserId(userId);
+        loginInfo.setUserId(user.getId());
         loginInfo.setUsername(user.getUsername());
         loginInfo.setTel(user.getTel());
         loginInfo.setAvatar(user.getAvatar());
 
+        List<Permission> permissions = accountMapper.findLoginUserPer(user.getId());
+
+        List<String> perList = new ArrayList<>();
+        permissions.forEach(it -> perList.add(it.getPerCode()));
+        loginInfo.setPermissions(perList);
+
+        List<PermissionVO> vos = permissionService.generatePermissionTree(permissions);
+        String modules = JsonUtils.SE_BUILDER
+                // 只序列化有@Expose注释的属性
+                .excludeFieldsWithoutExposeAnnotation()
+                .create()
+                .toJson(vos);
+        loginInfo.setModules(modules);
 
         return loginInfo;
     }

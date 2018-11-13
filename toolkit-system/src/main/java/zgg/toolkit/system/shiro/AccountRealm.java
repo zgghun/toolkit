@@ -28,7 +28,7 @@ public class AccountRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         User user = (User) principals.getPrimaryPrincipal();
-        LoginInfo loginInfo = accountService.getLoginInfo(user.getId());
+        LoginInfo loginInfo = accountService.getLoginInfo(user);
         //为当前用户设置角色和权限
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         List<String> permissions = loginInfo.getPermissions();

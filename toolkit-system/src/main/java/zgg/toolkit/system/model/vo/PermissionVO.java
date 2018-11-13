@@ -13,7 +13,8 @@ public class PermissionVO {
     private Long id;
     private Long pid;
     private String moduleName;
-    private String modeleCode;
+    private String moduleCode;
+    // TODO 权限要改
     private String perName;
     private String perCode;
     private String icon;

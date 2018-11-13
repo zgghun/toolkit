@@ -63,15 +63,21 @@ public class PermissionService extends SystemBaseService {
     }
 
     /**
-     * 权限列表
+     * 权限列表（树形结构）
      * 参考 https://blog.csdn.net/wohaqiyi/article/details/78338108?locationNum=4&fps=1
      *
+     * @param moduleName 查询指定模块
+     * @param userId     查询指定用户拥有的权限
      * @return
      */
-    public List<PermissionVO> findPermission() {
+    public List<PermissionVO> findPermission(String moduleName) {
         PermissionExample example = new PermissionExample();
         example.setOrderByClause("pid ASC, sort ASC");
-        example.or().andStatusNotEqualTo(StatusEnum.DELETE);
+        PermissionExample.Criteria criteria = example.or()
+                .andStatusNotEqualTo(StatusEnum.DELETE);
+        if (HelpUtils.isNotBlank(moduleName)) {
+            criteria.andModuleNameLike("%" + moduleName + "%");
+        }
         List<Permission> list = permissionMapper.selectByExample(example);
 
         List<PermissionVO> parent = generatePermissionTree(list);
@@ -86,7 +92,11 @@ public class PermissionService extends SystemBaseService {
             HelpUtils.copyProperties(it, vo);
             vos.add(vo);
         });
-        List<PermissionVO> parent = vos.stream().filter(it -> it.getPid() == 0).collect(Collectors.toList());
+        List<PermissionVO> parent = vos.stream()
+                .filter(it -> it.getPid() == 0)
+                // 按照 sort升序排列，PermissionVO::getSort.reversed()是降序，要求进行排列的属性或对象必须是实现了Comparable接口的
+                .sorted(Comparator.comparing(PermissionVO::getSort))
+                .collect(Collectors.toList());
         HashMap<Long, Long> used = new HashMap<>(vos.size());
         parent.forEach(it -> findPerVOChildren(it, vos, used));
         return parent;
