@@ -385,73 +385,73 @@ public class PermissionExample {
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeIsNull() {
-            addCriterion("modele_code is null");
+        public Criteria andModuleCodeIsNull() {
+            addCriterion("module_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeIsNotNull() {
-            addCriterion("modele_code is not null");
+        public Criteria andModuleCodeIsNotNull() {
+            addCriterion("module_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeEqualTo(String value) {
-            addCriterion("modele_code =", value, "modeleCode");
+        public Criteria andModuleCodeEqualTo(String value) {
+            addCriterion("module_code =", value, "moduleCode");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeNotEqualTo(String value) {
-            addCriterion("modele_code <>", value, "modeleCode");
+        public Criteria andModuleCodeNotEqualTo(String value) {
+            addCriterion("module_code <>", value, "moduleCode");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeGreaterThan(String value) {
-            addCriterion("modele_code >", value, "modeleCode");
+        public Criteria andModuleCodeGreaterThan(String value) {
+            addCriterion("module_code >", value, "moduleCode");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("modele_code >=", value, "modeleCode");
+        public Criteria andModuleCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("module_code >=", value, "moduleCode");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeLessThan(String value) {
-            addCriterion("modele_code <", value, "modeleCode");
+        public Criteria andModuleCodeLessThan(String value) {
+            addCriterion("module_code <", value, "moduleCode");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeLessThanOrEqualTo(String value) {
-            addCriterion("modele_code <=", value, "modeleCode");
+        public Criteria andModuleCodeLessThanOrEqualTo(String value) {
+            addCriterion("module_code <=", value, "moduleCode");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeLike(String value) {
-            addCriterion("modele_code like", value, "modeleCode");
+        public Criteria andModuleCodeLike(String value) {
+            addCriterion("module_code like", value, "moduleCode");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeNotLike(String value) {
-            addCriterion("modele_code not like", value, "modeleCode");
+        public Criteria andModuleCodeNotLike(String value) {
+            addCriterion("module_code not like", value, "moduleCode");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeIn(List<String> values) {
-            addCriterion("modele_code in", values, "modeleCode");
+        public Criteria andModuleCodeIn(List<String> values) {
+            addCriterion("module_code in", values, "moduleCode");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeNotIn(List<String> values) {
-            addCriterion("modele_code not in", values, "modeleCode");
+        public Criteria andModuleCodeNotIn(List<String> values) {
+            addCriterion("module_code not in", values, "moduleCode");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeBetween(String value1, String value2) {
-            addCriterion("modele_code between", value1, value2, "modeleCode");
+        public Criteria andModuleCodeBetween(String value1, String value2) {
+            addCriterion("module_code between", value1, value2, "moduleCode");
             return (Criteria) this;
         }
 
-        public Criteria andModeleCodeNotBetween(String value1, String value2) {
-            addCriterion("modele_code not between", value1, value2, "modeleCode");
+        public Criteria andModuleCodeNotBetween(String value1, String value2) {
+            addCriterion("module_code not between", value1, value2, "moduleCode");
             return (Criteria) this;
         }
 

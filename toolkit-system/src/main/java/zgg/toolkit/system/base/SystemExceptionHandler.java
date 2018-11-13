@@ -30,7 +30,7 @@ public class SystemExceptionHandler {
     // 登陆错误
     @ExceptionHandler(AuthenticationException.class)
     public Object accountExceptionHandler(HttpServletRequest req, HttpServletResponse rep, AuthenticationException ex) {
-        logger.error(ex.toString());
+        logger.debug(ex.toString());
         return new CommonResult(ResultCode.LOGIN_ERROR);
     }
 

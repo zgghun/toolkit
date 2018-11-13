@@ -1,6 +1,5 @@
 package zgg.toolkit.core.exception;
 
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import zgg.toolkit.core.enums.RequestType;
 import zgg.toolkit.core.enums.ResultCode;
 import zgg.toolkit.core.model.CommonResult;
+import zgg.toolkit.core.utils.JsonUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -53,9 +53,9 @@ public class GlobalExceptionHandler {
     public void baseExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BaseException ex) {
         logger.error(ex.toString());
         CommonResult result;
-        if (ex.getMessage() != null){
+        if (ex.getMessage() != null) {
             result = new CommonResult(ex.getResultCode());
-        }else {
+        } else {
             result = new CommonResult(ResultCode.BASE_ERROR, ex.getMessage());
         }
         errorDeal(req, rep, result);
@@ -82,7 +82,7 @@ public class GlobalExceptionHandler {
         }
         if (RequestType.AJAX == getRequestType(req)) {
             try {
-                String str = new Gson().toJson(result);
+                String str = JsonUtils.toJson(result);
                 rep.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                 rep.getWriter().print(str);
             } catch (IOException e) {

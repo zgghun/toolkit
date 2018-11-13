@@ -4,7 +4,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by zgg on 2018/10/26
@@ -18,8 +17,8 @@ public class LoginInfo implements Serializable {
     private String tel;
     private String avatar;
 
-    // 用户可访问模块，模块结构交由前端控制，后端仅告知启用哪些模块
-    private List<Map<String, String>> modules;
+    // 可访问模块树形结构，json类型
+    private String  modules;
     // 用户拥有的权限
     private List<String> permissions;
 }
