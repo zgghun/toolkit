@@ -2,6 +2,7 @@ package zgg.toolkit.system.model.vo;
 
 import lombok.Data;
 import zgg.toolkit.core.enums.StatusEnum;
+import zgg.toolkit.core.model.MapVO;
 
 import java.util.List;
 
@@ -10,16 +11,15 @@ import java.util.List;
  */
 @Data
 public class PermissionVO {
-    private Long id;
-    private Long pid;
-    private String moduleName;
     private String moduleCode;
-    // TODO 权限要改
-    private String perName;
-    private String perCode;
+    private String moduleName;
+    private String parentModule;
+
     private String icon;
     private Integer sort;
     private StatusEnum status;
+
+    private List<MapVO> permissions;
 
     private List<PermissionVO> children;
 }

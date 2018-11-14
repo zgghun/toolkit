@@ -9,8 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import zgg.toolkit.system.model.entity.User;
-import zgg.toolkit.system.model.vo.LoginInfo;
-import zgg.toolkit.system.service.AccountService;
+import zgg.toolkit.system.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,21 +21,20 @@ public class AccountRealm extends AuthorizingRealm {
     private static Logger logger = LoggerFactory.getLogger(AccountRealm.class);
 
     @Autowired
-    private AccountService accountService;
+    private UserService userService;
 
     // 获取权限信息
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         User user = (User) principals.getPrimaryPrincipal();
-        LoginInfo loginInfo = accountService.getLoginInfo(user);
-        //为当前用户设置角色和权限
+        List<String> perList = userService.getUserPermission(user);
+
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        List<String> permissions = loginInfo.getPermissions();
         // 不知道什么原因，permissions为null的话shiro会报空指针异常
-        if (permissions == null) {
-            permissions = new ArrayList<>();
-        }
+        List<String> permissions = new ArrayList<>();
+        permissions.addAll(perList);
         authorizationInfo.addStringPermissions(permissions);
+
         return authorizationInfo;
     }
 
@@ -46,7 +44,7 @@ public class AccountRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String username = (String) token.getPrincipal();
         String password = new String((char[]) token.getCredentials());
-        User user = accountService.getUser(username, password);
+        User user = userService.getUser(username, password);
         if (user == null) {
             throw new AccountException();
         }

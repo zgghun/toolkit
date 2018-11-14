@@ -18,7 +18,6 @@ import zgg.toolkit.system.model.dto.LoginDto;
 import zgg.toolkit.system.model.dto.UserSaveDto;
 import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.model.vo.LoginInfo;
-import zgg.toolkit.system.service.AccountService;
 import zgg.toolkit.system.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,8 +33,6 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/sys/account")
 public class AccountController extends SystemBaseController {
-    @Autowired
-    private AccountService accountService;
     @Autowired
     private UserService userService;
 
@@ -64,7 +61,7 @@ public class AccountController extends SystemBaseController {
     // 登陆
     @PostMapping("/login")
     public Object login(@Valid LoginDto dto) {
-        LoginInfo loginInfo = accountService.login(dto.getUsername(), dto.getPassword(), dto.getCaptcha());
+        LoginInfo loginInfo = userService.login(dto.getUsername(), dto.getPassword(), dto.getCaptcha());
         return commonResult(loginInfo);
     }
 
