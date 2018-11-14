@@ -1,9 +1,11 @@
 package zgg.toolkit.system.model.vo;
 
 import lombok.Data;
+import zgg.toolkit.core.model.MapVO;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by zgg on 2018/10/26
@@ -17,8 +19,8 @@ public class LoginInfo implements Serializable {
     private String tel;
     private String avatar;
 
-    // 可访问模块树形结构，json类型
-    private String  modules;
+    // 可访问模块
+    private Set<MapVO> modules;
     // 用户拥有的权限
     private List<String> permissions;
 }

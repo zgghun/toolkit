@@ -28,4 +28,13 @@
         </where>
         ORDER BY a.create_time DESC
     </select>
+
+    <select id="findLoginUserPer" resultType="zgg.toolkit.system.model.entity.Permission">
+        SELECT
+        c.*
+        FROM sys_user_role a
+        INNER JOIN sys_role_permission b ON a.role_id = b.role_id
+        INNER JOIN sys_permission c ON b.per_id = c.id
+        WHERE a.user_id = #{userId}
+    </select>
 </mapper>

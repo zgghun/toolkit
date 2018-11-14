@@ -9,10 +9,7 @@ import zgg.toolkit.core.utils.JsonUtils;
 import zgg.toolkit.system.model.vo.PermissionVO;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by zgg on 2018/10/25
@@ -20,9 +17,18 @@ import java.util.List;
 public class MyTest {
     private static final Logger log = LoggerFactory.getLogger(MyTest.class);
     @Test
+    public void test6() {
+        Map<String, List<Integer>> map = new HashMap<>();
+        map.put("a", Arrays.asList(1, 2, 3));
+        System.out.println(map);
+        map.get("a").add(4);
+        System.out.println(map);
+    }
+
+    @Test
     public void test5() {
         PermissionVO vo = new PermissionVO();
-        vo.setId(1L);
+//        vo.setId(1L);
         PermissionVO vo2 = new PermissionVO();
         vo.setChildren(Arrays.asList(vo2));
         System.out.println(JsonUtils.toJson(vo));

@@ -15,6 +15,10 @@ import zgg.toolkit.system.model.entity.PermissionExample;
 import zgg.toolkit.system.model.vo.PermissionVO;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -67,48 +71,67 @@ public class PermissionService extends SystemBaseService {
      * 参考 https://blog.csdn.net/wohaqiyi/article/details/78338108?locationNum=4&fps=1
      *
      * @param moduleName 查询指定模块
-     * @param userId     查询指定用户拥有的权限
      * @return
      */
-    public List<PermissionVO> findPermission(String moduleName) {
+    public List<PermissionVO> findPermission() {
         PermissionExample example = new PermissionExample();
-        example.setOrderByClause("pid ASC, sort ASC");
         PermissionExample.Criteria criteria = example.or()
                 .andStatusNotEqualTo(StatusEnum.DELETE);
-        if (HelpUtils.isNotBlank(moduleName)) {
-            criteria.andModuleNameLike("%" + moduleName + "%");
-        }
+
         List<Permission> list = permissionMapper.selectByExample(example);
 
-        List<PermissionVO> parent = generatePermissionTree(list);
+        List<PermissionVO> perTree = generatePermissionTree(list);
 
-        return parent;
+        return perTree;
     }
 
     public List<PermissionVO> generatePermissionTree(List<Permission> list) {
-        ArrayList<PermissionVO> vos = new ArrayList<>();
-        list.forEach(it -> {
+        List<PermissionVO> vos = new ArrayList<>();
+        Map<String, List<String>> perMap = new HashMap<>(16);
+
+        for (Permission permission : list) {
+            // 转为PermissionVO对象
             PermissionVO vo = new PermissionVO();
-            HelpUtils.copyProperties(it, vo);
+            HelpUtils.copyProperties(permission, vo);
             vos.add(vo);
-        });
-        List<PermissionVO> parent = vos.stream()
-                .filter(it -> it.getPid() == 0)
+            // 把同一模块权限放在一起
+            if (perMap.containsKey(permission.getModuleCode())) {
+                perMap.get(permission.getModuleCode()).add(permission.getPerCode());
+            } else {
+                perMap.put(permission.getModuleCode(), new ArrayList<>(Arrays.asList(permission.getPerCode())));
+            }
+        }
+
+        // 对vos根据 module_code去重,参考 https://blog.csdn.net/u012817635/article/details/79917674
+        List<PermissionVO> vosTemp = vos.stream()
+                .filter(distinctByKey(PermissionVO::getModuleCode))
+                .collect(Collectors.toList());
+
+        // 获取根模块
+        List<PermissionVO> parent = vosTemp.stream()
+                .filter(it -> "0".equals(it.getParentModule()))
                 // 按照 sort升序排列，PermissionVO::getSort.reversed()是降序，要求进行排列的属性或对象必须是实现了Comparable接口的
                 .sorted(Comparator.comparing(PermissionVO::getSort))
                 .collect(Collectors.toList());
-        HashMap<Long, Long> used = new HashMap<>(vos.size());
-        parent.forEach(it -> findPerVOChildren(it, vos, used));
+
+        HashMap<String, String> used = new HashMap<>(vos.size());
+        // 利用根模块查询子模块
+        parent.forEach(it -> findPerVOChildren(it, vosTemp, used));
         return parent;
     }
 
-    private void findPerVOChildren(PermissionVO parent, List<PermissionVO> vos, HashMap<Long, Long> used) {
+    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
+        Map<Object, Boolean> seen = new ConcurrentHashMap<>();
+        return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    }
+
+    private void findPerVOChildren(PermissionVO parent, List<PermissionVO> vos, HashMap<String, String> used) {
         List<PermissionVO> children = new ArrayList<>();
         vos.stream()
-                .filter(it -> !used.containsKey(it.getId()))
-                .filter(it -> it.getPid().equals(parent.getId()))
+                .filter(it -> !used.containsKey(it.getModuleCode()))
+                .filter(it -> it.getParentModule().equals(parent.getModuleCode()))
                 .forEach(it -> {
-                    used.put(it.getId(), it.getPid());
+                    used.put(it.getModuleCode(), it.getModuleCode());
                     findPerVOChildren(it, vos, used);
                     children.add(it);
                 });

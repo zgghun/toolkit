@@ -1,6 +1,7 @@
 package zgg.toolkit.system.mapper;
 
 import zgg.toolkit.system.model.dto.UserQuery;
+import zgg.toolkit.system.model.entity.Permission;
 import zgg.toolkit.system.model.entity.User;
 
 import java.util.List;
@@ -11,4 +12,7 @@ import java.util.List;
 
 public interface UserExtendMapper {
     List<User> findUser(UserQuery query);
+
+    List<Permission> findLoginUserPer(Long userId);
+
 }
