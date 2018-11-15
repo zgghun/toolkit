@@ -45,7 +45,6 @@ public class AccountController extends SystemBaseController {
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.logout();
-            subject.getSession().removeAttribute(GlobalConstant.SESSION_LOGIN_INFO);
         } catch (SessionException ise) {
             throw new BaseException();
         }

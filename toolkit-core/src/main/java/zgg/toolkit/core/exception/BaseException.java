@@ -19,7 +19,7 @@ public class BaseException extends RuntimeException {
     }
 
     public BaseException(ResultCode resultCode){
-        super();
+        super(resultCode.getNote());
         this.resultCode = resultCode;
     }
 

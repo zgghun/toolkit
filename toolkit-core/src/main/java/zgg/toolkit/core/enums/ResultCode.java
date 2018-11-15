@@ -13,13 +13,14 @@ public enum ResultCode {
     PATH_ERROR(101, "请求地址不存在"),
     MORE_THAN_ONE_ERROR(102, "查出多个结果"),
     BIND_ERROR(103, "参数绑定错误"),
+    SQL_ERROR(104, "数据操作错误"),
 
     BASE_ERROR(200, "其他异常"),
     UNAUTHENTICATED(201, "未登录"),
     UNAUTHORIZED(202, "未授权"),
     LOGIN_ERROR(203, "用户名或密码错误"),
 
-    NOT_FOUND_ERROR(210, "数据不存在");
+    DATA_ERROR(210, "数据不存在或不唯一");
 
     private int code;
     private String note;

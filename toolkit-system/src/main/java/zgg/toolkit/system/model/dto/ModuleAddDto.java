@@ -10,23 +10,18 @@ import javax.validation.constraints.NotNull;
  * Created by zgg on 2018/11/12
  */
 @Data
-public class PermissionSaveDto {
-    private Long id;
-    @NotNull
-    private Long pid;
+public class ModuleAddDto {
+    @NotBlank
+    private String parentModule;
 
     @NotBlank
     private String moduleName;
     @NotBlank
-    private String modeleCode;
-    @NotBlank
-    private String perName;
-    @NotBlank
-    private String perCode;
+    private String moduleCode;
     @NotBlank
     private String icon;
-    @NotBlank
+    @NotNull
     private Integer sort;
-    @NotBlank
+    @NotNull
     private StatusEnum status;
 }

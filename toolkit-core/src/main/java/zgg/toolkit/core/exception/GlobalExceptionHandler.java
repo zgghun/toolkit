@@ -2,6 +2,7 @@ package zgg.toolkit.core.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -48,16 +49,19 @@ public class GlobalExceptionHandler {
         errorDeal(req, rep, result);
     }
 
-    // 其他错误
+    // 自定义通用错误
     @ExceptionHandler(BaseException.class)
     public void baseExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BaseException ex) {
         logger.error(ex.toString());
-        CommonResult result;
-        if (ex.getMessage() != null) {
-            result = new CommonResult(ex.getResultCode());
-        } else {
-            result = new CommonResult(ResultCode.BASE_ERROR, ex.getMessage());
-        }
+        CommonResult result = new CommonResult(ResultCode.BASE_ERROR, ex.getMessage());
+        errorDeal(req, rep, result);
+    }
+
+    // 数据库错误
+    @ExceptionHandler(DataAccessException.class)
+    public void sqlExceptionHandler(HttpServletRequest req, HttpServletResponse rep, DataAccessException ex){
+        logger.error(ex.getMessage());
+        CommonResult result = new CommonResult(ResultCode.SQL_ERROR, ex.getCause().getMessage());
         errorDeal(req, rep, result);
     }
 

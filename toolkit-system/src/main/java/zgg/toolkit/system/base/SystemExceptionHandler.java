@@ -1,6 +1,7 @@
 package zgg.toolkit.system.base;
 
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -30,8 +31,14 @@ public class SystemExceptionHandler {
     // 登陆错误
     @ExceptionHandler(AuthenticationException.class)
     public Object accountExceptionHandler(HttpServletRequest req, HttpServletResponse rep, AuthenticationException ex) {
-        logger.debug(ex.toString());
+        logger.warn(ex.toString());
         return new CommonResult(ResultCode.LOGIN_ERROR);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public Object permissionExceptionHandler(UnauthorizedException ex){
+        logger.warn(ex.toString());
+        return new CommonResult(ResultCode.UNAUTHORIZED, ex.toString());
     }
 
 }

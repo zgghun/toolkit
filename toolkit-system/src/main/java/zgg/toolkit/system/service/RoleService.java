@@ -14,7 +14,6 @@ import zgg.toolkit.core.utils.IdWorker;
 import zgg.toolkit.system.base.SystemBaseService;
 import zgg.toolkit.system.mapper.autogen.RoleMapper;
 import zgg.toolkit.system.mapper.autogen.RolePermissionMapper;
-import zgg.toolkit.system.model.dto.DeleteBatchDto;
 import zgg.toolkit.system.model.dto.RolePerSetDto;
 import zgg.toolkit.system.model.dto.RoleQuery;
 import zgg.toolkit.system.model.dto.RoleSaveDto;
@@ -23,7 +22,6 @@ import zgg.toolkit.system.model.entity.RoleExample;
 import zgg.toolkit.system.model.entity.RolePermission;
 import zgg.toolkit.system.model.entity.RolePermissionExample;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -48,12 +46,13 @@ public class RoleService extends SystemBaseService {
         if (dto.getId() == null) {
             Role role = new Role();
             HelpUtils.copyProperties(dto, role);
+            role.setId(IdWorker.nextId());
             roleMapper.insert(role);
             return role;
         } else {
             Role role = roleMapper.selectByPrimaryKey(dto.getId());
             if (role == null) {
-                throw new BaseException(ResultCode.NOT_FOUND_ERROR);
+                throw new BaseException(ResultCode.DATA_ERROR);
             }
             HelpUtils.copyProperties(dto, role);
             roleMapper.updateByPrimaryKeySelective(role);
@@ -82,6 +81,7 @@ public class RoleService extends SystemBaseService {
      */
     public PageList<Role> findRole(RoleQuery query, PageParam pageParam){
         RoleExample example = new RoleExample();
+        example.setOrderByClause("sort ASC");
         RoleExample.Criteria criteria = example.or();
         if (HelpUtils.isNotBlank(query.getKeyword())){
             criteria.andNameLike("%" + query.getKeyword() + "%");

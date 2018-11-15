@@ -39,7 +39,7 @@ public class RoleController extends SystemBaseController {
         return commonResult();
     }
 
-    @PostMapping("/saveRole")
+    @PostMapping("/save")
     public Object saveRole(@Valid RoleSaveDto dto){
         Role role = roleService.saveRole(dto);
         return commonResult(role);
