@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import zgg.toolkit.system.base.SystemBaseController;
-import zgg.toolkit.system.model.dto.ModuleAddDto;
+import zgg.toolkit.system.model.dto.ModuleSaveDto;
 import zgg.toolkit.system.model.dto.ModuleUpdateDto;
 import zgg.toolkit.system.model.dto.PermissionUpdateDto;
 import zgg.toolkit.system.model.entity.Permission;
@@ -33,8 +33,8 @@ public class PermissionController extends SystemBaseController {
     }
 
     @PostMapping("/addModule")
-    public Object addModule(@Valid ModuleAddDto dto){
-        Permission permission = permissionService.addModule(dto);
+    public Object addModule(@Valid ModuleSaveDto dto){
+        Permission permission = permissionService.saveModule(dto);
         return commonResult(permission);
     }
 
