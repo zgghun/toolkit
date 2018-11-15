@@ -1,9 +1,11 @@
 package zgg.toolkit.system.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import zgg.toolkit.core.model.PageList;
 import zgg.toolkit.core.model.PageParam;
+import zgg.toolkit.system.base.PerConst;
 import zgg.toolkit.system.base.SystemBaseController;
 import zgg.toolkit.system.model.dto.*;
 import zgg.toolkit.system.model.entity.User;
@@ -45,6 +47,7 @@ public class UserController extends SystemBaseController {
         return commonResult(users);
     }
 
+    @RequiresPermissions(PerConst.user_save)
     @PostMapping("/save")
     public Object saveUser(@Valid UserSaveDto dto){
         User user = userService.saveUser(dto);

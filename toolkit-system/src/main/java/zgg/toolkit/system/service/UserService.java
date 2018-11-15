@@ -77,7 +77,7 @@ public class UserService extends SystemBaseService {
         } else {
             User user = userMapper.selectByPrimaryKey(dto.getId());
             if (user == null) {
-                throw new BaseException(ResultCode.NOT_FOUND_ERROR);
+                throw new BaseException(ResultCode.DATA_ERROR);
             }
             HelpUtils.copyProperties(dto, user);
             user.setPassword(HelpUtils.md5(dto.getPassword()));

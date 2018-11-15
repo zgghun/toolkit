@@ -49,12 +49,12 @@
                              type="XMLMAPPER"/>
 
         <!-- ************* 数据表数据表数据表 *************-->
-        <table tableName="sys_permission" domainObjectName="Permission">
-            <columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>
-        </table>
-        <!--<table tableName="sys_role" domainObjectName="Role">-->
+        <!--<table tableName="sys_permission" domainObjectName="Permission">-->
             <!--<columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>-->
         <!--</table>-->
+        <table tableName="sys_role" domainObjectName="Role">
+            <columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>
+        </table>
         <!--<table tableName="sys_role_permission" domainObjectName="RolePermission"/>-->
         <!--<table tableName="sys_user" domainObjectName="User">-->
             <!--<columnOverride column="gender" javaType="zgg.toolkit.core.enums.GenderEnum"/>-->
