@@ -1,7 +1,6 @@
 package zgg.toolkit.system.model.dto;
 
 import lombok.Data;
-import zgg.toolkit.core.enums.StatusEnum;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,9 +9,10 @@ import javax.validation.constraints.NotNull;
  * Created by zgg on 2018/11/12
  */
 @Data
-public class ModuleAddDto {
-    @NotBlank
-    private String parentModule;
+public class ModuleSaveDto {
+    private Long id;
+    @NotNull
+    private Long pid;
 
     @NotBlank
     private String moduleName;
@@ -22,6 +22,4 @@ public class ModuleAddDto {
     private String icon;
     @NotNull
     private Integer sort;
-    @NotNull
-    private StatusEnum status;
 }
