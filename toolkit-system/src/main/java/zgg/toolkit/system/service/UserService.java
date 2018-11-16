@@ -184,7 +184,7 @@ public class UserService extends SystemBaseService {
             return users.get(0);
         }
         if (users.size() > 1) {
-            throw new BaseException(ResultCode.MORE_THAN_ONE_ERROR);
+            throw new BaseException(ResultCode.DATA_ERROR);
         }
         return null;
     }
@@ -244,14 +244,13 @@ public class UserService extends SystemBaseService {
         loginInfo.setAvatar(user.getAvatar());
 
         List<Permission> permissions = userExtendMapper.findLoginUserPer(user.getId());
+        List<Long> moduleIds = permissions.stream().map(Permission::getModuleId).collect(Collectors.toList());
+        List<String> perList = permissions.stream().map(Permission::getPerCode).collect(Collectors.toList());
 
-        // 权限、模块列表
-        Set<MapVO> modules = new HashSet<>();
-        List<String> perList = new ArrayList<>();
-        permissions.forEach(it -> {
-            modules.add(new MapVO(it.getModuleName(), it.getModuleCode()));
-            perList.add(it.getPerCode());
-        });
+        List<MapVO> modules = new ArrayList<>();
+        if (permissions.size() > 0) {
+            modules = userExtendMapper.findUserModule(moduleIds);
+        }
         loginInfo.setModules(modules);
         loginInfo.setPermissions(perList);
 

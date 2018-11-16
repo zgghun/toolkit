@@ -10,22 +10,18 @@ import zgg.toolkit.core.model.MapVO;
 import zgg.toolkit.core.utils.HelpUtils;
 import zgg.toolkit.core.utils.IdWorker;
 import zgg.toolkit.system.base.SystemBaseService;
+import zgg.toolkit.system.mapper.PermissionExtendMapper;
 import zgg.toolkit.system.mapper.autogen.ModuleMapper;
 import zgg.toolkit.system.mapper.autogen.PermissionMapper;
 import zgg.toolkit.system.model.dto.ModuleEnableDto;
 import zgg.toolkit.system.model.dto.ModuleSaveDto;
-import zgg.toolkit.system.model.dto.ModuleUpdateDto;
-import zgg.toolkit.system.model.dto.PermissionUpdateDto;
+import zgg.toolkit.system.model.dto.PermissionSaveDto;
 import zgg.toolkit.system.model.entity.Module;
 import zgg.toolkit.system.model.entity.ModuleExample;
 import zgg.toolkit.system.model.entity.Permission;
-import zgg.toolkit.system.model.entity.PermissionExample;
 import zgg.toolkit.system.model.vo.PermissionVO;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -38,7 +34,20 @@ public class PermissionService extends SystemBaseService {
     private PermissionMapper permissionMapper;
     @Autowired
     private ModuleMapper moduleMapper;
+    @Autowired
+    private PermissionExtendMapper perExtendMapper;
 
+
+    /**
+     * 权限列表(通过模块树形结构展示)
+     * 参考 https://blog.csdn.net/wohaqiyi/article/details/78338108?locationNum=4&fps=1
+     *
+     * @return
+     */
+    public List<PermissionVO> findPermissionTree() {
+        List<PermissionVO> vos = perExtendMapper.findPermissionTree();
+        return generatePermissionTree(vos);
+    }
 
     /**
      * 添加/修改模块基本信息
@@ -53,6 +62,13 @@ public class PermissionService extends SystemBaseService {
             module.setId(IdWorker.nextId());
             module.setStatus(StatusEnum.ENABLE);
             moduleMapper.insert(module);
+            // 添加默认权限
+            PermissionSaveDto perAdd = new PermissionSaveDto();
+            perAdd.setPerName("查看");
+            perAdd.setPerCode(module.getModuleCode() + ":view");
+            perAdd.setModuleId(module.getId());
+            this.savePermission(perAdd);
+
             return module;
         } else {
             Module module = moduleMapper.selectByPrimaryKey(dto.getId());
@@ -76,6 +92,9 @@ public class PermissionService extends SystemBaseService {
     @Transactional(rollbackFor = Exception.class)
     public void setModule(ModuleEnableDto dto) {
         Module module = moduleMapper.selectByPrimaryKey(dto.getId());
+        if (module == null) {
+            throw new BaseException(ResultCode.DATA_ERROR);
+        }
         // 开启模块
         if (dto.getStatus() == StatusEnum.ENABLE) {
             if (module.getPid() != 0) {
@@ -87,7 +106,7 @@ public class PermissionService extends SystemBaseService {
                     throw new BaseException("请先开启父模块");
                 }
             }
-            module.setStatus(dto.getStatus());
+            module.setStatus(StatusEnum.ENABLE);
             moduleMapper.updateByPrimaryKey(module);
         }
         // 停用模块
@@ -97,137 +116,124 @@ public class PermissionService extends SystemBaseService {
             // 停用所有子模块:
             // 方法1，利用mysql存储过程，递归查询子节点，由于在sql端，维护较麻烦，但对于数据量大的树形结构，较为适合
             // 方法2，查询出所有记录，利用java查询子节点，只适用于记录量小的，这里比较适合
-
-
+            List<Module> children = findModuleAndChildren(module.getId());
+            List<Long> ids = children.stream().map(Module::getId).collect(Collectors.toList());
+            ModuleExample ep = new ModuleExample();
+            ep.or().andIdIn(ids);
+            Module m = new Module();
+            m.setStatus(StatusEnum.DISABLE);
+            moduleMapper.updateByExampleSelective(m, ep);
         }
-
-
     }
 
-
     /**
-     * 权限列表（树形结构）
-     * 参考 https://blog.csdn.net/wohaqiyi/article/details/78338108?locationNum=4&fps=1
+     * 删除模块
      *
-     * @return
+     * @param id
      */
-    public List<PermissionVO> findPermission() {
-        PermissionExample example = new PermissionExample();
-        List<Permission> list = permissionMapper.selectByExample(example);
-
-        List<PermissionVO> perTree = generatePermissionTree(list);
-
-        return perTree;
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteModule(Long id) {
+        ModuleExample example = new ModuleExample();
+        example.or().andPidEqualTo(id);
+        long l = moduleMapper.countByExample(example);
+        if (l > 0) {
+            throw new BaseException("请先删除子模块");
+        }
+        moduleMapper.deleteByPrimaryKey(id);
+        // 同时删除此模块下的权限
+        this.deletePermission(null, id);
     }
 
     /**
-     * 修改模块基本信息
+     * 添加/修改权限
      *
      * @param dto
      */
-    @Transactional(rollbackFor = Exception.class)
-    public void updateModule(ModuleUpdateDto dto) {
-        PermissionExample example = new PermissionExample();
-        example.or().andModuleCodeEqualTo(dto.getOldModuleCode());
+    public void savePermission(PermissionSaveDto dto) {
         Permission per = new Permission();
         HelpUtils.copyProperties(dto, per);
-        permissionMapper.updateByExampleSelective(per, example);
-
-        // 若module_code变了，要修改子模块的parent_module
-        if (!dto.getModuleCode().equals(dto.getOldModuleCode())) {
-            PermissionExample example2 = new PermissionExample();
-            example2.or().andParentModuleEqualTo(dto.getOldModuleCode());
-            Permission per2 = new Permission();
-            per2.setParentModule(dto.getModuleCode());
-            permissionMapper.updateByExampleSelective(per2, example2);
+        if (dto.getId() == null) {
+            per.setId(IdWorker.nextId());
+            permissionMapper.insert(per);
+        } else {
+            permissionMapper.updateByPrimaryKey(per);
         }
     }
 
-    public List<PermissionVO> generatePermissionTree(List<Permission> list) {
-        List<PermissionVO> vos = new ArrayList<>();
-        Map<String, List<MapVO>> perMap = new HashMap<>(16);
-
-        for (Permission per : list) {
-            // 转为PermissionVO对象
-            PermissionVO vo = new PermissionVO();
-            HelpUtils.copyProperties(per, vo);
-            vos.add(vo);
-            // 把同一模块权限放在一起
-            if (perMap.containsKey(per.getModuleCode())) {
-                perMap.get(per.getModuleCode()).add(new MapVO(per.getPerName(), per.getPerCode()));
-            } else {
-                perMap.put(per.getModuleCode(), new ArrayList<MapVO>() {{
-                    add(new MapVO(per.getPerName(), per.getPerCode()));
-                }});
+    /**
+     * 根据id或模块id删除权限
+     *
+     * @param perId
+     * @param moduleId
+     */
+    public void deletePermission(Long perId, Long moduleId) {
+        if (perId != null) {
+            Permission per = permissionMapper.selectByPrimaryKey(perId);
+            if (per != null && HelpUtils.contains(per.getPerCode(), ":view")) {
+                throw new BaseException("查看权限不可删除");
             }
+            perExtendMapper.deletePermissionById(perId);
         }
+        if (moduleId != null) {
+            perExtendMapper.deletePermissionByModuleId(moduleId);
+        }
+    }
 
-        // 对vos根据 module_code去重,参考 https://blog.csdn.net/u012817635/article/details/79917674
-        List<PermissionVO> vosTemp = vos.stream()
-                .filter(distinctByKey(PermissionVO::getModuleCode))
-                .collect(Collectors.toList());
 
-        // 获取根模块,并设置权限
-        List<PermissionVO> parent = vosTemp.stream()
-                .filter(it -> "0".equals(it.getParentModule()))
-                // 按照 sort升序排列，PermissionVO::getSort.reversed()是降序，要求进行排列的属性或对象必须是实现了Comparable接口的
+    /****************** 内部方法 *********************/
+
+    /**
+     * 获取模块及所属子模块
+     *
+     * @param id
+     * @return
+     */
+    private List<Module> findModuleAndChildren(Long id) {
+        List<Module> all = moduleMapper.selectByExample(new ModuleExample());
+        Module parent = all.stream().filter(it -> id.equals(it.getId())).findFirst().get();
+        List<Module> children = findModuleChildren(parent, all);
+        return children;
+    }
+
+    private List<Module> findModuleChildren(Module parent, List<Module> all) {
+        Set<Object> used = new HashSet<>();
+        List<Module> children = new ArrayList<>();
+        all.stream()
+                .filter(it -> used.add(it.getId()))
+                .filter(it -> parent.getId().equals(it.getPid()))
+                .forEach(it -> {
+                    children.add(it);
+                    findModuleChildren(it, all);
+                });
+        return children;
+    }
+
+
+    private List<PermissionVO> generatePermissionTree(List<PermissionVO> vos) {
+        // 获取根模块
+        List<PermissionVO> parent = vos.stream()
+                .filter(it -> 0 == it.getPid())
+                // 按照 sort升序排列，.reversed()是降序，要求进行排列的属性或对象必须是实现了Comparable接口的
                 .sorted(Comparator.comparing(PermissionVO::getSort))
                 .collect(Collectors.toList());
-
-        // 利用根模块查询子模块
-        Map<String, String> used = new HashMap<>(vosTemp.size());
+        // 利用父模块查询子模块
         parent.forEach(it -> {
-            it.setPermissions(perMap.get(it.getModuleCode()));
-            findPerVOChildren(it, vosTemp, perMap, used);
+            findPerVOChildren(it, vos);
         });
-
         return parent;
     }
 
-    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
-        Map<Object, Boolean> seen = new ConcurrentHashMap<>();
-        return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
-    }
-
-    private void findPerVOChildren(PermissionVO parent, List<PermissionVO> vos, Map<String, List<MapVO>> perMap, Map<String, String> used) {
+    private void findPerVOChildren(PermissionVO parent, List<PermissionVO> vos) {
+        Set<Long> used = new HashSet<>();
         List<PermissionVO> children = new ArrayList<>();
         vos.stream()
-                .filter(it -> !used.containsKey(it.getModuleCode()))
-                .filter(it -> it.getParentModule().equals(parent.getModuleCode()))
+                .filter(it -> used.add(it.getId()))
+                .filter(it -> it.getPid().equals(parent.getId()))
                 .sorted(Comparator.comparing(PermissionVO::getSort))
                 .forEach(it -> {
-                    used.put(it.getModuleCode(), it.getModuleCode());
-                    it.setPermissions(perMap.get(it.getModuleCode()));
                     children.add(it);
-                    findPerVOChildren(it, vos, perMap, used);
+                    findPerVOChildren(it, vos);
                 });
         parent.setChildren(children);
-    }
-
-    /**
-     * 添加/删除权限
-     *
-     * @param dto
-     */
-    public void updatePermission(PermissionUpdateDto dto) {
-        PermissionExample example = new PermissionExample();
-        PermissionExample.Criteria criteria = example.or();
-        // 添加权限
-        if (HelpUtils.isNotBlank(dto.getPerName())) {
-            criteria.andModuleCodeEqualTo(dto.getModuleCode());
-            List<Permission> temp = permissionMapper.selectByExample(example);
-            if (temp.size() == 0) {
-                throw new BaseException(ResultCode.DATA_ERROR);
-            }
-            Permission per = temp.get(0);
-            per.setId(IdWorker.nextId());
-            per.setPerName(dto.getPerName());
-            per.setPerCode(dto.getPerCode());
-            permissionMapper.insert(per);
-        } else {
-            //删除权限
-            criteria.andPerCodeEqualTo(dto.getPerCode());
-            permissionMapper.deleteByExample(example);
-        }
     }
 }

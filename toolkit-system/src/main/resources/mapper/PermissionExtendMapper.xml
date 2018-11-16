@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zgg.toolkit.system.mapper.PermissionExtendMapper">
+    <delete id="deletePermissionById">
+        DELETE
+            a, b
+        FROM
+            sys_permission a INNER JOIN sys_role_permission b ON a.id = b.per_id
+        WHERE
+            a.id = #{id}
+    </delete>
+    <delete id="deletePermissionByModuleId">
+        DELETE
+            a, c
+        FROM sys_permission a
+            INNER JOIN sys_module b ON a.module_id = b.id
+            INNER JOIN sys_role_permission c ON c.per_id = a.id
+        WHERE a.module_id = #{moduleId}
+    </delete>
+    <resultMap id="permissionVo" type="zgg.toolkit.system.model.vo.PermissionVO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="pid" property="pid" jdbcType="BIGINT"/>
+        <result column="module_name" property="moduleName" jdbcType="VARCHAR"/>
+        <result column="module_code" property="moduleCode" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <collection property="permissions" column="id" ofType="zgg.toolkit.system.model.entity.Permission">
+            <id column="perId" property="id" jdbcType="BIGINT"/>
+            <result column="per_name" property="perName" jdbcType="VARCHAR"/>
+            <result column="per_code" property="perCode" jdbcType="VARCHAR"/>
+            <result column="module_id" property="moduleId" jdbcType="BIGINT"/>
+        </collection>
+    </resultMap>
+    <select id="findPermissionTree" resultMap="permissionVo">
+        SELECT
+            a.*,
+            b.id AS perId,
+            b.per_name,
+            b.per_code,
+            b.module_id
+        FROM sys_module a INNER JOIN sys_permission b ON a.id = b.module_id
+    </select>
+    <resultMap id="test" type="zgg.toolkit.system.model.entity.Permission">
+        <!--<id column="id"/>-->
+    </resultMap>
+</mapper>
