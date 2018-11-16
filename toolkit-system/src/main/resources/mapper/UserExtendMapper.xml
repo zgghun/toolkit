@@ -30,11 +30,23 @@
     </select>
 
     <select id="findLoginUserPer" resultType="zgg.toolkit.system.model.entity.Permission">
-        SELECT
-        c.*
+        SELECT c.*
         FROM sys_user_role a
-        INNER JOIN sys_role_permission b ON a.role_id = b.role_id
-        INNER JOIN sys_permission c ON b.per_id = c.id
+            INNER JOIN sys_role_permission b ON a.role_id = b.role_id
+            INNER JOIN sys_permission c ON b.per_id = c.id
+            INNER JOIN sys_module d ON d.id = c.module_id
         WHERE a.user_id = #{userId}
+              AND d.status = "ENABLE"
+    </select>
+
+    <select id="findUserModule" resultType="zgg.toolkit.core.model.MapVO">
+        SELECT
+        a.module_name,
+        a.module_code
+        FROM sys_module a
+        WHERE a.id IN
+        <foreach collection="moduleIds" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 </mapper>

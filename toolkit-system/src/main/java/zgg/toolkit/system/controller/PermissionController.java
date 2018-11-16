@@ -1,15 +1,13 @@
 package zgg.toolkit.system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import zgg.toolkit.system.base.SystemBaseController;
+import zgg.toolkit.system.model.dto.DeleteDto;
+import zgg.toolkit.system.model.dto.ModuleEnableDto;
 import zgg.toolkit.system.model.dto.ModuleSaveDto;
-import zgg.toolkit.system.model.dto.ModuleUpdateDto;
-import zgg.toolkit.system.model.dto.PermissionUpdateDto;
-import zgg.toolkit.system.model.entity.Permission;
+import zgg.toolkit.system.model.dto.PermissionSaveDto;
+import zgg.toolkit.system.model.entity.Module;
 import zgg.toolkit.system.model.vo.PermissionVO;
 import zgg.toolkit.system.service.PermissionService;
 
@@ -27,30 +25,39 @@ public class PermissionController extends SystemBaseController {
     private PermissionService permissionService;
 
     @GetMapping("")
-    public Object findPermission(){
-        List<PermissionVO> perVO = permissionService.findPermission();
+    public Object findPermission() {
+        List<PermissionVO> perVO = permissionService.findPermissionTree();
         return commonResult(perVO);
     }
 
-    @PostMapping("/addModule")
-    public Object addModule(@Valid ModuleSaveDto dto){
-        Permission permission = permissionService.saveModule(dto);
-        return commonResult(permission);
+    @PostMapping("/saveModule")
+    public Object saveModule(@Valid ModuleSaveDto dto) {
+        Module module = permissionService.saveModule(dto);
+        return commonResult(module);
     }
 
-    @PostMapping("/updateModule")
-    public Object updateModule(@Valid ModuleUpdateDto dto){
-        permissionService.updateModule(dto);
+    @PostMapping("/setModule")
+    public Object setModule(@Valid ModuleEnableDto dto) {
+        permissionService.setModule(dto);
         return commonResult();
     }
 
-
-    @PostMapping("/updatePer")
-    public Object updatePermission(@Valid PermissionUpdateDto dto){
-        permissionService.updatePermission(dto);
+    @PostMapping("/deleteModule")
+    public Object deleteModule(@RequestParam Long id) {
+        permissionService.deleteModule(id);
         return commonResult();
     }
 
+    @PostMapping("/savePer")
+    public Object savePermission(@Valid PermissionSaveDto dto) {
+        permissionService.savePermission(dto);
+        return commonResult();
+    }
 
+    @PostMapping("/deletePer")
+    public Object deletePermission(@Valid DeleteDto dto) {
+        permissionService.deletePermission(dto.getId(), null);
+        return commonResult();
+    }
 
 }

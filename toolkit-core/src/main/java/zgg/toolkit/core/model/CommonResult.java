@@ -52,7 +52,7 @@ public class CommonResult {
     public CommonResult(ResultCode resultCode, Object error) {
         this.code = resultCode.getCode();
         this.message = resultCode.getNote();
-        this.data = error;
+        this.data = error == null ? "" : error;
     }
 
 

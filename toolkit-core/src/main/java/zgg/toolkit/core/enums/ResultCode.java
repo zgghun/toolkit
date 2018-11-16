@@ -11,7 +11,6 @@ public enum ResultCode {
 
     ERROR(100, "系统异常"),
     PATH_ERROR(101, "请求地址不存在"),
-    MORE_THAN_ONE_ERROR(102, "查出多个结果"),
     BIND_ERROR(103, "参数绑定错误"),
     SQL_ERROR(104, "数据操作错误"),
 
