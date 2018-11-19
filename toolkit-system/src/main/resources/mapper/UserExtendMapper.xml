@@ -41,8 +41,8 @@
 
     <select id="findUserModule" resultType="zgg.toolkit.core.model.MapVO">
         SELECT
-        a.module_name,
-        a.module_code
+        a.module_name AS 'key',
+        a.module_code AS 'value'
         FROM sys_module a
         WHERE a.id IN
         <foreach collection="moduleIds" item="item" open="(" separator="," close=")">

@@ -5,7 +5,7 @@
         DELETE
             a, b
         FROM
-            sys_permission a INNER JOIN sys_role_permission b ON a.id = b.per_id
+            sys_permission a LEFT JOIN sys_role_permission b ON a.id = b.per_id
         WHERE
             a.id = #{id}
     </delete>
@@ -17,7 +17,7 @@
             INNER JOIN sys_role_permission c ON c.per_id = a.id
         WHERE a.module_id = #{moduleId}
     </delete>
-    <resultMap id="permissionVo" type="zgg.toolkit.system.model.vo.PermissionVO">
+    <resultMap id="permissionVo" type="zgg.toolkit.system.model.vo.PermissionVo">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="pid" property="pid" jdbcType="BIGINT"/>
         <result column="module_name" property="moduleName" jdbcType="VARCHAR"/>

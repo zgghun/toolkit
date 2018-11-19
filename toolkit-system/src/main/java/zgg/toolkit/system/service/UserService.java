@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import zgg.toolkit.core.constant.GlobalConstant;
+import zgg.toolkit.core.constant.GlobalConst;
 import zgg.toolkit.core.enums.ResultCode;
 import zgg.toolkit.core.enums.StatusEnum;
 import zgg.toolkit.core.exception.BaseException;
@@ -25,18 +25,13 @@ import zgg.toolkit.system.mapper.UserExtendMapper;
 import zgg.toolkit.system.mapper.autogen.UserDetailMapper;
 import zgg.toolkit.system.mapper.autogen.UserMapper;
 import zgg.toolkit.system.mapper.autogen.UserRoleMapper;
-import zgg.toolkit.system.model.dto.UserDetailSaveDto;
-import zgg.toolkit.system.model.dto.UserQuery;
-import zgg.toolkit.system.model.dto.UserRoleSetDto;
-import zgg.toolkit.system.model.dto.UserSaveDto;
+import zgg.toolkit.system.model.dto.*;
 import zgg.toolkit.system.model.entity.*;
 import zgg.toolkit.system.model.vo.LoginInfo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -68,11 +63,11 @@ public class UserService extends SystemBaseService {
             HelpUtils.copyProperties(dto, user);
             user.setId(IdWorker.nextId());
             user.setPassword(HelpUtils.md5(dto.getPassword()));
+            user.setStatus(StatusEnum.ENABLE);
             user.setCreateTime(LocalDateTime.now());
             user.setUpdateTime(LocalDateTime.now());
             userMapper.insert(user);
-
-            user.setPassword("*********");
+            user.setPassword(GlobalConst.MASK);
             return user;
         } else {
             User user = userMapper.selectByPrimaryKey(dto.getId());
@@ -83,7 +78,7 @@ public class UserService extends SystemBaseService {
             user.setPassword(HelpUtils.md5(dto.getPassword()));
             user.setUpdateTime(LocalDateTime.now());
             userMapper.updateByPrimaryKeySelective(user);
-            user.setPassword("*********");
+            user.setPassword(GlobalConst.MASK);
             return user;
         }
     }
@@ -91,15 +86,14 @@ public class UserService extends SystemBaseService {
     /**
      * 删除用户
      *
-     * @param ids
+     * @param dto
      */
     @Transactional(rollbackFor = Exception.class)
-    public void deleteUser(List<Long> ids) {
-        UserExample example = new UserExample();
-        example.or().andIdIn(ids);
+    public void enableUser(EnableDto dto) {
         User user = new User();
+        user.setId(dto.getId());
         user.setStatus(StatusEnum.DELETE);
-        userMapper.updateByExampleSelective(user, example);
+        userMapper.updateByPrimaryKeySelective(user);
     }
 
     /**
@@ -112,7 +106,7 @@ public class UserService extends SystemBaseService {
     public PageList<User> findUser(UserQuery query, PageParam pageParam) {
         PageHelper.startPage(pageParam);
         List<User> users = userExtendMapper.findUser(query);
-        users.forEach(it -> it.setPassword("********"));
+        users.forEach(it -> it.setPassword(GlobalConst.MASK));
         return new PageList<>(users);
     }
 
@@ -124,9 +118,16 @@ public class UserService extends SystemBaseService {
      * @return
      */
     public UserDetail saveUserDetail(UserDetailSaveDto dto, LoginInfo loginInfo) {
-        UserDetail userDetail = new UserDetail();
-        HelpUtils.copyProperties(dto, userDetail);
-        return userDetail;
+        UserDetail detail = userDetailMapper.selectByPrimaryKey(dto.getId());
+        if (detail == null){
+            detail = new UserDetail();
+            HelpUtils.copyProperties(dto, detail);
+            userDetailMapper.insertSelective(detail);
+        }else {
+            HelpUtils.copyProperties(dto, detail);
+            userDetailMapper.updateByPrimaryKeySelective(detail);
+        }
+        return detail;
     }
 
     /**
@@ -211,7 +212,7 @@ public class UserService extends SystemBaseService {
     public LoginInfo login(String username, String password, String captcha) {
         Session session = SecurityUtils.getSubject().getSession();
         // 验证码验证
-        session.removeAttribute(GlobalConstant.SESSION_CAPTCHA);
+        session.removeAttribute(GlobalConst.SESSION_CAPTCHA);
 
         UsernamePasswordToken token = new UsernamePasswordToken(username, HelpUtils.md5(password));
         Subject subject = SecurityUtils.getSubject();
@@ -225,7 +226,7 @@ public class UserService extends SystemBaseService {
         User user = (User) subject.getPrincipals().getPrimaryPrincipal();
         // 返回登陆信息，并把登陆信息存到session中，之后前端再次获取登录信息直接从session获取
         LoginInfo loginInfo = this.getLoginInfo(user);
-        session.setAttribute(GlobalConstant.SESSION_LOGIN_INFO, loginInfo);
+        session.setAttribute(GlobalConst.SESSION_LOGIN_INFO, loginInfo);
 
         return loginInfo;
     }
@@ -244,12 +245,12 @@ public class UserService extends SystemBaseService {
         loginInfo.setAvatar(user.getAvatar());
 
         List<Permission> permissions = userExtendMapper.findLoginUserPer(user.getId());
-        List<Long> moduleIds = permissions.stream().map(Permission::getModuleId).collect(Collectors.toList());
+        List<Long> moduleIds = permissions.stream().map(Permission::getModuleId).distinct().collect(Collectors.toList());
         List<String> perList = permissions.stream().map(Permission::getPerCode).collect(Collectors.toList());
 
         List<MapVO> modules = new ArrayList<>();
         if (permissions.size() > 0) {
-            modules = userExtendMapper.findUserModule(moduleIds);
+            modules.addAll(userExtendMapper.findUserModule(moduleIds));
         }
         loginInfo.setModules(modules);
         loginInfo.setPermissions(perList);

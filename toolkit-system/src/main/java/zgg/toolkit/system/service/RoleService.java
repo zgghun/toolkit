@@ -14,13 +14,12 @@ import zgg.toolkit.core.utils.IdWorker;
 import zgg.toolkit.system.base.SystemBaseService;
 import zgg.toolkit.system.mapper.autogen.RoleMapper;
 import zgg.toolkit.system.mapper.autogen.RolePermissionMapper;
+import zgg.toolkit.system.mapper.autogen.UserRoleMapper;
+import zgg.toolkit.system.model.dto.EnableDto;
 import zgg.toolkit.system.model.dto.RolePerSetDto;
 import zgg.toolkit.system.model.dto.RoleQuery;
 import zgg.toolkit.system.model.dto.RoleSaveDto;
-import zgg.toolkit.system.model.entity.Role;
-import zgg.toolkit.system.model.entity.RoleExample;
-import zgg.toolkit.system.model.entity.RolePermission;
-import zgg.toolkit.system.model.entity.RolePermissionExample;
+import zgg.toolkit.system.model.entity.*;
 
 import java.util.List;
 
@@ -34,6 +33,10 @@ public class RoleService extends SystemBaseService {
     private RoleMapper roleMapper;
     @Autowired
     private RolePermissionMapper rolePermissionMapper;
+    @Autowired
+    private UserRoleMapper userRoleMapper;
+
+
 
 
     /**
@@ -61,16 +64,29 @@ public class RoleService extends SystemBaseService {
     }
 
     /**
-     * 删除角色
-     * @param ids
+     * 启用/停用角色
+     * @param dto
+     */
+    public void enableRole(EnableDto dto){
+        Role role = new Role();
+        role.setId(dto.getId());
+        role.setStatus(dto.getStatus());
+        roleMapper.updateByPrimaryKeySelective(role);
+    }
+
+    /**
+     * 删除角色(会删除所有用户与角色的关联，角色与权限的关联)
+     * @param id
      */
     @Transactional(rollbackFor = Exception.class)
-    public void deleteRole(List<Long> ids){
-        RoleExample example = new RoleExample();
-        example.or().andIdIn(ids);
-        Role role = new Role();
-        role.setStatus(StatusEnum.DELETE);
-        roleMapper.updateByExampleSelective(role, example);
+    public void deleteRole(Long id){
+        roleMapper.deleteByPrimaryKey(id);
+        UserRoleExample example = new UserRoleExample();
+        example.or().andRoleIdEqualTo(id);
+        userRoleMapper.deleteByExample(example);
+        RolePermissionExample ep2 = new RolePermissionExample();
+        ep2.or().andRoleIdEqualTo(id);
+        rolePermissionMapper.deleteByExample(ep2);
     }
 
     /**

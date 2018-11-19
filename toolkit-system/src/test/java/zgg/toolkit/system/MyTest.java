@@ -6,8 +6,10 @@ import org.slf4j.LoggerFactory;
 import zgg.toolkit.core.utils.DateUtils;
 import zgg.toolkit.core.utils.HelpUtils;
 import zgg.toolkit.core.utils.JsonUtils;
-import zgg.toolkit.system.model.vo.PermissionVO;
+import zgg.toolkit.system.base.SysPerConst;
+import zgg.toolkit.system.model.vo.PermissionVo;
 
+import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -16,6 +18,16 @@ import java.util.*;
  */
 public class MyTest {
     private static final Logger log = LoggerFactory.getLogger(MyTest.class);
+
+    @Test
+    public void test7() throws IllegalAccessException {
+        Field[] fields = SysPerConst.class.getDeclaredFields();
+        for (Field field : fields) {
+            System.out.println(field.get(this));
+        }
+    }
+
+
     @Test
     public void test6() {
         Map<String, List<Integer>> map = new HashMap<>();
@@ -27,9 +39,9 @@ public class MyTest {
 
     @Test
     public void test5() {
-        PermissionVO vo = new PermissionVO();
+        PermissionVo vo = new PermissionVo();
 //        vo.setId(1L);
-        PermissionVO vo2 = new PermissionVO();
+        PermissionVo vo2 = new PermissionVo();
         vo.setChildren(Arrays.asList(vo2));
         System.out.println(JsonUtils.toJson(vo));
     }
