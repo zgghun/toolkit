@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import zgg.toolkit.core.model.PageList;
 import zgg.toolkit.core.model.PageParam;
 import zgg.toolkit.system.base.SystemBaseController;
-import zgg.toolkit.system.model.dto.DeleteBatchDto;
-import zgg.toolkit.system.model.dto.RolePerSetDto;
-import zgg.toolkit.system.model.dto.RoleQuery;
-import zgg.toolkit.system.model.dto.RoleSaveDto;
+import zgg.toolkit.system.model.dto.*;
 import zgg.toolkit.system.model.entity.Role;
 import zgg.toolkit.system.service.RoleService;
 
@@ -33,16 +30,22 @@ public class RoleController extends SystemBaseController {
         return commonResult(list);
     }
 
-    @PostMapping("/delete")
-    public Object deleteRole(@Valid DeleteBatchDto dto){
-        roleService.deleteRole(dto.getIds());
-        return commonResult();
-    }
-
     @PostMapping("/save")
     public Object saveRole(@Valid RoleSaveDto dto){
         Role role = roleService.saveRole(dto);
         return commonResult(role);
+    }
+
+    @PostMapping("/enable")
+    public Object enableRole(@Valid EnableDto dto){
+        roleService.enableRole(dto);
+        return commonResult();
+    }
+
+    @PostMapping("/delete")
+    public Object deleteRole(@Valid DeleteDto dto){
+        roleService.deleteRole(dto.getId());
+        return commonResult();
     }
 
     @PostMapping("/setPermission")

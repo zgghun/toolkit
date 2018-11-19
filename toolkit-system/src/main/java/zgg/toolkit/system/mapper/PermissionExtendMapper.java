@@ -1,6 +1,6 @@
 package zgg.toolkit.system.mapper;
 
-import zgg.toolkit.system.model.vo.PermissionVO;
+import zgg.toolkit.system.model.vo.PermissionVo;
 
 import java.util.List;
 
@@ -12,6 +12,6 @@ public interface PermissionExtendMapper {
 
     void deletePermissionByModuleId(Long moduleId);
 
-    List<PermissionVO> findPermissionTree();
+    List<PermissionVo> findPermissionTree();
 
 }

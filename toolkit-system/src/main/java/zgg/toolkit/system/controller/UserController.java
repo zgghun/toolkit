@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import zgg.toolkit.core.model.PageList;
 import zgg.toolkit.core.model.PageParam;
-import zgg.toolkit.system.base.PerConst;
+import zgg.toolkit.system.base.SysPerConst;
 import zgg.toolkit.system.base.SystemBaseController;
 import zgg.toolkit.system.model.dto.*;
 import zgg.toolkit.system.model.entity.User;
@@ -23,40 +23,40 @@ public class UserController extends SystemBaseController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/find")
+    public Object findUser(UserQuery query, PageParam pageParam) {
+        PageList<User> users = userService.findUser(query, pageParam);
+        return commonResult(users);
+    }
+
+    @RequiresPermissions(SysPerConst.user_save)
+    @PostMapping("/save")
+    public Object saveUser(@Valid UserSaveDto dto) {
+        User user = userService.saveUser(dto);
+        return commonResult(user);
+    }
+
+    @PostMapping("/enable")
+    public Object enableUser(@Valid EnableDto dto) {
+        userService.enableUser(dto);
+        return commonResult();
+    }
+
+    @PostMapping("/setRole")
+    public Object setUserRole(@Valid UserRoleSetDto dto) {
+        userService.setUserRole(dto);
+        return commonResult();
+    }
+
     @GetMapping("/detail/get")
-    public Object getUserExtend(@RequestParam Long id){
+    public Object getUserExtend(@RequestParam Long id) {
         UserDetail detail = userService.getUserDetail(id);
         return commonResult(detail);
     }
 
     @PostMapping("/detail/save")
-    public Object saveUserDetail(@Valid UserDetailSaveDto dto){
-        UserDetail extend =  userService.saveUserDetail(dto, getLoginInfo());
+    public Object saveUserDetail(@Valid UserDetailSaveDto dto) {
+        UserDetail extend = userService.saveUserDetail(dto, getLoginInfo());
         return commonResult(extend);
-    }
-
-    @PostMapping("/delete")
-    public Object deleteUser(@Valid DeleteBatchDto dto){
-        userService.deleteUser(dto.getIds());
-        return commonResult();
-    }
-
-    @GetMapping("/find")
-    public Object findUser(UserQuery query, PageParam pageParam){
-        PageList<User> users = userService.findUser(query, pageParam);
-        return commonResult(users);
-    }
-
-    @RequiresPermissions(PerConst.user_save)
-    @PostMapping("/save")
-    public Object saveUser(@Valid UserSaveDto dto){
-        User user = userService.saveUser(dto);
-        return commonResult(user);
-    }
-
-    @PostMapping("/setRole")
-    public Object setUserRole(@Valid UserRoleSetDto dto){
-        userService.setUserRole(dto);
-        return commonResult();
     }
 }

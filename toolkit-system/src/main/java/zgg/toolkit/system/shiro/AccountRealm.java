@@ -8,6 +8,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import zgg.toolkit.core.constant.GlobalConst;
 import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.service.UserService;
 
@@ -49,7 +50,7 @@ public class AccountRealm extends AuthorizingRealm {
             throw new AccountException();
         }
         // 去掉密码
-        user.setPassword("********");
+        user.setPassword(GlobalConst.MASK);
         return new SimpleAuthenticationInfo(user, password, getName());
     }
 }

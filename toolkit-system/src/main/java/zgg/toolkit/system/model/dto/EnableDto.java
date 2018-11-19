@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Data
-public class ModuleEnableDto {
+public class EnableDto {
     @NonNull
     private Long id;
     @NotNull

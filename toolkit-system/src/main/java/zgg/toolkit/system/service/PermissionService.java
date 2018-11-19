@@ -6,20 +6,19 @@ import org.springframework.transaction.annotation.Transactional;
 import zgg.toolkit.core.enums.ResultCode;
 import zgg.toolkit.core.enums.StatusEnum;
 import zgg.toolkit.core.exception.BaseException;
-import zgg.toolkit.core.model.MapVO;
 import zgg.toolkit.core.utils.HelpUtils;
 import zgg.toolkit.core.utils.IdWorker;
 import zgg.toolkit.system.base.SystemBaseService;
 import zgg.toolkit.system.mapper.PermissionExtendMapper;
 import zgg.toolkit.system.mapper.autogen.ModuleMapper;
 import zgg.toolkit.system.mapper.autogen.PermissionMapper;
-import zgg.toolkit.system.model.dto.ModuleEnableDto;
+import zgg.toolkit.system.model.dto.EnableDto;
 import zgg.toolkit.system.model.dto.ModuleSaveDto;
 import zgg.toolkit.system.model.dto.PermissionSaveDto;
 import zgg.toolkit.system.model.entity.Module;
 import zgg.toolkit.system.model.entity.ModuleExample;
 import zgg.toolkit.system.model.entity.Permission;
-import zgg.toolkit.system.model.vo.PermissionVO;
+import zgg.toolkit.system.model.vo.PermissionVo;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -44,8 +43,8 @@ public class PermissionService extends SystemBaseService {
      *
      * @return
      */
-    public List<PermissionVO> findPermissionTree() {
-        List<PermissionVO> vos = perExtendMapper.findPermissionTree();
+    public List<PermissionVo> findPermissionTree() {
+        List<PermissionVo> vos = perExtendMapper.findPermissionTree();
         return generatePermissionTree(vos);
     }
 
@@ -90,7 +89,7 @@ public class PermissionService extends SystemBaseService {
      * @param dto
      */
     @Transactional(rollbackFor = Exception.class)
-    public void setModule(ModuleEnableDto dto) {
+    public void enableModule(EnableDto dto) {
         Module module = moduleMapper.selectByPrimaryKey(dto.getId());
         if (module == null) {
             throw new BaseException(ResultCode.DATA_ERROR);
@@ -209,12 +208,12 @@ public class PermissionService extends SystemBaseService {
     }
 
 
-    private List<PermissionVO> generatePermissionTree(List<PermissionVO> vos) {
+    private List<PermissionVo> generatePermissionTree(List<PermissionVo> vos) {
         // 获取根模块
-        List<PermissionVO> parent = vos.stream()
+        List<PermissionVo> parent = vos.stream()
                 .filter(it -> 0 == it.getPid())
                 // 按照 sort升序排列，.reversed()是降序，要求进行排列的属性或对象必须是实现了Comparable接口的
-                .sorted(Comparator.comparing(PermissionVO::getSort))
+                .sorted(Comparator.comparing(PermissionVo::getSort))
                 .collect(Collectors.toList());
         // 利用父模块查询子模块
         parent.forEach(it -> {
@@ -223,13 +222,13 @@ public class PermissionService extends SystemBaseService {
         return parent;
     }
 
-    private void findPerVOChildren(PermissionVO parent, List<PermissionVO> vos) {
+    private void findPerVOChildren(PermissionVo parent, List<PermissionVo> vos) {
         Set<Long> used = new HashSet<>();
-        List<PermissionVO> children = new ArrayList<>();
+        List<PermissionVo> children = new ArrayList<>();
         vos.stream()
                 .filter(it -> used.add(it.getId()))
                 .filter(it -> it.getPid().equals(parent.getId()))
-                .sorted(Comparator.comparing(PermissionVO::getSort))
+                .sorted(Comparator.comparing(PermissionVo::getSort))
                 .forEach(it -> {
                     children.add(it);
                     findPerVOChildren(it, vos);

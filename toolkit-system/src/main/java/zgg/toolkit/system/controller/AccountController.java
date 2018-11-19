@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import zgg.toolkit.core.constant.GlobalConstant;
+import zgg.toolkit.core.constant.GlobalConst;
 import zgg.toolkit.core.enums.ResultCode;
 import zgg.toolkit.core.exception.BaseException;
 import zgg.toolkit.system.base.SystemBaseController;
@@ -80,7 +80,7 @@ public class AccountController extends SystemBaseController {
         Generator generator = new PngVCGenerator(width, height, count);
         try {
             generator.write2out(response.getOutputStream());
-            session.setAttribute(GlobalConstant.SESSION_CAPTCHA, generator.text());
+            session.setAttribute(GlobalConst.SESSION_CAPTCHA, generator.text());
         } catch (IOException e) {
             throw new BaseException("生成验证码错误");
         }

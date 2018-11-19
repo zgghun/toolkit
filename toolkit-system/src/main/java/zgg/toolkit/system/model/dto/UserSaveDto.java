@@ -2,7 +2,6 @@ package zgg.toolkit.system.model.dto;
 
 import lombok.Data;
 import zgg.toolkit.core.enums.GenderEnum;
-import zgg.toolkit.core.enums.StatusEnum;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -25,7 +24,5 @@ public class UserSaveDto {
 
     @NotNull
     private GenderEnum gender;
-    @NotNull
-    private StatusEnum status;
 
 }

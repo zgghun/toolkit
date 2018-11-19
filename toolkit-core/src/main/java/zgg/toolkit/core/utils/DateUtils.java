@@ -31,29 +31,29 @@ public class DateUtils {
 
     /**
      * {@link LocalDate} 解析
-     * @param date
+     * @param localDate
      * @param pattern 默认 {@value YMD}
      * @return
      */
-    public static LocalDate parseDate(String date, String... pattern){
+    public static LocalDate parseDate(String localDate, String... pattern){
         if (pattern.length == 0){
-            return LocalDate.parse(date, DateTimeFormatter.ofPattern(YMD));
+            return LocalDate.parse(localDate, DateTimeFormatter.ofPattern(YMD));
         }else {
-            return LocalDate.parse(date, DateTimeFormatter.ofPattern(pattern[0]));
+            return LocalDate.parse(localDate, DateTimeFormatter.ofPattern(pattern[0]));
         }
     }
 
     /**
      * {@link LocalTime} 解析
-     * @param time
+     * @param localTime
      * @param pattern 默认 {@value HMS}
      * @return
      */
-    public static LocalTime parseTime(String time, String... pattern){
+    public static LocalTime parseTime(String localTime, String... pattern){
         if (pattern.length == 0){
-            return LocalTime.parse(time, DateTimeFormatter.ofPattern(HMS));
+            return LocalTime.parse(localTime, DateTimeFormatter.ofPattern(HMS));
         }else {
-            return LocalTime.parse(time, DateTimeFormatter.ofPattern(pattern[0]));
+            return LocalTime.parse(localTime, DateTimeFormatter.ofPattern(pattern[0]));
         }
     }
 
@@ -73,29 +73,29 @@ public class DateUtils {
 
     /**
      * {@link LocalDate} 格式化
-     * @param date
+     * @param localDate
      * @param pattern 默认 {@value YMD}
      * @return
      */
-    public static String formatDate(LocalDate date, String... pattern){
+    public static String formatDate(LocalDate localDate, String... pattern){
         if (pattern.length == 0){
-            return date.format(DateTimeFormatter.ofPattern(YMD));
+            return localDate.format(DateTimeFormatter.ofPattern(YMD));
         }else {
-            return date.format(DateTimeFormatter.ofPattern(pattern[0]));
+            return localDate.format(DateTimeFormatter.ofPattern(pattern[0]));
         }
     }
 
     /**
      * {@link LocalTime} 格式化
-     * @param time
+     * @param localTime
      * @param pattern 默认 {@value HMS}
      * @return
      */
-    public static String formatTime(LocalTime time, String... pattern){
+    public static String formatTime(LocalTime localTime, String... pattern){
         if (pattern.length == 0){
-            return time.format(DateTimeFormatter.ofPattern(HMS));
+            return localTime.format(DateTimeFormatter.ofPattern(HMS));
         }else {
-            return time.format(DateTimeFormatter.ofPattern(pattern[0]));
+            return localTime.format(DateTimeFormatter.ofPattern(pattern[0]));
         }
     }
 }
