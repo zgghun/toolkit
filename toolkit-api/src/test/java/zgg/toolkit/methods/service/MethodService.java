@@ -6,27 +6,27 @@ package zgg.toolkit.methods.service;
 //import com.yoga.core.controller.BaseApiController;
 //import com.yoga.core.data.CommonPage;
 //import com.yoga.core.utils.StrUtil;
-//import com.yoga.debug.methods.model.Group;
-//import com.yoga.debug.methods.model.Parameter;
+//import com.yoga.debug.methods.model.GroupVo;
+//import com.yoga.debug.methods.model.ParameterVo;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class MethodService {
-//    private List<com.yoga.debug.methods.model.Group> allGroups = null;
-//    private Map<String, com.yoga.debug.methods.model.Method> allMethods = null;
+//    private List<com.yoga.debug.methods.model.GroupVo> allGroups = null;
+//    private Map<String, com.yoga.debug.methods.model.MethodVo> allMethods = null;
 //
-//    public List<com.yoga.debug.methods.model.Group> getAllMethods() {
+//    public List<com.yoga.debug.methods.model.GroupVo> getAllMethods() {
 //        return allGroups;
 //    }
 //
-//    public List<com.yoga.debug.methods.model.Group> getAllMethods(String filter) {
+//    public List<com.yoga.debug.methods.model.GroupVo> getAllMethods(String filter) {
 //        if (allGroups == null) return null;
 //        if (StrUtil.isBlank(filter)) return allGroups;
-//        List<com.yoga.debug.methods.model.Group> groups = new ArrayList<>();
-//        for (Group group : allGroups) {
-//            Group newGroup = new Group(group.getName());
-//            for (com.yoga.debug.methods.model.Method method : group.getMethods()) {
+//        List<com.yoga.debug.methods.model.GroupVo> groups = new ArrayList<>();
+//        for (GroupVo group : allGroups) {
+//            GroupVo newGroup = new GroupVo(group.getName());
+//            for (com.yoga.debug.methods.model.MethodVo method : group.getMethods()) {
 //                if (method.getExplain() != null && method.getExplain().contains(filter)) {
 //                    newGroup.addMethod(method);
 //                }
@@ -38,7 +38,7 @@ public class MethodService {
 //        return groups;
 //    }
 //
-//    public com.yoga.debug.methods.model.Method getMethod(String url) {
+//    public com.yoga.debug.methods.model.MethodVo getMethod(String url) {
 //        if (allMethods == null) return null;
 //        return allMethods.get(url);
 //    }
@@ -52,7 +52,7 @@ public class MethodService {
 //        LocalVariableTableParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
 //        for (BeanDefinition beanDefinition : beanDefinitionSet) {
 //            Class<?> entityClass = ClassUtils.getClass(beanDefinition.getBeanClassName());
-//            Group group = new Group(entityClass.getSimpleName());
+//            GroupVo group = new GroupVo(entityClass.getSimpleName());
 //            String baseModule = "";
 //            if (entityClass.isAnnotationPresent(Explain.class)) {
 //                Explain explain = entityClass.getAnnotation(Explain.class);
@@ -65,8 +65,8 @@ public class MethodService {
 //            if (entityClass.getAnnotation(RequestMapping.class) != null) {
 //                baseUrl += entityClass.getAnnotation(RequestMapping.class).value()[0];
 //            }
-//            Method[] methods = entityClass.getMethods();
-//            for (Method method : methods) {
+//            MethodVo[] methods = entityClass.getMethods();
+//            for (MethodVo method : methods) {
 //                String url = baseUrl;
 //                if (method.isAnnotationPresent(RequestMapping.class)) {
 //                    if (method.getAnnotation(RequestMapping.class).value().length > 0) {
@@ -82,10 +82,10 @@ public class MethodService {
 //                    }
 //                    if (StrUtil.isEmpty(module)) module = baseModule;
 //                    if (StrUtil.isBlank(message)) message = method.getName();
-//                    com.yoga.debug.methods.model.Method method1 = new com.yoga.debug.methods.model.Method(url, message, module);
-//                    List<Parameter> parameters1 = new ArrayList<>();
+//                    com.yoga.debug.methods.model.MethodVo method1 = new com.yoga.debug.methods.model.MethodVo(url, message, module);
+//                    List<ParameterVo> parameters1 = new ArrayList<>();
 //                    Class<?>[] parameterTypes = method.getParameterTypes();
-//                    java.lang.reflect.Parameter[] parameters = method.getParameters();
+//                    java.lang.reflect.ParameterVo[] parameters = method.getParameters();
 //                    String[] parameterNames = parameterNameDiscoverer.getParameterNames(method);
 //                    for (int i = 0; i < parameters.length; i++) {
 //                        Class<?> parameterType = parameterTypes[i];
@@ -99,8 +99,8 @@ public class MethodService {
 //                            requestBody = true;
 //                        }
 //                        if (CommonPage.class.isAssignableFrom(parameterType)) {
-//                            parameters1.add(new Parameter("pageIndex", Integer.class.getSimpleName(), "分页页码", requestBody));
-//                            parameters1.add(new Parameter("pageSize", Integer.class.getSimpleName(), "分页大小", requestBody));
+//                            parameters1.add(new ParameterVo("pageIndex", Integer.class.getSimpleName(), "分页页码", requestBody));
+//                            parameters1.add(new ParameterVo("pageSize", Integer.class.getSimpleName(), "分页大小", requestBody));
 //                        } else if (requestBody || parameterType.getClassLoader() == null) {
 //                            message = "";
 //                            if (parameters[i].isAnnotationPresent(Explain.class)) {
@@ -123,9 +123,9 @@ public class MethodService {
 //                                    }
 //                                } catch (Exception ex) {
 //                                }
-//                                parameters1.add(new Parameter(parameterNames[i], demo, message, requestBody));
+//                                parameters1.add(new ParameterVo(parameterNames[i], demo, message, requestBody));
 //                            } else {
-//                                parameters1.add(new Parameter(parameterNames[i], parameterType.getSimpleName(), message, requestBody));
+//                                parameters1.add(new ParameterVo(parameterNames[i], parameterType.getSimpleName(), message, requestBody));
 //                            }
 //                        } else {
 //                            Set<String> fieldNames = new HashSet<>();
@@ -163,7 +163,7 @@ public class MethodService {
 //                                            }
 //                                            hint = getHint(annotation);
 //                                        }
-//                                        parameters1.add(new Parameter(name, type, message, requestBody, constraints, values, hint));
+//                                        parameters1.add(new ParameterVo(name, type, message, requestBody, constraints, values, hint));
 //                                    }
 //                                }
 //                            }
