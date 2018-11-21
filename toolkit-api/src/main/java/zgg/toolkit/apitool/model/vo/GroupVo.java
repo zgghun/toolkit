@@ -6,6 +6,6 @@ import java.util.List;
 
 @Data
 public class GroupVo {
-    private String name;
+    private String groupName;
     private List<MethodVo> methods;
 }

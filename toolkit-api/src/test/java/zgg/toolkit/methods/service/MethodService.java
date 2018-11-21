@@ -25,7 +25,7 @@ public class MethodService {
 //        if (StrUtil.isBlank(filter)) return allGroups;
 //        List<com.yoga.debug.methods.model.GroupVo> groups = new ArrayList<>();
 //        for (GroupVo group : allGroups) {
-//            GroupVo newGroup = new GroupVo(group.getName());
+//            GroupVo newGroup = new GroupVo(group.getGroupName());
 //            for (com.yoga.debug.methods.model.MethodVo method : group.getMethods()) {
 //                if (method.getExplain() != null && method.getExplain().contains(filter)) {
 //                    newGroup.addMethod(method);
@@ -57,7 +57,7 @@ public class MethodService {
 //            if (entityClass.isAnnotationPresent(Explain.class)) {
 //                Explain explain = entityClass.getAnnotation(Explain.class);
 //                if (explain.exclude()) continue;
-//                group.setName(explain.value());
+//                group.setGroupName(explain.value());
 //                group.setModule(explain.module());
 //                baseModule = explain.module();
 //            }
@@ -81,7 +81,7 @@ public class MethodService {
 //                        module = explain.module();
 //                    }
 //                    if (StrUtil.isEmpty(module)) module = baseModule;
-//                    if (StrUtil.isBlank(message)) message = method.getName();
+//                    if (StrUtil.isBlank(message)) message = method.getGroupName();
 //                    com.yoga.debug.methods.model.MethodVo method1 = new com.yoga.debug.methods.model.MethodVo(url, message, module);
 //                    List<ParameterVo> parameters1 = new ArrayList<>();
 //                    Class<?>[] parameterTypes = method.getParameterTypes();
@@ -133,13 +133,13 @@ public class MethodService {
 //                                Field[] fields = parameterType.getDeclaredFields();
 //                                if (fields != null) {
 //                                    for (Field field : fields) {
-//                                        String name = field.getName();
+//                                        String groupName = field.getGroupName();
 //                                        String type = field.getType().getSimpleName();
 //                                        String[] values = null;
 //                                        String hint = null;
 //                                        message = "";
-//                                        if (fieldNames.contains(name)) continue;
-//                                        fieldNames.add(name);
+//                                        if (fieldNames.contains(groupName)) continue;
+//                                        fieldNames.add(groupName);
 //                                        if (field.isAnnotationPresent(Explain.class)) {
 //                                            Explain explain = field.getAnnotation(Explain.class);
 //                                            if (explain.exclude()) continue;
@@ -155,7 +155,7 @@ public class MethodService {
 //                                        Annotation[] annotations = field.getAnnotations();
 //                                        List<String> constraints = new ArrayList<>();
 //                                        for (Annotation annotation : annotations) {
-//                                            String packageName = annotation.annotationType().getPackage().getName();
+//                                            String packageName = annotation.annotationType().getPackage().getGroupName();
 //                                            if (packageName != null &&
 //                                                    (packageName.startsWith("javax.validation.constraints") ||
 //                                                            packageName.startsWith("org.hibernate.validator.constraints"))) {
@@ -163,7 +163,7 @@ public class MethodService {
 //                                            }
 //                                            hint = getHint(annotation);
 //                                        }
-//                                        parameters1.add(new ParameterVo(name, type, message, requestBody, constraints, values, hint));
+//                                        parameters1.add(new ParameterVo(groupName, type, message, requestBody, constraints, values, hint));
 //                                    }
 //                                }
 //                            }

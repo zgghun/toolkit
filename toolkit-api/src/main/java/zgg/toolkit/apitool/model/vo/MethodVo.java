@@ -11,7 +11,7 @@ public class MethodVo {
     private String url;
 
     private RequestMethod requestMethod;
-    private String mediaType;
+    private String contentType;
 
     private List<ParameterVo> parameters;
 }
