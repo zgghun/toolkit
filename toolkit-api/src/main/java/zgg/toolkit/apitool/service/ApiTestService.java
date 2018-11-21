@@ -31,10 +31,10 @@ public class ApiTestService {
     /**
      * 自动获取所有接口
      */
-    public Map<String, GroupVo> findApi() throws ClassNotFoundException {
+    public List<GroupVo> findApi() throws ClassNotFoundException {
         ClassPathScanningCandidateComponentProvider scan = new ClassPathScanningCandidateComponentProvider(false);
         scan.addIncludeFilter(new AnnotationTypeFilter(RestController.class));
-        Set<BeanDefinition> beanDefinitionSet = scan.findCandidateComponents("zgg.toolkit.**");
+        Set<BeanDefinition> beanDefinitionSet = scan.findCandidateComponents("zgg.toolkit.apitool.**");
 
         Map<String, GroupVo> groups = new HashMap<>(16);
 
@@ -51,7 +51,7 @@ public class ApiTestService {
             String groupName = HelpUtils.isBlank(rmName) ? className : rmName;
 
             GroupVo vo = new GroupVo();
-            vo.setName(groupName);
+            vo.setGroupName(groupName);
 
             List<MethodVo> mvos = new ArrayList<>();
             if (!groups.containsKey(groupName)) {
@@ -61,7 +61,7 @@ public class ApiTestService {
             }
 
         }
-        return groups;
+        return new ArrayList<>(groups.values());
     }
 
     private List<MethodVo> findMethodVo(Class<?> clazz, String url) {
@@ -89,7 +89,7 @@ public class ApiTestService {
             } else {
                 methodVo.setRequestMethod(RequestMethod.POST);
             }
-            methodVo.setMediaType(MediaType.APPLICATION_FORM_URLENCODED_VALUE);
+            methodVo.setContentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE);
 
             List<ParameterVo> params = findParameterVos(method, methodVo);
             methodVo.setParameters(params);
@@ -108,7 +108,7 @@ public class ApiTestService {
 
         for (int i = 0; i < parameters.length; i++) {
             if (parameters[i].isAnnotationPresent(RequestBody.class)) {
-                methodVo.setMediaType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+                methodVo.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             }
             Class<?> parameterType = parameterTypes[i];
             Field[] fields = parameterType.getDeclaredFields();
