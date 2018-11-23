@@ -3,6 +3,7 @@ package zgg.toolkit.apitool;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import zgg.toolkit.core.ToolkitCoreApplication;
 import zgg.toolkit.system.ToolkitSystemApplication;
 
@@ -10,6 +11,7 @@ import zgg.toolkit.system.ToolkitSystemApplication;
  * @author zgg
  */
 @SpringBootApplication
+@EnableTransactionManagement
 public class ToolkitApiApplication {
 
     public static void main(String[] args) {
