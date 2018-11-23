@@ -72,17 +72,17 @@ public class MethodService {
 //                    if (method.getAnnotation(RequestMapping.class).value().length > 0) {
 //                        url += method.getAnnotation(RequestMapping.class).value()[0];
 //                    }
-//                    String message = "";
+//                    String msg = "";
 //                    String module = "";
 //                    if (method.isAnnotationPresent(Explain.class)) {
 //                        Explain explain = method.getAnnotation(Explain.class);
 //                        if (explain.exclude()) continue;
-//                        message = explain.value();
+//                        msg = explain.value();
 //                        module = explain.module();
 //                    }
 //                    if (StrUtil.isEmpty(module)) module = baseModule;
-//                    if (StrUtil.isBlank(message)) message = method.getGroupName();
-//                    com.yoga.debug.methods.model.MethodVo method1 = new com.yoga.debug.methods.model.MethodVo(url, message, module);
+//                    if (StrUtil.isBlank(msg)) msg = method.getGroupName();
+//                    com.yoga.debug.methods.model.MethodVo method1 = new com.yoga.debug.methods.model.MethodVo(url, msg, module);
 //                    List<ParameterVo> parameters1 = new ArrayList<>();
 //                    Class<?>[] parameterTypes = method.getParameterTypes();
 //                    java.lang.reflect.ParameterVo[] parameters = method.getParameters();
@@ -102,11 +102,11 @@ public class MethodService {
 //                            parameters1.add(new ParameterVo("pageIndex", Integer.class.getSimpleName(), "分页页码", requestBody));
 //                            parameters1.add(new ParameterVo("pageSize", Integer.class.getSimpleName(), "分页大小", requestBody));
 //                        } else if (requestBody || parameterType.getClassLoader() == null) {
-//                            message = "";
+//                            msg = "";
 //                            if (parameters[i].isAnnotationPresent(Explain.class)) {
 //                                Explain explain = parameters[i].getAnnotation(Explain.class);
 //                                if (explain.exclude()) continue;
-//                                message = explain.value();
+//                                msg = explain.value();
 //                            }
 //                            if (requestBody) {
 //                                String demo = "";
@@ -123,9 +123,9 @@ public class MethodService {
 //                                    }
 //                                } catch (Exception ex) {
 //                                }
-//                                parameters1.add(new ParameterVo(parameterNames[i], demo, message, requestBody));
+//                                parameters1.add(new ParameterVo(parameterNames[i], demo, msg, requestBody));
 //                            } else {
-//                                parameters1.add(new ParameterVo(parameterNames[i], parameterType.getSimpleName(), message, requestBody));
+//                                parameters1.add(new ParameterVo(parameterNames[i], parameterType.getSimpleName(), msg, requestBody));
 //                            }
 //                        } else {
 //                            Set<String> fieldNames = new HashSet<>();
@@ -137,13 +137,13 @@ public class MethodService {
 //                                        String type = field.getType().getSimpleName();
 //                                        String[] values = null;
 //                                        String hint = null;
-//                                        message = "";
+//                                        msg = "";
 //                                        if (fieldNames.contains(groupName)) continue;
 //                                        fieldNames.add(groupName);
 //                                        if (field.isAnnotationPresent(Explain.class)) {
 //                                            Explain explain = field.getAnnotation(Explain.class);
 //                                            if (explain.exclude()) continue;
-//                                            message = explain.value();
+//                                            msg = explain.value();
 //                                        }
 //                                        if (field.getType().isEnum()) {
 //                                            Object[] enums = field.getType().getEnumConstants();
@@ -163,7 +163,7 @@ public class MethodService {
 //                                            }
 //                                            hint = getHint(annotation);
 //                                        }
-//                                        parameters1.add(new ParameterVo(groupName, type, message, requestBody, constraints, values, hint));
+//                                        parameters1.add(new ParameterVo(groupName, type, msg, requestBody, constraints, values, hint));
 //                                    }
 //                                }
 //                            }
@@ -224,14 +224,14 @@ public class MethodService {
                 if ("toString".equals(name)) continue;
                 if ("hashCode".equals(name)) continue;
                 if ("annotationType".equals(name)) continue;
-                if ("message".equals(name)) message = method.invoke(annotation).toString();
+                if ("msg".equals(name)) message = method.invoke(annotation).toString();
                 else condition += method.getName() + "=" + method.invoke(annotation).toString() + ", ";
             } catch (Exception ex) {
             }
         }
         if (condition.length() > 2) condition = condition.substring(0, condition.length() - 2);
         if (condition.length() > 0) condition += ", ";
-        return annotation.annotationType().getSimpleName() + "(" + condition + "message=" + message + ")";
+        return annotation.annotationType().getSimpleName() + "(" + condition + "msg=" + message + ")";
     }
 
     private String getHint(Annotation annotation) {

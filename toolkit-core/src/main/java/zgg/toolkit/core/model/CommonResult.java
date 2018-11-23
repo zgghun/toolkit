@@ -9,7 +9,7 @@ import zgg.toolkit.core.enums.ResultCode;
 @Data
 public class CommonResult {
     private Integer code;
-    private String message;
+    private String msg;
     private Object data;
 
     /**
@@ -17,7 +17,7 @@ public class CommonResult {
      */
     public CommonResult() {
         this.code = ResultCode.OK.getCode();
-        this.message = ResultCode.OK.getNote();
+        this.msg = ResultCode.OK.getNote();
         this.data = "";
     }
 
@@ -28,7 +28,7 @@ public class CommonResult {
      */
     public CommonResult(Object data) {
         this.code = ResultCode.OK.getCode();
-        this.message = ResultCode.OK.getNote();
+        this.msg = ResultCode.OK.getNote();
         this.data = data == null ? "" : data;
     }
 
@@ -39,7 +39,7 @@ public class CommonResult {
      */
     public CommonResult(ResultCode resultCode) {
         this.code = resultCode.getCode();
-        this.message = resultCode.getNote();
+        this.msg = resultCode.getNote();
         this.data = "";
     }
 
@@ -51,7 +51,7 @@ public class CommonResult {
      */
     public CommonResult(ResultCode resultCode, Object error) {
         this.code = resultCode.getCode();
-        this.message = resultCode.getNote();
+        this.msg = resultCode.getNote();
         this.data = error == null ? "" : error;
     }
 

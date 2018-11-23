@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import zgg.toolkit.apitool.model.vo.GroupVo;
 import zgg.toolkit.apitool.service.ApiTestService;
 import zgg.toolkit.core.controller.BaseController;
-import zgg.toolkit.core.enums.StatusEnum;
 import zgg.toolkit.system.model.dto.DeleteDto;
 
 import java.util.List;
@@ -17,23 +16,18 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/apiTest", name = "api测试")
-public class ApiTestController extends BaseController{
+public class ApiTestController extends BaseController {
     @Autowired
     private ApiTestService apiTestService;
 
-    @RequestMapping("/")
-    public Object findApi(StatusEnum status){
-        try {
-            List<GroupVo> api = apiTestService.findApi();
-            return commonResult(api);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return commonResult();
+    @RequestMapping(value = "", name = "获取所有api")
+    public Object findApi() {
+        List<GroupVo> api = apiTestService.findApi();
+        return commonResult(api);
     }
 
     @RequestMapping(value = "/233", name = "测试222")
-    public Object test(@RequestBody DeleteDto dto){
+    public Object test(@RequestBody DeleteDto dto) {
         return commonResult("2333333333333");
     }
 }
