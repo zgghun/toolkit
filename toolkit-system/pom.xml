@@ -24,6 +24,7 @@
     </properties>
 
     <dependencies>
+        <!--验证码-->
         <dependency>
             <groupId>com.github.botaruibo</groupId>
             <artifactId>xvcode</artifactId>
