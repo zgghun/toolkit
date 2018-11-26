@@ -1,5 +1,6 @@
 package zgg.toolkit.apitool;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -12,6 +13,7 @@ import zgg.toolkit.system.ToolkitSystemApplication;
  */
 @SpringBootApplication
 @EnableTransactionManagement
+@MapperScan("zgg.toolkit.apitool.mapper")
 public class ToolkitApiApplication {
 
     public static void main(String[] args) {

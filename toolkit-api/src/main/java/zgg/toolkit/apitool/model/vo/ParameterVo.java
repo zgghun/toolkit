@@ -9,4 +9,15 @@ public class ParameterVo {
     private String dataType;
 
     private String validInfo;
+
+    public ParameterVo() {
+    }
+
+    public ParameterVo(String key, String value, String dataType, String validInfo) {
+
+        this.key = key;
+        this.value = value;
+        this.dataType = dataType;
+        this.validInfo = validInfo;
+    }
 }

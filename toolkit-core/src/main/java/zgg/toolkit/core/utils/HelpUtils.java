@@ -36,7 +36,7 @@ public class HelpUtils {
 
     private static final char[] DIGITS_UPPER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-    // MD5加密 ，从 commons-codec 复制的
+    // 获取MD5值 ，从 commons-codec 复制的
     public static String md5(String str) {
         byte[] bs = new byte[]{};
         try {
