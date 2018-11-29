@@ -2,6 +2,7 @@
 server:
   port: 8200
 
+#https://docs.spring.io/spring-boot/docs/2.0.6.RELEASE/reference/htmlsingle/#boot-features-logging
 logging:
   level:
     root: info
@@ -11,6 +12,9 @@ logging:
           mapper: trace
         system:
           mapper: trace
+  file: D:/logs/tk_api.log
+  file.max-size: 1MB
+
 
 spring:
   application:
@@ -31,10 +35,11 @@ spring:
       filter:
         config:
           enabled: true
-
+# 这个应该存在其他地方
 public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKuawc+3wVgX7iWqHReV8zBE9b0JALbVTQiYMYHcUAxfOnQ9eQkW4L0/EmHsF0rrqNV2MXC48wXNloVJPJzQkqcCAwEAAQ==
 
 mybatis:
+  # 这里使用classpath*,这样才能找到依赖模块system中resource下的xml等静态资源文件，否则会包 invalid bound statement (not found)异常
   mapper-locations: classpath*:mapper/*.xml,classpath*:mapper/autogen/*.xml
   configuration:
     map-underscore-to-camel-case: true

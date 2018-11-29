@@ -216,14 +216,12 @@ public class PermissionService extends SystemBaseService {
                 .sorted(Comparator.comparing(PermissionVo::getSort))
                 .collect(Collectors.toList());
         // 利用父模块查询子模块
-        parent.forEach(it -> {
-            findPerVOChildren(it, vos);
-        });
+        Set<Long> used = new HashSet<>();
+        parent.forEach(it -> findPerVOChildren(it, vos, used));
         return parent;
     }
 
-    private void findPerVOChildren(PermissionVo parent, List<PermissionVo> vos) {
-        Set<Long> used = new HashSet<>();
+    private void findPerVOChildren(PermissionVo parent, List<PermissionVo> vos, Set<Long> used) {
         List<PermissionVo> children = new ArrayList<>();
         vos.stream()
                 .filter(it -> used.add(it.getId()))
@@ -231,7 +229,7 @@ public class PermissionService extends SystemBaseService {
                 .sorted(Comparator.comparing(PermissionVo::getSort))
                 .forEach(it -> {
                     children.add(it);
-                    findPerVOChildren(it, vos);
+                    findPerVOChildren(it, vos, used);
                 });
         parent.setChildren(children);
     }
