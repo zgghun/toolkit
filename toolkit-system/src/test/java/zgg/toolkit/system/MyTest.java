@@ -19,16 +19,28 @@ import java.util.*;
  */
 public class MyTest {
     private static final Logger log = LoggerFactory.getLogger(MyTest.class);
+    
+    @Test
+    public void test9() {
+        
+    }
+    
 
     // 利用druid对数据库密码加密
     @Test
     public void test8() throws Exception{
         ConfigTools tool = new ConfigTools();
-        String password = "123456";
+        String password = "222222aaaa";
         String[] arr = tool.genKeyPair(512);
-        System.out.println("privateKey:" + arr[0]);
-        System.out.println("publicKey:" + arr[1]);
-        System.out.println("password:" + tool.encrypt(arr[0], password));
+        String privateKey = arr[0];
+        String publicKey = arr[1];
+        String encryptRassword = tool.encrypt(arr[0], password);
+        System.out.println("privateKey:" + privateKey);
+        System.out.println("publicKey:" +publicKey);
+        System.out.println("password:" + encryptRassword);
+
+        String passwordPlainText = tool.decrypt(publicKey, encryptRassword);
+        System.out.println(passwordPlainText);
     }
 
 
