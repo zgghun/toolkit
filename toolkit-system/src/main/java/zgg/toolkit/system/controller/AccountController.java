@@ -58,7 +58,7 @@ public class AccountController extends SystemBaseController {
     }
 
     // 登陆
-    @PostMapping("/login")
+    @RequestMapping("/login")
     public Object login(@Valid LoginDto dto) {
         LoginInfo loginInfo = userService.login(dto.getUsername(), dto.getPassword(), dto.getCaptcha());
         return commonResult(loginInfo);

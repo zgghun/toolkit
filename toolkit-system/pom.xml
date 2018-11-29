@@ -24,15 +24,19 @@
     </properties>
 
     <dependencies>
-        <!--验证码-->
-        <dependency>
-            <groupId>com.github.botaruibo</groupId>
-            <artifactId>xvcode</artifactId>
-        </dependency>
         <dependency>
             <groupId>zgg.toolkit</groupId>
             <artifactId>toolkit-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+        <!--验证码-->
+        <dependency>
+            <groupId>com.github.botaruibo</groupId>
+            <artifactId>xvcode</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.shiro</groupId>
