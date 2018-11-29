@@ -1,0 +1,46 @@
+
+server:
+  port: 8200
+
+#https://docs.spring.io/spring-boot/docs/2.0.6.RELEASE/reference/htmlsingle/#boot-features-logging
+logging:
+  level:
+    root: info
+    zgg:
+      toolkit:
+        apitool:
+          mapper: trace
+        system:
+          mapper: trace
+  file: D:/logs/tk_api.log
+  file.max-size: 1MB
+
+
+spring:
+  application:
+    name: toolkit-api
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.105.34.242:3306/toolkit?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: nNsWbmYS1PjsJoncMMYdz6KLcv+Ma3PzVM6fsYCKPEn6+hrHAfKUM9YZ1hgjWG4aOSw3IOmys3ipanxOy9nXTQ==
+    druid:
+      max-active: 5
+      min-idle: 1
+      max-wait: 10000
+      connection-properties: config.decrypt=true;config.decrypt.key=${public-key}
+      filter:
+        config:
+          enabled: true
+# 这个应该存在其他地方
+public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKuawc+3wVgX7iWqHReV8zBE9b0JALbVTQiYMYHcUAxfOnQ9eQkW4L0/EmHsF0rrqNV2MXC48wXNloVJPJzQkqcCAwEAAQ==
+
+mybatis:
+  # 这里使用classpath*,这样才能找到依赖模块system中resource下的xml等静态资源文件，否则会包 invalid bound statement (not found)异常
+  mapper-locations: classpath*:mapper/*.xml,classpath*:mapper/autogen/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
