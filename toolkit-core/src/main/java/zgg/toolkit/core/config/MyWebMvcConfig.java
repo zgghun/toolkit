@@ -22,8 +22,7 @@ import java.util.Locale;
 
 @Configuration
 public class MyWebMvcConfig implements WebMvcConfigurer {
-
-    // 自定义java8 time 全局格式化
+    // 自定义全局格式化
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new Formatter<LocalDateTime>() {

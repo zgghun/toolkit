@@ -61,7 +61,7 @@ public class ApiController extends BaseController{
         return commonResult(detail);
     }
 
-    // 添加api历史(请求成功才添加)
+    // 添加api历史
     @PostMapping("/addHistory")
     public Object addApiHistory(@Valid HistoryAddDto dto){
         ApiHistory history = apiService.addApiHistory(dto);

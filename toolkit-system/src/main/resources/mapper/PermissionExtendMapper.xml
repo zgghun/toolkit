@@ -32,7 +32,6 @@
             <result column="module_id" property="moduleId" jdbcType="BIGINT"/>
         </collection>
     </resultMap>
-    <!--auto-mapping levels default value is PARTIAL, will auto-map results except those that have nested result mappings defined inside (joins) 所以这个查询虽然sql字段和实体字段一样，但是也要写<result ...>-->
     <select id="findPermissionTree" resultMap="permissionVo">
         SELECT
             a.*,
@@ -42,4 +41,7 @@
             b.module_id
         FROM sys_module a INNER JOIN sys_permission b ON a.id = b.module_id
     </select>
+    <resultMap id="test" type="zgg.toolkit.system.model.entity.Permission">
+        <!--<id column="id"/>-->
+    </resultMap>
 </mapper>

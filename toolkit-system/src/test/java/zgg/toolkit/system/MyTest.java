@@ -1,6 +1,5 @@
 package zgg.toolkit.system;
 
-import com.alibaba.druid.filter.config.ConfigTools;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,30 +18,6 @@ import java.util.*;
  */
 public class MyTest {
     private static final Logger log = LoggerFactory.getLogger(MyTest.class);
-    
-    @Test
-    public void test9() {
-        
-    }
-    
-
-    // 利用druid对数据库密码加密
-    @Test
-    public void test8() throws Exception{
-        ConfigTools tool = new ConfigTools();
-        String password = "222222aaaa";
-        String[] arr = tool.genKeyPair(512);
-        String privateKey = arr[0];
-        String publicKey = arr[1];
-        String encryptRassword = tool.encrypt(arr[0], password);
-        System.out.println("privateKey:" + privateKey);
-        System.out.println("publicKey:" +publicKey);
-        System.out.println("password:" + encryptRassword);
-
-        String passwordPlainText = tool.decrypt(publicKey, encryptRassword);
-        System.out.println(passwordPlainText);
-    }
-
 
     @Test
     public void test7() throws IllegalAccessException {
