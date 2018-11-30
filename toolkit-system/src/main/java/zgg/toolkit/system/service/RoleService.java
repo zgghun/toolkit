@@ -1,6 +1,8 @@
 package zgg.toolkit.system.service;
 
 import com.github.pagehelper.PageHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,7 @@ import java.util.List;
 
 @Service
 public class RoleService extends SystemBaseService {
+    private static Logger logger = LoggerFactory.getLogger(RoleService.class);
     @Autowired
     private RoleMapper roleMapper;
     @Autowired
@@ -109,6 +112,10 @@ public class RoleService extends SystemBaseService {
         }
         PageHelper.startPage(pageParam);
         List<Role> roles = roleMapper.selectByExample(example);
+        logger.debug("111111111111111111");
+        logger.info("2222222222222222");
+        logger.warn("3333333333333333");
+        logger.error("44444444444444444");
         return new PageList<>(roles);
     }
 

@@ -4,16 +4,7 @@ server:
 
 #https://docs.spring.io/spring-boot/docs/2.0.6.RELEASE/reference/htmlsingle/#boot-features-logging
 logging:
-  level:
-    root: info
-    zgg:
-      toolkit:
-        apitool:
-          mapper: trace
-        system:
-          mapper: trace
-  file: D:/logs/tk_api.log
-  file.max-size: 1MB
+  config: classpath:config/log4j2-spring.xml
 
 
 spring:
