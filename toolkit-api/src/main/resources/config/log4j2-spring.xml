@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="5">
     <!--参考文档http://logging.apache.org/log4j/2.x/manual/index.html-->
-
     <Properties>
         <Property name="PID">????</Property>
         <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
@@ -11,14 +10,56 @@
         <Console name="Console" target="SYSTEM_OUT" follow="true">
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
+
+        <!--<Kafka name="Kafka" topic="toolkit-log" ignoreExceptions="false">-->
+            <!--<JsonLayout compact="true">-->
+                <!--<KeyValuePair key="additionalField1" value="constant value"/>-->
+                <!--<KeyValuePair key="app-name" value="$${spring.application.name}"/>-->
+            <!--</JsonLayout>-->
+            <!--<Property name="bootstrap.servers">localhost:9092</Property>-->
+            <!--<Property name="timeout.ms">10000</Property>-->
+        <!--</Kafka>-->
+
+        <RollingFile name="RollingFile" fileName="d:/logs/api.log" filePattern="d:/logs/api-%i.log">
+            <JsonLayout compact="false">
+                <KeyValuePair key="additionalField1" value="constant value"/>
+                <KeyValuePair key="additionalField2" value="$${ctx:key}"/>
+                <KeyValuePair key="app-name" value="$${spring.application.name}"/>
+            </JsonLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="RollingFile2" fileName="d:/logs2/api.log" filePattern="d:/logs2/api-%i.log">
+            <JsonLayout compact="false">
+                <KeyValuePair key="additionalField1" value="constant value"/>
+                <KeyValuePair key="additionalField2" value="$${ctx:key}"/>
+                <KeyValuePair key="app-name" value="$${spring.application.name}"/>
+            </JsonLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <Failover name="Failover" primary="RollingFile2" retryIntervalSeconds="10">
+            <Failovers>
+                <AppenderRef ref="RollingFile"/>
+            </Failovers>
+        </Failover>
     </Appenders>
 
     <Loggers>
-        <Logger name="zgg.toolkit.apitool.mapper" level="trace" />
-        <Logger name="zgg.toolkit.system.mapper" level="trace" />
+        <Logger name="zgg.toolkit.apitool.mapper" level="trace"/>
+        <Logger name="zgg.toolkit.system.mapper" level="trace"/>
+        <!--Note:Make sure to not let org.apache.kafka log to a Kafka appender on DEBUG level, since that will cause recursive logging-->
+        <Logger name="org.apache.kafka" level="INFO"/>
 
         <Root level="info">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="Failover"/>
         </Root>
     </Loggers>
 </Configuration>

@@ -38,10 +38,18 @@
         <page-helper.version>1.2.9</page-helper.version>
         <shiro.version>1.4.0</shiro.version>
         <xvcode.version>1.0</xvcode.version>
+        <druid.version>1.1.10</druid.version>
+        <!--<kafka.version>2.1.0</kafka.version>-->
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!--druid数据库连接池-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
             <!-- 验证码 https://github.com/botaruibo/xvcode-->
             <dependency>
                 <groupId>com.github.botaruibo</groupId>
