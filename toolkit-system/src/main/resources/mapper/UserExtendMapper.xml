@@ -39,7 +39,7 @@
               AND d.status = "ENABLE"
     </select>
 
-    <select id="findUserModule" resultType="zgg.toolkit.core.model.MapVO">
+    <select id="findUserModule" resultType="zgg.toolkit.system.model.common.MapVO">
         SELECT
         a.module_name AS 'key',
         a.module_code AS 'value'

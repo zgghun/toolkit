@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import zgg.toolkit.core.model.PageList;
-import zgg.toolkit.core.model.PageParam;
-import zgg.toolkit.system.base.SystemBaseController;
+import zgg.toolkit.system.base.BaseController;
+import zgg.toolkit.system.model.common.PageList;
+import zgg.toolkit.system.model.common.PageParam;
 import zgg.toolkit.system.model.dto.*;
 import zgg.toolkit.system.model.entity.Role;
 import zgg.toolkit.system.service.RoleService;
@@ -19,7 +19,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/sys/role")
-public class RoleController extends SystemBaseController {
+public class RoleController extends BaseController {
 
     @Autowired
     private RoleService roleService;

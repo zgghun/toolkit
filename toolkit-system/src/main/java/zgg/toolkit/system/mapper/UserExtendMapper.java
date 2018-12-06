@@ -1,7 +1,7 @@
 package zgg.toolkit.system.mapper;
 
 import org.apache.ibatis.annotations.Param;
-import zgg.toolkit.core.model.MapVO;
+import zgg.toolkit.system.model.common.MapVO;
 import zgg.toolkit.system.model.dto.UserQuery;
 import zgg.toolkit.system.model.entity.Permission;
 import zgg.toolkit.system.model.entity.User;

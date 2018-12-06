@@ -3,10 +3,10 @@ package zgg.toolkit.system.controller;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import zgg.toolkit.core.model.PageList;
-import zgg.toolkit.core.model.PageParam;
-import zgg.toolkit.system.base.SysPerConst;
-import zgg.toolkit.system.base.SystemBaseController;
+import zgg.toolkit.system.base.BaseController;
+import zgg.toolkit.system.constant.PerConst;
+import zgg.toolkit.system.model.common.PageList;
+import zgg.toolkit.system.model.common.PageParam;
 import zgg.toolkit.system.model.dto.*;
 import zgg.toolkit.system.model.entity.User;
 import zgg.toolkit.system.model.entity.UserDetail;
@@ -19,7 +19,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/sys/user")
-public class UserController extends SystemBaseController {
+public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
@@ -29,7 +29,7 @@ public class UserController extends SystemBaseController {
         return commonResult(users);
     }
 
-    @RequiresPermissions(SysPerConst.user_save)
+    @RequiresPermissions(PerConst.user_save)
     @PostMapping("/save")
     public Object saveUser(@Valid UserSaveDto dto) {
         User user = userService.saveUser(dto);

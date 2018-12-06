@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>toolkit-system</name>
-    <description>用户，权限管理</description>
+    <description>web基础、用户、权限</description>
 
     <parent>
         <groupId>zgg.toolkit</groupId>
@@ -26,10 +26,28 @@
     <dependencies>
         <dependency>
             <groupId>zgg.toolkit</groupId>
-            <artifactId>toolkit-core</artifactId>
+            <artifactId>toolkit-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!--spring-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>

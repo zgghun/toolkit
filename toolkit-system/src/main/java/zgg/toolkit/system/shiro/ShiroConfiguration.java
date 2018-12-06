@@ -31,7 +31,6 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/sys/account/login", "anon");
         filterChainDefinitionMap.put("/sys/account/captcha", "anon");
         filterChainDefinitionMap.put("/sys/account/signUp", "anon");
-        filterChainDefinitionMap.put("/apiTest/*", "anon");
         filterChainDefinitionMap.put("/error/*", "anon");
         filterChainDefinitionMap.put("/**", "authc");
 

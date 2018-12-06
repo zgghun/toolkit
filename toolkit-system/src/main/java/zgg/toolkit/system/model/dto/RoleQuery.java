@@ -1,7 +1,7 @@
 package zgg.toolkit.system.model.dto;
 
 import lombok.Data;
-import zgg.toolkit.core.enums.StatusEnum;
+import zgg.toolkit.system.enums.StatusEnum;
 
 /**
  * Created by zgg on 2018/11/12

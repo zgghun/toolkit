@@ -1,6 +1,6 @@
 package zgg.toolkit.system.model.entity;
 
-import zgg.toolkit.core.enums.StatusEnum;
+import zgg.toolkit.system.enums.StatusEnum;
 
 /**
  *

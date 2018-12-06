@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
-import zgg.toolkit.core.utils.DateUtils;
-import zgg.toolkit.core.utils.IdWorker;
+import zgg.toolkit.common.utils.DateUtils;
+import zgg.toolkit.common.utils.IdWorker;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

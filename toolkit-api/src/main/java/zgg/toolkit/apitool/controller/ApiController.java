@@ -12,7 +12,7 @@ import zgg.toolkit.apitool.model.entity.ApiHistory;
 import zgg.toolkit.apitool.model.entity.ApiProject;
 import zgg.toolkit.apitool.model.vo.ApiVo;
 import zgg.toolkit.apitool.service.ApiService;
-import zgg.toolkit.core.controller.BaseController;
+import zgg.toolkit.system.base.BaseController;
 
 import javax.validation.Valid;
 import java.util.List;

@@ -3,12 +3,12 @@ package zgg.toolkit.system.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import zgg.toolkit.core.enums.ResultCode;
-import zgg.toolkit.core.enums.StatusEnum;
-import zgg.toolkit.core.exception.BaseException;
-import zgg.toolkit.core.utils.HelpUtils;
-import zgg.toolkit.core.utils.IdWorker;
-import zgg.toolkit.system.base.SystemBaseService;
+import zgg.toolkit.common.utils.HelpUtils;
+import zgg.toolkit.common.utils.IdWorker;
+import zgg.toolkit.system.base.BaseService;
+import zgg.toolkit.system.enums.ResultCode;
+import zgg.toolkit.system.enums.StatusEnum;
+import zgg.toolkit.system.base.BaseException;
 import zgg.toolkit.system.mapper.PermissionExtendMapper;
 import zgg.toolkit.system.mapper.autogen.ModuleMapper;
 import zgg.toolkit.system.mapper.autogen.PermissionMapper;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
  * 模块和权限是在一张表，模块仅仅用于对权限分组，便于查看、理解
  */
 @Service
-public class PermissionService extends SystemBaseService {
+public class PermissionService extends BaseService {
     @Autowired
     private PermissionMapper permissionMapper;
     @Autowired
@@ -217,12 +217,12 @@ public class PermissionService extends SystemBaseService {
                 .collect(Collectors.toList());
         // 利用父模块查询子模块
         parent.forEach(it -> {
-            findPerVOChildren(it, vos);
+            generatePerVOChildren(it, vos);
         });
         return parent;
     }
 
-    private void findPerVOChildren(PermissionVo parent, List<PermissionVo> vos) {
+    private void generatePerVOChildren(PermissionVo parent, List<PermissionVo> vos) {
         Set<Long> used = new HashSet<>();
         List<PermissionVo> children = new ArrayList<>();
         vos.stream()
@@ -231,7 +231,7 @@ public class PermissionService extends SystemBaseService {
                 .sorted(Comparator.comparing(PermissionVo::getSort))
                 .forEach(it -> {
                     children.add(it);
-                    findPerVOChildren(it, vos);
+                    generatePerVOChildren(it, vos);
                 });
         parent.setChildren(children);
     }

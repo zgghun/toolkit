@@ -1,7 +1,7 @@
 package zgg.toolkit.system.model.vo;
 
 import lombok.Data;
-import zgg.toolkit.core.enums.StatusEnum;
+import zgg.toolkit.system.enums.StatusEnum;
 import zgg.toolkit.system.model.entity.Permission;
 
 import java.util.List;

@@ -6,17 +6,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import zgg.toolkit.core.enums.ResultCode;
-import zgg.toolkit.core.enums.StatusEnum;
-import zgg.toolkit.core.exception.BaseException;
-import zgg.toolkit.core.model.PageList;
-import zgg.toolkit.core.model.PageParam;
-import zgg.toolkit.core.utils.HelpUtils;
-import zgg.toolkit.core.utils.IdWorker;
-import zgg.toolkit.system.base.SystemBaseService;
+import zgg.toolkit.common.utils.HelpUtils;
+import zgg.toolkit.common.utils.IdWorker;
+import zgg.toolkit.system.base.BaseService;
+import zgg.toolkit.system.enums.ResultCode;
+import zgg.toolkit.system.enums.StatusEnum;
+import zgg.toolkit.system.base.BaseException;
 import zgg.toolkit.system.mapper.autogen.RoleMapper;
 import zgg.toolkit.system.mapper.autogen.RolePermissionMapper;
 import zgg.toolkit.system.mapper.autogen.UserRoleMapper;
+import zgg.toolkit.system.model.common.PageList;
+import zgg.toolkit.system.model.common.PageParam;
 import zgg.toolkit.system.model.dto.EnableDto;
 import zgg.toolkit.system.model.dto.RolePerSetDto;
 import zgg.toolkit.system.model.dto.RoleQuery;
@@ -30,7 +30,7 @@ import java.util.List;
  */
 
 @Service
-public class RoleService extends SystemBaseService {
+public class RoleService extends BaseService {
     private static Logger logger = LoggerFactory.getLogger(RoleService.class);
     @Autowired
     private RoleMapper roleMapper;

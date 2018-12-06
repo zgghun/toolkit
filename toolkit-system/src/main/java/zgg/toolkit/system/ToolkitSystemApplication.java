@@ -5,7 +5,7 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import zgg.toolkit.core.ToolkitCoreApplication;
+import zgg.toolkit.common.ToolkitCommonApplication;
 
 /**
  * @author zgg
@@ -16,9 +16,10 @@ import zgg.toolkit.core.ToolkitCoreApplication;
 public class ToolkitSystemApplication {
 
     public static void main(String[] args) {
-        Class[] objects = new Class[]{
-                ToolkitCoreApplication.class,
-                ToolkitSystemApplication.class};
-        new SpringApplicationBuilder(objects).web(WebApplicationType.SERVLET).run(args);
+        Class[] classes = new Class[]{
+                ToolkitSystemApplication.class,
+                ToolkitCommonApplication.class
+        };
+        new SpringApplicationBuilder(classes).web(WebApplicationType.SERVLET).run(args);
     }
 }

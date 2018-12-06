@@ -3,10 +3,10 @@ package zgg.toolkit.system;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import zgg.toolkit.core.utils.DateUtils;
-import zgg.toolkit.core.utils.HelpUtils;
-import zgg.toolkit.core.utils.JsonUtils;
-import zgg.toolkit.system.base.SysPerConst;
+import zgg.toolkit.common.utils.DateUtils;
+import zgg.toolkit.common.utils.HelpUtils;
+import zgg.toolkit.common.utils.JsonUtils;
+import zgg.toolkit.system.constant.PerConst;
 import zgg.toolkit.system.model.vo.PermissionVo;
 
 import java.lang.reflect.Field;
@@ -21,7 +21,7 @@ public class MyTest {
 
     @Test
     public void test7() throws IllegalAccessException {
-        Field[] fields = SysPerConst.class.getDeclaredFields();
+        Field[] fields = PerConst.class.getDeclaredFields();
         for (Field field : fields) {
             System.out.println(field.get(this));
         }

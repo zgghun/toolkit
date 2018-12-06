@@ -2,7 +2,7 @@ package zgg.toolkit.system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import zgg.toolkit.system.base.SystemBaseController;
+import zgg.toolkit.system.base.BaseController;
 import zgg.toolkit.system.model.dto.DeleteDto;
 import zgg.toolkit.system.model.dto.EnableDto;
 import zgg.toolkit.system.model.dto.ModuleSaveDto;
@@ -19,11 +19,11 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sys/permission")
-public class PermissionController extends SystemBaseController {
+public class PermissionController extends BaseController {
     @Autowired
     private PermissionService permissionService;
 
-    @GetMapping("")
+    @GetMapping
     public Object findPermission() {
         List<PermissionVo> perVO = permissionService.findPermissionTree();
         return commonResult(perVO);

@@ -11,20 +11,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import zgg.toolkit.core.constant.GlobalConst;
-import zgg.toolkit.core.enums.ResultCode;
-import zgg.toolkit.core.enums.StatusEnum;
-import zgg.toolkit.core.exception.BaseException;
-import zgg.toolkit.core.model.MapVO;
-import zgg.toolkit.core.model.PageList;
-import zgg.toolkit.core.model.PageParam;
-import zgg.toolkit.core.utils.HelpUtils;
-import zgg.toolkit.core.utils.IdWorker;
-import zgg.toolkit.system.base.SystemBaseService;
+import zgg.toolkit.common.utils.HelpUtils;
+import zgg.toolkit.common.utils.IdWorker;
+import zgg.toolkit.system.base.BaseService;
+import zgg.toolkit.system.constant.SysConst;
+import zgg.toolkit.system.enums.ResultCode;
+import zgg.toolkit.system.enums.StatusEnum;
+import zgg.toolkit.system.base.BaseException;
 import zgg.toolkit.system.mapper.UserExtendMapper;
 import zgg.toolkit.system.mapper.autogen.UserDetailMapper;
 import zgg.toolkit.system.mapper.autogen.UserMapper;
 import zgg.toolkit.system.mapper.autogen.UserRoleMapper;
+import zgg.toolkit.system.model.common.MapVO;
+import zgg.toolkit.system.model.common.PageList;
+import zgg.toolkit.system.model.common.PageParam;
 import zgg.toolkit.system.model.dto.*;
 import zgg.toolkit.system.model.entity.*;
 import zgg.toolkit.system.model.vo.LoginInfo;
@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
  * Created by zgg on 2018/10/18
  */
 @Service
-public class UserService extends SystemBaseService {
+public class UserService extends BaseService {
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
@@ -67,7 +67,7 @@ public class UserService extends SystemBaseService {
             user.setCreateTime(LocalDateTime.now());
             user.setUpdateTime(LocalDateTime.now());
             userMapper.insert(user);
-            user.setPassword(GlobalConst.MASK);
+            user.setPassword(SysConst.MASK);
             return user;
         } else {
             User user = userMapper.selectByPrimaryKey(dto.getId());
@@ -78,7 +78,7 @@ public class UserService extends SystemBaseService {
             user.setPassword(HelpUtils.md5(dto.getPassword()));
             user.setUpdateTime(LocalDateTime.now());
             userMapper.updateByPrimaryKeySelective(user);
-            user.setPassword(GlobalConst.MASK);
+            user.setPassword(SysConst.MASK);
             return user;
         }
     }
@@ -106,7 +106,7 @@ public class UserService extends SystemBaseService {
     public PageList<User> findUser(UserQuery query, PageParam pageParam) {
         PageHelper.startPage(pageParam);
         List<User> users = userExtendMapper.findUser(query);
-        users.forEach(it -> it.setPassword(GlobalConst.MASK));
+        users.forEach(it -> it.setPassword(SysConst.MASK));
         return new PageList<>(users);
     }
 
@@ -212,7 +212,7 @@ public class UserService extends SystemBaseService {
     public LoginInfo login(String username, String password, String captcha) {
         Session session = SecurityUtils.getSubject().getSession();
         // 验证码验证
-        session.removeAttribute(GlobalConst.SESSION_CAPTCHA);
+        session.removeAttribute(SysConst.SESSION_CAPTCHA);
 
         UsernamePasswordToken token = new UsernamePasswordToken(username, HelpUtils.md5(password));
         Subject subject = SecurityUtils.getSubject();
@@ -226,7 +226,7 @@ public class UserService extends SystemBaseService {
         User user = (User) subject.getPrincipals().getPrimaryPrincipal();
         // 返回登陆信息，并把登陆信息存到session中，之后前端再次获取登录信息直接从session获取
         LoginInfo loginInfo = this.getLoginInfo(user);
-        session.setAttribute(GlobalConst.SESSION_LOGIN_INFO, loginInfo);
+        session.setAttribute(SysConst.SESSION_LOGIN_INFO, loginInfo);
 
         return loginInfo;
     }

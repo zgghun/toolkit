@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import zgg.toolkit.apitool.model.vo.GroupVo;
 import zgg.toolkit.apitool.model.vo.MethodVo;
 import zgg.toolkit.apitool.model.vo.ParameterVo;
-import zgg.toolkit.core.exception.BaseException;
-import zgg.toolkit.core.utils.HelpUtils;
+import zgg.toolkit.common.utils.HelpUtils;
+import zgg.toolkit.system.base.BaseException;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

@@ -2,7 +2,7 @@ package zgg.toolkit.system.model.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import zgg.toolkit.core.enums.StatusEnum;
+import zgg.toolkit.system.enums.StatusEnum;
 
 public class ModuleExample {
     /**

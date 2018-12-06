@@ -12,8 +12,8 @@ import zgg.toolkit.apitool.model.dto.HistoryAddDto;
 import zgg.toolkit.apitool.model.dto.ProjectSaveDto;
 import zgg.toolkit.apitool.model.entity.*;
 import zgg.toolkit.apitool.model.vo.ApiVo;
-import zgg.toolkit.core.utils.HelpUtils;
-import zgg.toolkit.core.utils.IdWorker;
+import zgg.toolkit.common.utils.HelpUtils;
+import zgg.toolkit.common.utils.IdWorker;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;

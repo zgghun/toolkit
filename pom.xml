@@ -19,7 +19,7 @@
     </parent>
 
     <modules>
-        <module>toolkit-core</module>
+        <module>toolkit-common</module>
         <module>toolkit-system</module>
         <module>toolkit-api</module>
         <module>toolkit-log</module>
@@ -85,6 +85,7 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 

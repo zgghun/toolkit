@@ -26,11 +26,6 @@
     <dependencies>
         <dependency>
             <groupId>zgg.toolkit</groupId>
-            <artifactId>toolkit-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>zgg.toolkit</groupId>
             <artifactId>toolkit-system</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

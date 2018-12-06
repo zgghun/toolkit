@@ -3,8 +3,8 @@ package zgg.toolkit.system.model.entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import zgg.toolkit.core.enums.GenderEnum;
-import zgg.toolkit.core.enums.StatusEnum;
+import zgg.toolkit.system.enums.GenderEnum;
+import zgg.toolkit.system.enums.StatusEnum;
 
 public class UserExample {
     /**

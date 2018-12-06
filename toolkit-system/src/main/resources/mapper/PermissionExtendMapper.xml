@@ -11,11 +11,11 @@
     </delete>
     <delete id="deletePermissionByModuleId">
         DELETE
-            a, c
-        FROM sys_permission a
-            INNER JOIN sys_module b ON a.module_id = b.id
-            INNER JOIN sys_role_permission c ON c.per_id = a.id
-        WHERE a.module_id = #{moduleId}
+            b, c
+        FROM sys_module a
+            INNER JOIN sys_permission b ON a.id = b.module_id
+            LEFT JOIN sys_role_permission c ON c.per_id = b.id
+        WHERE a.id = #{moduleId}
     </delete>
     <resultMap id="permissionVo" type="zgg.toolkit.system.model.vo.PermissionVo">
         <id column="id" property="id" jdbcType="BIGINT"/>
@@ -41,7 +41,4 @@
             b.module_id
         FROM sys_module a INNER JOIN sys_permission b ON a.id = b.module_id
     </select>
-    <resultMap id="test" type="zgg.toolkit.system.model.entity.Permission">
-        <!--<id column="id"/>-->
-    </resultMap>
 </mapper>

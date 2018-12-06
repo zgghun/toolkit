@@ -1,7 +1,7 @@
 package zgg.toolkit.system.model.vo;
 
 import lombok.Data;
-import zgg.toolkit.core.model.MapVO;
+import zgg.toolkit.system.model.common.MapVO;
 
 import java.io.Serializable;
 import java.util.List;

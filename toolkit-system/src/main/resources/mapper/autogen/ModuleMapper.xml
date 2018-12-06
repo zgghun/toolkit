@@ -13,7 +13,7 @@
       <arg column="module_code" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="icon" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="status" javaType="zgg.toolkit.core.enums.StatusEnum" jdbcType="CHAR" />
+      <arg column="status" javaType="zgg.toolkit.system.enums.StatusEnum" jdbcType="CHAR" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
