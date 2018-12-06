@@ -36,7 +36,6 @@ public class AccountController extends BaseController {
     @Autowired
     private UserService userService;
 
-
     // TODO 找回密码，直接重置
 
     // 退出
@@ -49,14 +48,6 @@ public class AccountController extends BaseController {
             throw new BaseException();
         }
         return commonResult();
-    }
-
-//    @RequiresGuest
-//    @RequiresPermissions(value={“user:a”, “user:b”}, logical= Logical.OR)
-    // 获取登录用户权限信息
-    @GetMapping("/loginInfo")
-    public Object getLoginUserInfo() {
-        return commonResult(this.getLoginInfo());
     }
 
     // 登陆

@@ -179,8 +179,6 @@ public class PermissionService extends BaseService {
     }
 
 
-    /****************** 内部方法 *********************/
-
     /**
      * 获取模块及所属子模块
      *
@@ -216,14 +214,14 @@ public class PermissionService extends BaseService {
                 .sorted(Comparator.comparing(PermissionVo::getSort))
                 .collect(Collectors.toList());
         // 利用父模块查询子模块
+        Set<Long> used = new HashSet<>();
         parent.forEach(it -> {
-            generatePerVOChildren(it, vos);
+            generatePerVOChildren(it, vos, used);
         });
         return parent;
     }
 
-    private void generatePerVOChildren(PermissionVo parent, List<PermissionVo> vos) {
-        Set<Long> used = new HashSet<>();
+    private void generatePerVOChildren(PermissionVo parent, List<PermissionVo> vos, Set<Long> used) {
         List<PermissionVo> children = new ArrayList<>();
         vos.stream()
                 .filter(it -> used.add(it.getId()))
@@ -231,7 +229,7 @@ public class PermissionService extends BaseService {
                 .sorted(Comparator.comparing(PermissionVo::getSort))
                 .forEach(it -> {
                     children.add(it);
-                    generatePerVOChildren(it, vos);
+                    generatePerVOChildren(it, vos, used);
                 });
         parent.setChildren(children);
     }

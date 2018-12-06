@@ -59,4 +59,12 @@ public class UserController extends BaseController {
         UserDetail extend = userService.saveUserDetail(dto, getLoginInfo());
         return commonResult(extend);
     }
+
+    //    @RequiresGuest
+//    @RequiresPermissions(value={“user:a”, “user:b”}, logical= Logical.OR)
+    // 获取登录用户权限信息
+    @GetMapping("/loginInfo")
+    public Object getLoginUserInfo() {
+        return commonResult(getLoginInfo());
+    }
 }

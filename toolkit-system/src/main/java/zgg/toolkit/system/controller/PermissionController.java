@@ -23,7 +23,7 @@ public class PermissionController extends BaseController {
     @Autowired
     private PermissionService permissionService;
 
-    @GetMapping
+    @GetMapping("/find")
     public Object findPermission() {
         List<PermissionVo> perVO = permissionService.findPermissionTree();
         return commonResult(perVO);
