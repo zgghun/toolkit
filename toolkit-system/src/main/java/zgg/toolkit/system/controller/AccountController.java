@@ -5,6 +5,8 @@ import com.github.botaruibo.xvcode.generator.PngVCGenerator;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +35,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/sys/account")
 public class AccountController extends BaseController {
+    private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
     @Autowired
     private UserService userService;
 
@@ -89,6 +92,7 @@ public class AccountController extends BaseController {
     // 未登跳转地址
     @RequestMapping("/unauth")
     public Object unAuthentication() {
+        logger.warn(ResultCode.UNAUTHENTICATED.getNote());
         return commonResult(ResultCode.UNAUTHENTICATED);
     }
 }

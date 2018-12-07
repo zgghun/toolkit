@@ -17,7 +17,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://47.105.34.242:3306/toolkit?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
-    password: nNsWbmYS1PjsJoncMMYdz6KLcv+Ma3PzVM6fsYCKPEn6+hrHAfKUM9YZ1hgjWG4aOSw3IOmys3ipanxOy9nXTQ==
+    password: d1Aa4aNty4rkvjO2rkZxjXPaaxHDqDN9sjl3un+CiT0lDvThKS0lhMP7RVuRyIcO9bVThyhyhb4gozDm7bUjlw==
     druid:
       max-active: 5
       min-idle: 1
@@ -26,6 +26,9 @@ spring:
       filter:
         config:
           enabled: true
+# 这个应该存在其他地方
+public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJYO8jR0IDetilnYRay2uXY15q1WOFaNEGSBWuRNtQ40jC84MXawC4rSf+/JwwZrwuO9O3Ij1tJ70uk9ydtuhdECAwEAAQ==
+
 #  kafka:
 #    bootstrap-servers: localhost:9092
 #    producer:
@@ -37,8 +40,7 @@ spring:
 #      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
 
-# 这个应该存在其他地方
-public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKuawc+3wVgX7iWqHReV8zBE9b0JALbVTQiYMYHcUAxfOnQ9eQkW4L0/EmHsF0rrqNV2MXC48wXNloVJPJzQkqcCAwEAAQ==
+
 
 mybatis:
   # 这里使用classpath*,这样才能找到依赖模块system中resource下的xml等静态资源文件，否则会报 invalid bound statement (not found)异常

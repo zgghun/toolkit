@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zgg.toolkit.common.utils.HelpUtils;
 import zgg.toolkit.common.utils.IdWorker;
+import zgg.toolkit.system.base.BaseException;
 import zgg.toolkit.system.base.BaseService;
 import zgg.toolkit.system.constant.SysConst;
 import zgg.toolkit.system.enums.ResultCode;
 import zgg.toolkit.system.enums.StatusEnum;
-import zgg.toolkit.system.base.BaseException;
 import zgg.toolkit.system.mapper.UserExtendMapper;
 import zgg.toolkit.system.mapper.autogen.UserDetailMapper;
 import zgg.toolkit.system.mapper.autogen.UserMapper;
@@ -32,6 +32,7 @@ import zgg.toolkit.system.model.vo.LoginInfo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 /**
@@ -39,7 +40,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class UserService extends BaseService {
-    private static final Logger log = LoggerFactory.getLogger(UserService.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -107,6 +108,16 @@ public class UserService extends BaseService {
         PageHelper.startPage(pageParam);
         List<User> users = userExtendMapper.findUser(query);
         users.forEach(it -> it.setPassword(SysConst.MASK));
+//        for (int i = 0; i < 200; i++) {
+//            commonTaskExecutor.execute(() -> {
+//                try {
+//                    Thread.sleep(100L);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                logger.info("***************" + Thread.currentThread().getName() + "**********");
+//            });
+//        }
         return new PageList<>(users);
     }
 
@@ -119,11 +130,11 @@ public class UserService extends BaseService {
      */
     public UserDetail saveUserDetail(UserDetailSaveDto dto, LoginInfo loginInfo) {
         UserDetail detail = userDetailMapper.selectByPrimaryKey(dto.getId());
-        if (detail == null){
+        if (detail == null) {
             detail = new UserDetail();
             HelpUtils.copyProperties(dto, detail);
             userDetailMapper.insertSelective(detail);
-        }else {
+        } else {
             HelpUtils.copyProperties(dto, detail);
             userDetailMapper.updateByPrimaryKeySelective(detail);
         }
@@ -160,7 +171,7 @@ public class UserService extends BaseService {
     }
 
     /**
-     * 查询用户
+     * 登陆用户查询
      *
      * @param username
      * @param password
@@ -219,7 +230,7 @@ public class UserService extends BaseService {
         try {
             subject.login(token);
         } catch (AuthenticationException e) {
-            log.debug("登陆错误：{}", e.getMessage());
+            logger.debug("登陆错误：{}", e.getMessage());
             throw e;
         }
 

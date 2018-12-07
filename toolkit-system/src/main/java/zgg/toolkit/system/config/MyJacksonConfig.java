@@ -28,7 +28,7 @@ import java.time.format.DateTimeFormatter;
  * 参考 https://github.com/FasterXML/jackson-docs/wiki/JacksonHowToCustomSerializers
  **/
 @Configuration
-public class MyJacksonConfiguration {
+public class MyJacksonConfig {
 
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer customizeJackson2ObjectMapper() {
