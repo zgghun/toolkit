@@ -1,4 +1,4 @@
-package zgg.toolkit.common.threadpool;
+package zgg.toolkit.common.thread;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

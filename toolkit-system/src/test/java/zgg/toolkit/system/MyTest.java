@@ -4,6 +4,7 @@ import com.alibaba.druid.filter.config.ConfigTools;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.DigestUtils;
 import zgg.toolkit.common.utils.DateUtils;
 import zgg.toolkit.common.utils.HelpUtils;
 import zgg.toolkit.common.utils.JsonUtils;
@@ -19,6 +20,16 @@ import java.util.*;
  */
 public class MyTest {
     private static final Logger log = LoggerFactory.getLogger(MyTest.class);
+
+    @Test
+    public void test9() {
+        String str = "123456";
+        String s1 = HelpUtils.md5(str);
+        String s2 = DigestUtils.md5DigestAsHex(str.getBytes());
+        System.out.println(s1);
+        System.out.println(s2.toUpperCase());
+    }
+
 
     // 利用druid对数据库密码加密
     @Test

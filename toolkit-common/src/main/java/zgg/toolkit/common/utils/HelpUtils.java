@@ -2,9 +2,7 @@ package zgg.toolkit.common.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import org.springframework.util.DigestUtils;
 
 /**
  * Created by zgg on 2018/10/26
@@ -12,6 +10,11 @@ import java.security.NoSuchAlgorithmException;
  */
 
 public class HelpUtils {
+    /**
+     * 对象间属性值复制，按照属性名
+     * @param source
+     * @param target
+     */
     public static void copyProperties(Object source, Object target) {
         BeanUtils.copyProperties(source, target);
     }
@@ -34,25 +37,8 @@ public class HelpUtils {
         return StringUtils.contains(str, searchStr);
     }
 
-    // 获取MD5值 ，从 commons-codec 复制的
+    // 获取MD5值
     public static String md5(String str) {
-        byte[] bs = new byte[]{};
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(str.getBytes());
-            bs = md.digest();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
-        final int l = bs.length;
-        final char[] out = new char[l << 1];
-        for (int i = 0, j = 0; i < l; i++) {
-            out[j++] = DIGITS_UPPER[(0xF0 & bs[i]) >>> 4];
-            out[j++] = DIGITS_UPPER[0x0F & bs[i]];
-        }
-        return new String(out);
+        return DigestUtils.md5DigestAsHex(str.getBytes());
     }
-
-    private static final char[] DIGITS_UPPER = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 }
