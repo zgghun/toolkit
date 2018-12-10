@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>toolkit-common</name>
-    <description>Demo project for Spring Boot</description>
+    <description>基础模块，包含工具类，线程池，消息队列，分布式缓存，excel工具等</description>
 
     <parent>
         <groupId>zgg.toolkit</groupId>
@@ -40,6 +40,11 @@
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
@@ -47,22 +52,5 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        <!--provided-->
-        <!--<dependency>-->
-        <!--<groupId>org.projectlombok</groupId>-->
-        <!--<artifactId>lombok</artifactId>-->
-        <!--<scope>provided</scope>-->
-        <!--</dependency>-->
     </dependencies>
-
-    <build>
-        <plugins>
-            <!--<plugin>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-            <!--</plugin>-->
-        </plugins>
-    </build>
-
-
 </project>

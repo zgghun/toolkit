@@ -34,14 +34,10 @@
             <artifactId>toolkit-system</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
+        <!--spring-->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
