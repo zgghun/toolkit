@@ -26,6 +26,12 @@ spring:
       filter:
         config:
           enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 # 这个应该存在其他地方
 public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJYO8jR0IDetilnYRay2uXY15q1WOFaNEGSBWuRNtQ40jC84MXawC4rSf+/JwwZrwuO9O3Ij1tJ70uk9ydtuhdECAwEAAQ==
 
