@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import zgg.toolkit.apitool.ToolkitApiApplication;
-import zgg.toolkit.common.rabbitmq.RabbitMqConfig;
+import zgg.toolkit.common.ToolkitCommonApplication;
+import zgg.toolkit.common.rabbitmq.MqConst;
+import zgg.toolkit.system.ToolkitSystemApplication;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ToolkitApiApplication.class)
+@SpringBootTest(classes = {ToolkitApiApplication.class, ToolkitSystemApplication.class, ToolkitCommonApplication.class})
 public class ToolkitApiApplicationTests {
     @Autowired
     private AmqpTemplate amqpTemplate;
@@ -22,10 +24,8 @@ public class ToolkitApiApplicationTests {
         System.out.println("发送：" + msg);
         for (int i = 0; i < 1000; i++) {
             System.out.println("#####发送次数：" + i);
-//            mqTemplate.convertAndSend(RabbitMqConfig.EMAIL_QUEUE, msg + "direct");
-            amqpTemplate.convertAndSend(RabbitMqConfig.TOPIC_EXCHANGE, "email", msg + "topic, email");
-            amqpTemplate.convertAndSend(RabbitMqConfig.TOPIC_EXCHANGE, "verifyCode", msg + "topic, verifyCode");
-            amqpTemplate.convertAndSend(RabbitMqConfig.TOPIC_EXCHANGE, "abc", msg + "topic, test");
+            amqpTemplate.convertAndSend(MqConst.DIRECT_EXCHANGE, "email", msg + "topic, email");
+            amqpTemplate.convertAndSend(MqConst.DIRECT_EXCHANGE, "verifyCode", msg + "topic, verifyCode");
             try {
                 Thread.sleep(1000L);
             } catch (InterruptedException e) {

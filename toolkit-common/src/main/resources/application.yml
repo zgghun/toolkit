@@ -1,0 +1,2 @@
+
+myconfig: ${JASYPT_ENCRYPTOR_PASSWORD:123}

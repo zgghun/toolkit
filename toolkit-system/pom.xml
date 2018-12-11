@@ -84,6 +84,14 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>application.yml</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <!--注意：多模块项目仅仅需要在启动类所在的模块添加打包插件即可！！
             不要在父类添加该打包插件，因为那样会导致全部子模块都使用spring-boot-maven-plugin的方式来打包
