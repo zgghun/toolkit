@@ -32,7 +32,6 @@ import zgg.toolkit.system.model.vo.LoginInfo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 /**
@@ -180,14 +179,14 @@ public class UserService extends BaseService {
     public User getUser(String username, String password) {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
-        if (HelpUtils.isNumeric(username)) {
+        if (HelpUtils.isAllNumber(username)) {
             // 全数字，电话登陆
             criteria.andTelEqualTo(username);
-        } else if (HelpUtils.contains(username, "@")) {
-            // 包含 @ 邮箱登陆
+        } else if (username.contains("@")) {
+            // 包含 @ 为邮箱登陆
             criteria.andEmailEqualTo(username);
         } else {
-            // 用户名登陆
+            // 用户名登陆（必定包含 中文，或字母+数字）
             criteria.andUsernameEqualTo(username);
         }
         criteria.andPasswordEqualTo(password);

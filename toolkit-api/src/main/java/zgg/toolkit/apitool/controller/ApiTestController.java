@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import zgg.toolkit.apitool.model.vo.GroupVo;
 import zgg.toolkit.apitool.service.ApiTestService;
 import zgg.toolkit.system.base.BaseController;
-import zgg.toolkit.system.model.dto.DeleteDto;
+import zgg.toolkit.system.model.common.DeleteDto;
 
 import java.util.List;
 

@@ -1,8 +1,10 @@
-package zgg.toolkit.system.model.dto;
+package zgg.toolkit.system.model.common;
 
 import lombok.Data;
+import zgg.toolkit.system.enums.StatusEnum;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -12,4 +14,6 @@ import java.util.List;
 public class DeleteBatchDto {
     @NotEmpty
     private List<Long> ids;
+    @NotNull
+    private StatusEnum status;
 }

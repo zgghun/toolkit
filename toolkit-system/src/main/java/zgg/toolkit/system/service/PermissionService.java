@@ -168,7 +168,7 @@ public class PermissionService extends BaseService {
     public void deletePermission(Long perId, Long moduleId) {
         if (perId != null) {
             Permission per = permissionMapper.selectByPrimaryKey(perId);
-            if (per != null && HelpUtils.contains(per.getPerCode(), ":view")) {
+            if (per != null && per.getPerCode().contains(":view")) {
                 throw new BaseException("查看权限不可删除");
             }
             perExtendMapper.deletePermissionById(perId);

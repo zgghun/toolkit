@@ -3,7 +3,7 @@ package zgg.toolkit.system.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import zgg.toolkit.system.base.BaseController;
-import zgg.toolkit.system.model.dto.DeleteDto;
+import zgg.toolkit.system.model.common.DeleteDto;
 import zgg.toolkit.system.model.dto.EnableDto;
 import zgg.toolkit.system.model.dto.ModuleSaveDto;
 import zgg.toolkit.system.model.dto.PermissionSaveDto;

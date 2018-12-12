@@ -28,7 +28,7 @@ public class ThreadPoolConfig {
         executor.setQueueCapacity(QUEUE_CAPACITY);
         executor.setThreadNamePrefix(THREAD_NAME_PREFIX);
         // rejection-policy：当pool已经达到maxSize时，如何处理新任务
-        // CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行
+        // CALLER_RUNS：不在新线程中执行任务，而是由调用者所在的线程来执行
         //executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
 
         executor.initialize();

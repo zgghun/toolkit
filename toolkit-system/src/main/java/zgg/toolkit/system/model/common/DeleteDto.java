@@ -1,9 +1,8 @@
-package zgg.toolkit.system.model.dto;
+package zgg.toolkit.system.model.common;
 
 import lombok.Data;
 import zgg.toolkit.system.enums.StatusEnum;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -12,7 +11,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class DeleteDto {
     @NotNull
-    @Min(10)
     private Long id;
     @NotNull
     private StatusEnum status;

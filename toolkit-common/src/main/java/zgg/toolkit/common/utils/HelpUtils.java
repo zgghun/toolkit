@@ -1,12 +1,12 @@
 package zgg.toolkit.common.utils;
 
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.DigestUtils;
 
 /**
  * Created by zgg on 2018/10/26
- * 工具类,对第三方工具的统一引用
+ * 工具类
  */
 
 public class HelpUtils {
@@ -20,21 +20,25 @@ public class HelpUtils {
     }
 
     public static boolean isNotBlank(String str) {
-        return StringUtils.isNotBlank(str);
+        return StringUtils.hasText(str);
     }
 
     public static boolean isBlank(String str) {
-        return StringUtils.isBlank(str);
+        return !StringUtils.hasText(str);
     }
 
-    // 字符串全是数字验证
-    public static boolean isNumeric(String str) {
-        return StringUtils.isNumeric(str);
-    }
-
-    // 字符串查询
-    public static boolean contains(String str, String searchStr) {
-        return StringUtils.contains(str, searchStr);
+    // 字符串是否全是数字
+    public static boolean isAllNumber(String str) {
+        if (isBlank(str)){
+            return false;
+        }
+        final int sz = str.length();
+        for (int i = 0; i < sz; i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // 获取MD5值

@@ -1,6 +1,5 @@
 package zgg.toolkit.apitool.service;
 
-import org.apache.commons.lang3.ClassUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
@@ -45,7 +44,7 @@ public class ApiTestService {
         for (BeanDefinition beanDefinition : beanDefinitionSet) {
             Class<?> entityClass;
             try {
-                entityClass = ClassUtils.getClass(beanDefinition.getBeanClassName());
+                entityClass = Class.forName(beanDefinition.getBeanClassName());
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
                 throw new BaseException(e.getMessage());
