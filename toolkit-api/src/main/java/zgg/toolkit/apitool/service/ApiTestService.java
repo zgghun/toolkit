@@ -174,8 +174,7 @@ public class ApiTestService {
                 Date.class,
                 LocalDateTime.class, LocalDate.class, LocalTime.class
                 );
-        HashSet<Object> set = new HashSet<>();
-        set.addAll(list);
+        HashSet<Object> set = new HashSet<>(list);
         return set.contains(clazz);
     }
 

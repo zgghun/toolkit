@@ -17,6 +17,7 @@
             LEFT JOIN sys_role_permission c ON c.per_id = b.id
         WHERE a.id = #{moduleId}
     </delete>
+
     <resultMap id="permissionVo" type="zgg.toolkit.system.model.vo.PermissionVo">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="pid" property="pid" jdbcType="BIGINT"/>

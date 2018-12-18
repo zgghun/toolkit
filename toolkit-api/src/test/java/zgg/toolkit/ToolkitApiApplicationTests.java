@@ -1,39 +1,62 @@
 package zgg.toolkit;
 
+import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import zgg.toolkit.apitool.ToolkitApiApplication;
 import zgg.toolkit.common.ToolkitCommonApplication;
-import zgg.toolkit.common.rabbitmq.MqConst;
-import zgg.toolkit.common.utils.DateUtils;
+import zgg.toolkit.common.rabbitmq.MqProducer;
 import zgg.toolkit.system.ToolkitSystemApplication;
 
-import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {ToolkitApiApplication.class, ToolkitSystemApplication.class, ToolkitCommonApplication.class})
 public class ToolkitApiApplicationTests {
     @Autowired
-    private AmqpTemplate amqpTemplate;
+    private StringEncryptor encryptor;
+    @Autowired
+    private MqProducer mqService;
+
 
     @Test
-    public void contextLoads() {
-        String msg = "hello word! 你好，世界！";
-        System.out.println("发送：" + msg);
-        for (int i = 0; i < 1000; i++) {
-            System.out.println("#####发送次数：" + i);
-            amqpTemplate.convertAndSend(MqConst.DIRECT_EXCHANGE, MqConst.EMAIL_QUEUE, msg + DateUtils.format(LocalDateTime.now()));
-            amqpTemplate.convertAndSend(MqConst.DIRECT_EXCHANGE, MqConst.VERIFY_CODE_QUEUE, msg + DateUtils.format(LocalDateTime.now()));
-            try {
-                Thread.sleep(1000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    public void test1() {
+        mqService.sendEmailToMq(Arrays.asList(111L, 222L, 333L, 444L));
+        mqService.sendVerifyCodeToMq(Arrays.asList(111L, 222L, 333L, 444L));
+    }
+
+    /**
+     * 敏感信息加密
+     */
+    @Test
+    public void encryptInfo() {
+        // 数据库
+//        String url = encryptor.encrypt("111111");
+//        String username = encryptor.encrypt("");
+//        String pass = encryptor.encrypt("");
+//        System.out.println(url);
+//        System.out.println(username);
+//        System.out.println(pass);
+
+        // rabbit
+        String host = encryptor.encrypt("");
+        String username = encryptor.encrypt("");
+        String password = encryptor.encrypt("");
+        System.out.println(host);
+        System.out.println(username);
+        System.out.println(password);
+
+        //redis
+//        String url = encryptor.encrypt("");
+//        String username = encryptor.encrypt("");
+//        String pass = encryptor.encrypt("");
+//        System.out.println(url);
+//        System.out.println(username);
+//        System.out.println(pass);
+
     }
 
 }
