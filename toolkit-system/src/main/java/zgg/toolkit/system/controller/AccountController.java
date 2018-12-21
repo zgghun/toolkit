@@ -3,6 +3,7 @@ package zgg.toolkit.system.controller;
 import com.github.botaruibo.xvcode.generator.Generator;
 import com.github.botaruibo.xvcode.generator.PngVCGenerator;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -54,6 +55,7 @@ public class AccountController extends BaseController {
     }
 
     // 登陆
+    @RequiresGuest
     @PostMapping("/login")
     public Object login(@Valid LoginDto dto) {
         LoginInfo loginInfo = userService.login(dto.getUsername(), dto.getPassword(), dto.getCaptcha());
@@ -83,6 +85,7 @@ public class AccountController extends BaseController {
     }
 
     // 注册
+    @RequiresGuest
     @PostMapping("/signUp")
     public Object signUp(@Valid UserSaveDto dto) {
         User user = userService.saveUser(dto);
