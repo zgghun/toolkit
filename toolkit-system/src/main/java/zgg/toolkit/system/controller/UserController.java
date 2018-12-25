@@ -60,8 +60,6 @@ public class UserController extends BaseController {
         return commonResult(extend);
     }
 
-    //    @RequiresGuest
-//    @RequiresPermissions(value={“user:a”, “user:b”}, logical= Logical.OR)
     // 获取登录用户权限信息
     @GetMapping("/loginInfo")
     public Object getLoginUserInfo() {

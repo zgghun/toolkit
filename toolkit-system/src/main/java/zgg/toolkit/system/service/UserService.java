@@ -257,12 +257,14 @@ public class UserService extends BaseService {
         List<Permission> permissions = userExtendMapper.findLoginUserPer(user.getId());
         List<Long> moduleIds = permissions.stream().map(Permission::getModuleId).distinct().collect(Collectors.toList());
         List<String> perList = permissions.stream().map(Permission::getPerCode).collect(Collectors.toList());
-
         List<MapVO> modules = new ArrayList<>();
         if (permissions.size() > 0) {
             modules.addAll(userExtendMapper.findUserModule(moduleIds));
         }
+
+        // 用于控制前端路由
         loginInfo.setModules(modules);
+        // 前端根据权限做细粒度控制
         loginInfo.setPermissions(perList);
 
         return loginInfo;
