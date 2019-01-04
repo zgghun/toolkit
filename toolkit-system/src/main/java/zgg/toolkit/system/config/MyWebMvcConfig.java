@@ -60,6 +60,7 @@ public class MyWebMvcConfig implements WebMvcConfigurer {
         });
     }
 
+    // 放弃这个配置，利用 nginx 反响代理来解决跨域
 //    // 全局跨域配置 https://docs.spring.io/spring/docs/5.0.10.RELEASE/spring-framework-reference/web.html#mvc-cors
 //    @Override
 //    public void addCorsMappings(CorsRegistry registry) {
