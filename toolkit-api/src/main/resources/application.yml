@@ -33,22 +33,8 @@ jasypt:
     encryptor:
         password: ${JASYPT_ENCRYPTOR_PASSWORD}
 
-
-#  kafka:
-#    bootstrap-servers: localhost:9092
-#    producer:
-#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-#    consumer:
-#      group-id: test-consumer-group
-#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-
-
-
-
 mybatis:
-  # 这里使用classpath*,这样才能找到依赖模块system中resource下的xml等静态资源文件，否则会报 invalid bound statement (not found)异常
+  # 这里使用classpath*,这样才能找到lib包system中resource下的xml等静态资源文件，否则会报 invalid bound statement (not found)异常
   mapper-locations: classpath*:mapper/*.xml,classpath*:mapper/autogen/*.xml
   configuration:
     map-underscore-to-camel-case: true

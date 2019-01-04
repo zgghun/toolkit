@@ -11,20 +11,9 @@
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
 
-        <!--<Kafka name="Kafka" topic="api-log">-->
-            <!--<PatternLayout pattern="%date %message"/>-->
-            <!--&lt;!&ndash;<JsonLayout compact="true" eventEol="true">&ndash;&gt;-->
-                <!--&lt;!&ndash;<KeyValuePair key="app-name" value="tk_api"/>&ndash;&gt;-->
-            <!--&lt;!&ndash;</JsonLayout>&ndash;&gt;-->
-            <!--<Property name="bootstrap.servers">127.0.0.1:9092</Property>-->
-        <!--</Kafka>-->
-
         <!--<RollingFile name="RollingFile" fileName="d:/logs/api.log" filePattern="d:/logs/api-%i.log">-->
-            <!--<JsonLayout compact="true" eventEol="true">-->
-                <!--<KeyValuePair key="app-name" value="tk_api"/>-->
-            <!--</JsonLayout>-->
+            <!--<PatternLayout pattern="${LOG_PATTERN}"/>-->
             <!--<Policies>-->
-                <!--<OnStartupTriggeringPolicy/>-->
                 <!--<SizeBasedTriggeringPolicy size="5 MB"/>-->
             <!--</Policies>-->
         <!--</RollingFile>-->
@@ -33,12 +22,8 @@
     <Loggers>
         <Logger name="zgg.toolkit.apitool.mapper" level="trace"/>
         <Logger name="zgg.toolkit.system.mapper" level="trace"/>
-        <!--Note:Make sure to not let org.apache.kafka log to a Kafka appender on DEBUG level, since that will cause recursive logging-->
-        <Logger name="org.apache.kafka" level="INFO"/>
-
         <Root level="info">
             <AppenderRef ref="Console"/>
-            <!--<AppenderRef ref="Kafka"/>-->
             <!--<AppenderRef ref="RollingFile"/>-->
         </Root>
     </Loggers>

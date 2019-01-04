@@ -1,0 +1,11 @@
+
+
+server:
+  port: 8200
+  servlet:
+    context-path: /bug
+
+spring:
+  application:
+    name: toolkit-bug
+

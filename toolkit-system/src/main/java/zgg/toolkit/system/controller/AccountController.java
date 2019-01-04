@@ -3,6 +3,7 @@ package zgg.toolkit.system.controller;
 import com.github.botaruibo.xvcode.generator.Generator;
 import com.github.botaruibo.xvcode.generator.PngVCGenerator;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
@@ -43,6 +44,7 @@ public class AccountController extends BaseController {
     // TODO 找回密码，直接重置
 
     // 退出
+    @RequiresAuthentication
     @GetMapping("/logout")
     public Object logout() {
         Subject subject = SecurityUtils.getSubject();

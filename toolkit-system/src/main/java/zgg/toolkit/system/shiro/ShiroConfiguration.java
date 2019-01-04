@@ -28,11 +28,11 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/sys/account/login", "anon");
-        filterChainDefinitionMap.put("/sys/account/captcha", "anon");
-        filterChainDefinitionMap.put("/sys/account/signUp", "anon");
-        filterChainDefinitionMap.put("/error/*", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+//        filterChainDefinitionMap.put("/sys/account/login", "anon");
+//        filterChainDefinitionMap.put("/sys/account/captcha", "anon");
+//        filterChainDefinitionMap.put("/sys/account/signUp", "anon");
+//        filterChainDefinitionMap.put("/error/*", "anon");
+//        filterChainDefinitionMap.put("/**", "authc");
 
         // 通过shiro设置登陆地址（默认login.jsp），由于前后分离了，此地址用于未登录时返回未登录异常信息
         shiroFilterFactoryBean.setLoginUrl("/sys/account/unauth");

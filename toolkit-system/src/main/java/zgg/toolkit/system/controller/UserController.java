@@ -1,10 +1,8 @@
 package zgg.toolkit.system.controller;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import zgg.toolkit.system.base.BaseController;
-import zgg.toolkit.system.constant.PerConst;
 import zgg.toolkit.system.model.common.PageList;
 import zgg.toolkit.system.model.common.PageParam;
 import zgg.toolkit.system.model.dto.*;
@@ -23,25 +21,28 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
+//    @RequiresPermissions(PerConst.user_view)
     @GetMapping("/find")
     public Object findUser(UserQuery query, PageParam pageParam) {
         PageList<User> users = userService.findUser(query, pageParam);
         return commonResult(users);
     }
 
-    @RequiresPermissions(PerConst.user_save)
+//    @RequiresPermissions(PerConst.user_save)
     @PostMapping("/save")
     public Object saveUser(@Valid UserSaveDto dto) {
         User user = userService.saveUser(dto);
         return commonResult(user);
     }
 
+//    @RequiresPermissions(PerConst.user_enable)
     @PostMapping("/enable")
     public Object enableUser(@Valid EnableDto dto) {
         userService.enableUser(dto);
         return commonResult();
     }
 
+//    @RequiresPermissions(PerConst.user_set_role)
     @PostMapping("/setRole")
     public Object setUserRole(@Valid UserRoleSetDto dto) {
         userService.setUserRole(dto);

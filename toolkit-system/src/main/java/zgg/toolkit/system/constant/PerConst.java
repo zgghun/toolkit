@@ -27,4 +27,5 @@ public class PerConst {
     public static final String per_module_save = "per:moduleSave";
     public static final String per_module_enable = "per:moduleEnable";
     public static final String per_module_del = "per:moduleDel";
+
 }

@@ -1,6 +1,7 @@
 package zgg.toolkit.system.base;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import zgg.toolkit.system.constant.SysConst;
 import zgg.toolkit.system.enums.ResultCode;
 import zgg.toolkit.system.model.common.CommonResult;
@@ -14,7 +15,11 @@ public class BaseController {
 
     // 从 Shiro session 获取登录用户信息
     protected LoginInfo getLoginInfo(){
-        return (LoginInfo) SecurityUtils.getSubject().getSession().getAttribute(SysConst.SESSION_LOGIN_INFO);
+        Subject subject = SecurityUtils.getSubject();
+        if (!subject.isAuthenticated()){
+            throw new BaseException(ResultCode.UNAUTHENTICATED);
+        }
+        return (LoginInfo) subject.getSession().getAttribute(SysConst.SESSION_LOGIN_INFO);
     }
 
     protected CommonResult commonResult() {

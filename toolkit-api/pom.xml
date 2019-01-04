@@ -60,6 +60,7 @@
     </dependencies>
 
     <build>
+        <!--部署时都不打包配置文件-->
         <!--<resources>-->
             <!--<resource>-->
                 <!--<directory>src/main/resources</directory>-->
