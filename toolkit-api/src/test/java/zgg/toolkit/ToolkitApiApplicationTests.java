@@ -22,6 +22,7 @@ public class ToolkitApiApplicationTests {
     private MqProducer mqService;
 
 
+
     @Test
     public void test1() {
         mqService.sendEmailToMq(Arrays.asList(111L, 222L, 333L, 444L));
