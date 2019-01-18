@@ -1,6 +1,9 @@
 package zgg.toolkit.common.rabbitmq;
 
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +15,17 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class RabbitMqConfig {
+    @Autowired
+    private ConnectionFactory connectionFactory;
+
+    // 开启事务回滚时，消息不发送
+    @Bean
+    public AmqpTemplate rabbitTemplate(){
+        RabbitTemplate template = new RabbitTemplate(connectionFactory);
+        template.setChannelTransacted(true);
+        return template;
+    }
+
     @Bean
     public Queue emailQueue() {
         return new Queue(MqConst.EMAIL_QUEUE);
