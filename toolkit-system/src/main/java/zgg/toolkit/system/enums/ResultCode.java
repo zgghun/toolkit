@@ -2,7 +2,8 @@ package zgg.toolkit.system.enums;
 
 /**
  * Created by zgg on 2018/10/19
- * 返回状态码
+ * 返回状态码<br>
+ * 只有 1 为正常
  */
 public enum ResultCode {
 
@@ -10,9 +11,9 @@ public enum ResultCode {
     OK(1, "OK"),
 
     ERROR(100, "系统异常"),
-    PATH_ERROR(101, "请求地址不存在"),
-    BIND_ERROR(103, "参数绑定错误"),
-    SQL_ERROR(104, "数据操作错误"),
+    URI_ERROR(101, "请求地址不存在"),
+    PARAM_BIND_ERROR(103, "参数绑定错误"),
+    DATABASE_ERROR(104, "数据库错误"),
 
     BASE_ERROR(200, "其他异常"),
     UNAUTHENTICATED(201, "未登录"),

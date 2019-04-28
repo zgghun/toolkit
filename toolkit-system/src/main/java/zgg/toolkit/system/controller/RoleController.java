@@ -27,13 +27,13 @@ public class RoleController extends BaseController {
 
     @GetMapping("/find")
     public Object findRole(RoleQuery query, PageParam pageParam){
-        PageList<Role> list = roleService.findRole(query, pageParam);
+        PageList<Role> list = roleService.listRole(query, pageParam);
         return commonResult(list);
     }
 
     @PostMapping("/save")
     public Object saveRole(@Valid RoleSaveDto dto){
-        Role role = roleService.saveRole(dto);
+        Role role = roleService.saveOrUpdateRole(dto);
         return commonResult(role);
     }
 

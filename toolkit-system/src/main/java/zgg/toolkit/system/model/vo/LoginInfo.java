@@ -1,7 +1,7 @@
 package zgg.toolkit.system.model.vo;
 
 import lombok.Data;
-import zgg.toolkit.system.model.common.MapVO;
+import zgg.toolkit.system.model.common.MapVo;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +19,7 @@ public class LoginInfo implements Serializable {
     private String avatar;
 
     // 可访问模块
-    private List<MapVO> modules;
+    private List<MapVo> modules;
     // 用户拥有的权限
     private List<String> permissions;
 }

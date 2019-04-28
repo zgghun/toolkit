@@ -11,8 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import zgg.toolkit.common.utils.HelpUtils;
-import zgg.toolkit.common.utils.IdWorker;
+import zgg.toolkit.common.util.HelpUtils;
+import zgg.toolkit.common.util.IdWorker;
+import zgg.toolkit.common.util.StringUtils;
 import zgg.toolkit.system.base.BaseException;
 import zgg.toolkit.system.base.BaseService;
 import zgg.toolkit.system.constant.SysConst;
@@ -22,7 +23,7 @@ import zgg.toolkit.system.mapper.UserExtendMapper;
 import zgg.toolkit.system.mapper.autogen.UserDetailMapper;
 import zgg.toolkit.system.mapper.autogen.UserMapper;
 import zgg.toolkit.system.mapper.autogen.UserRoleMapper;
-import zgg.toolkit.system.model.common.MapVO;
+import zgg.toolkit.system.model.common.MapVo;
 import zgg.toolkit.system.model.common.PageList;
 import zgg.toolkit.system.model.common.PageParam;
 import zgg.toolkit.system.model.dto.*;
@@ -179,7 +180,7 @@ public class UserService extends BaseService {
     public User getUser(String username, String password) {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
-        if (HelpUtils.isAllNumber(username)) {
+        if (StringUtils.isAllNumber(username)) {
             // 全数字，电话登陆
             criteria.andTelEqualTo(username);
         } else if (username.contains("@")) {
@@ -257,7 +258,7 @@ public class UserService extends BaseService {
         List<Permission> permissions = userExtendMapper.findLoginUserPer(user.getId());
         List<Long> moduleIds = permissions.stream().map(Permission::getModuleId).distinct().collect(Collectors.toList());
         List<String> perList = permissions.stream().map(Permission::getPerCode).collect(Collectors.toList());
-        List<MapVO> modules = new ArrayList<>();
+        List<MapVo> modules = new ArrayList<>();
         if (permissions.size() > 0) {
             modules.addAll(userExtendMapper.findUserModule(moduleIds));
         }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import zgg.toolkit.apitool.model.vo.GroupVo;
 import zgg.toolkit.apitool.model.vo.MethodVo;
 import zgg.toolkit.apitool.model.vo.ParameterVo;
-import zgg.toolkit.common.utils.HelpUtils;
+import zgg.toolkit.common.util.StringUtils;
 import zgg.toolkit.system.base.BaseException;
 
 import java.lang.annotation.Annotation;
@@ -58,7 +58,7 @@ public class ApiTestService {
             // class上的@RequestMapping name值一样的分为一组,若没有就用class名
             String rmName = requestMapping.name();
             String className = entityClass.getSimpleName();
-            String groupName = HelpUtils.isBlank(rmName) ? className : rmName;
+            String groupName = StringUtils.hasText(rmName) ? rmName : className;
 
             List<MethodVo> mvos = this.findMethodVo(entityClass, baseUrl);
             if (!groups.containsKey(groupName)) {
@@ -83,14 +83,14 @@ public class ApiTestService {
                 continue;
             }
             // api名称
-            String apiName = HelpUtils.isBlank(requestMapping.name()) ? method.getName() : requestMapping.name();
+            String apiName = StringUtils.hasText(requestMapping.name()) ? requestMapping.name() : method.getName();
             // api地址
             String fullUrl = baseUrl;
             String partUrl = requestMapping.value()[0];
             if (partUrl.startsWith("/")) {
                 fullUrl += partUrl;
             }
-            if (HelpUtils.isNotBlank(partUrl) && !partUrl.startsWith("/")) {
+            if (StringUtils.hasText(partUrl) && !partUrl.startsWith("/")) {
                 fullUrl = fullUrl + "/" + partUrl;
             }
             // 请求方法
@@ -173,7 +173,7 @@ public class ApiTestService {
                 String.class,
                 Date.class,
                 LocalDateTime.class, LocalDate.class, LocalTime.class
-                );
+        );
         HashSet<Object> set = new HashSet<>(list);
         return set.contains(clazz);
     }

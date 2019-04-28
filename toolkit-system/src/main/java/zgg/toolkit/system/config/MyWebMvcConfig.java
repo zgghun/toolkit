@@ -5,7 +5,7 @@ import org.springframework.expression.ParseException;
 import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import zgg.toolkit.common.utils.DateUtils;
+import zgg.toolkit.common.util.DateUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

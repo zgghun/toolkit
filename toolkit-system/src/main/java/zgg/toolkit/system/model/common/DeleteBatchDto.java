@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by zgg on 2018/10/19
+ * <p>通用批量删除 Dto</p>
  */
 @Data
 public class DeleteBatchDto {

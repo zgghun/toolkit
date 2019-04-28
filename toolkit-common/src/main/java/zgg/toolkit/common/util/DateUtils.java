@@ -1,4 +1,4 @@
-package zgg.toolkit.common.utils;
+package zgg.toolkit.common.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

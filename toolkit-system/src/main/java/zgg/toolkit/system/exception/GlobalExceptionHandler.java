@@ -13,7 +13,7 @@ import zgg.toolkit.system.base.BaseException;
 import zgg.toolkit.system.enums.RequestType;
 import zgg.toolkit.system.enums.ResultCode;
 import zgg.toolkit.system.model.common.CommonResult;
-import zgg.toolkit.common.utils.JsonUtils;
+import zgg.toolkit.common.util.JsonUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -36,12 +36,12 @@ public class GlobalExceptionHandler {
 
     // 参数绑定错误
     @ExceptionHandler(BindException.class)
-    public void bindingExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BindException ex) {
+    public void bindExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BindException ex) {
         logger.warn(ex.toString());
         Map<String, String> map = new HashMap<>(16);
         ex.getFieldErrors()
                 .forEach(it -> map.put(it.getField(), it.getDefaultMessage()));
-        CommonResult result = new CommonResult(ResultCode.BIND_ERROR, map);
+        CommonResult result = new CommonResult(ResultCode.PARAM_BIND_ERROR, map);
         errorDeal(req, rep, result);
     }
 
@@ -70,7 +70,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DataAccessException.class)
     public void sqlExceptionHandler(HttpServletRequest req, HttpServletResponse rep, DataAccessException ex){
         logger.error(ex.getMessage());
-        CommonResult result = new CommonResult(ResultCode.SQL_ERROR, ex.getCause().getMessage());
+        CommonResult result = new CommonResult(ResultCode.DATABASE_ERROR, ex.getCause().getMessage());
         errorDeal(req, rep, result);
     }
 

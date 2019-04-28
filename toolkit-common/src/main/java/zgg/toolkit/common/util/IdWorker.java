@@ -1,4 +1,4 @@
-package zgg.toolkit.common.utils;
+package zgg.toolkit.common.util;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;

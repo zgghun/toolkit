@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Created by zgg on 2018/10/19
+ * <p>通用单个删除 Dto</p>
  */
 @Data
 public class DeleteDto {

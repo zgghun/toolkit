@@ -1,4 +1,4 @@
-package zgg.toolkit.common.utils;
+package zgg.toolkit.common.util;
 
 import com.google.gson.*;
 

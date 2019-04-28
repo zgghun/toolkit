@@ -5,9 +5,13 @@ import zgg.toolkit.system.enums.ResultCode;
 
 /**
  * Created by zgg on 2018/08/27
+ * <p>返回给前台的数据模型，所有请求都是返回这个</p>
  */
 @Data
 public class CommonResult {
+    /**
+     * 参考 {@link ResultCode}
+     */
     private Integer code;
     private String msg;
     private Object data;

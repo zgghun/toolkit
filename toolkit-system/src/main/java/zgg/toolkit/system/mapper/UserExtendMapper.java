@@ -1,7 +1,7 @@
 package zgg.toolkit.system.mapper;
 
 import org.apache.ibatis.annotations.Param;
-import zgg.toolkit.system.model.common.MapVO;
+import zgg.toolkit.system.model.common.MapVo;
 import zgg.toolkit.system.model.dto.UserQuery;
 import zgg.toolkit.system.model.entity.Permission;
 import zgg.toolkit.system.model.entity.User;
@@ -17,5 +17,5 @@ public interface UserExtendMapper {
 
     List<Permission> findLoginUserPer(Long userId);
 
-    List<MapVO> findUserModule(@Param("moduleIds") List<Long> moduleIds);
+    List<MapVo> findUserModule(@Param("moduleIds") List<Long> moduleIds);
 }

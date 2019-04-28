@@ -6,8 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import zgg.toolkit.common.utils.HelpUtils;
-import zgg.toolkit.common.utils.IdWorker;
+import zgg.toolkit.common.util.HelpUtils;
+import zgg.toolkit.common.util.IdWorker;
+import zgg.toolkit.common.util.StringUtils;
 import zgg.toolkit.system.base.BaseService;
 import zgg.toolkit.system.enums.ResultCode;
 import zgg.toolkit.system.enums.StatusEnum;
@@ -48,7 +49,7 @@ public class RoleService extends BaseService {
      * @param dto
      * @return
      */
-    public Role saveRole(RoleSaveDto dto) {
+    public Role saveOrUpdateRole(RoleSaveDto dto) {
         if (dto.getId() == null) {
             Role role = new Role();
             HelpUtils.copyProperties(dto, role);
@@ -98,11 +99,11 @@ public class RoleService extends BaseService {
      * @param pageParam
      * @return
      */
-    public PageList<Role> findRole(RoleQuery query, PageParam pageParam){
+    public PageList<Role> listRole(RoleQuery query, PageParam pageParam){
         RoleExample example = new RoleExample();
         example.setOrderByClause("sort ASC");
         RoleExample.Criteria criteria = example.or();
-        if (HelpUtils.isNotBlank(query.getKeyword())){
+        if (StringUtils.hasText(query.getKeyword())){
             criteria.andNameLike("%" + query.getKeyword() + "%");
         }
         if (query.getStatus() != null) {
@@ -112,10 +113,6 @@ public class RoleService extends BaseService {
         }
         PageHelper.startPage(pageParam);
         List<Role> roles = roleMapper.selectByExample(example);
-        logger.debug("111111111111111111");
-        logger.info("2222222222222222");
-        logger.warn("3333333333333333");
-        logger.error("44444444444444444");
         return new PageList<>(roles);
     }
 

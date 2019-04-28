@@ -16,8 +16,8 @@ public class RoleSaveDto {
     private String name;
     @NotNull
     private StatusEnum status;
+
     @NotNull
     private Integer sort;
-
     private String note;
 }

@@ -1,4 +1,4 @@
-package zgg.toolkit.common.utils;
+package zgg.toolkit.common.util;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

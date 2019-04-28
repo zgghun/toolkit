@@ -4,9 +4,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.DigestUtils;
-import zgg.toolkit.common.utils.DateUtils;
-import zgg.toolkit.common.utils.HelpUtils;
-import zgg.toolkit.common.utils.JsonUtils;
+import zgg.toolkit.common.util.DateUtils;
+import zgg.toolkit.common.util.HelpUtils;
+import zgg.toolkit.common.util.JsonUtils;
 import zgg.toolkit.system.constant.PerConst;
 import zgg.toolkit.system.model.vo.PermissionVo;
 

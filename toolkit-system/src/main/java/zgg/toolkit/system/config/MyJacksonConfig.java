@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilde
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import zgg.toolkit.common.utils.DateUtils;
+import zgg.toolkit.common.util.DateUtils;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
