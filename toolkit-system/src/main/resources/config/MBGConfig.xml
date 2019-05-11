@@ -7,7 +7,7 @@
     <!--Mybatis Generator 配置参考 https://blog.csdn.net/isea533/article/details/42102297-->
     <!--Mybatis Generator对于生成的entity和*Mapper.java采取直接覆盖操作，所有不要在自动生成的文件里手动添加方法，-->
     <!--而生成的xml只会覆盖它自动生成的内容，用户添加的会保留-->
-    <properties resource="application.properties"/>
+    <properties resource="application.yml"/>
 
     <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
         <property name="beginningDelimiter" value="`"/>
