@@ -21,28 +21,28 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
-//    @RequiresPermissions(PerConst.user_view)
+    //    @RequiresPermissions(PerConst.user_view)
     @GetMapping("/find")
     public Object findUser(UserQuery query, PageParam pageParam) {
         PageList<User> users = userService.findUser(query, pageParam);
         return commonResult(users);
     }
 
-//    @RequiresPermissions(PerConst.user_save)
+    //    @RequiresPermissions(PerConst.user_save)
     @PostMapping("/save")
     public Object saveUser(@Valid UserSaveDto dto) {
         User user = userService.saveUser(dto);
         return commonResult(user);
     }
 
-//    @RequiresPermissions(PerConst.user_enable)
+    //    @RequiresPermissions(PerConst.user_enable)
     @PostMapping("/enable")
     public Object enableUser(@Valid EnableDto dto) {
         userService.enableUser(dto);
         return commonResult();
     }
 
-//    @RequiresPermissions(PerConst.user_set_role)
+    //    @RequiresPermissions(PerConst.user_set_role)
     @PostMapping("/setRole")
     public Object setUserRole(@Valid UserRoleSetDto dto) {
         userService.setUserRole(dto);

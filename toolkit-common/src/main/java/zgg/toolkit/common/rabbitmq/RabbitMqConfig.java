@@ -20,7 +20,7 @@ public class RabbitMqConfig {
 
     // 开启事务回滚时，消息不发送
     @Bean
-    public AmqpTemplate rabbitTemplate(){
+    public AmqpTemplate rabbitTemplate() {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
         template.setChannelTransacted(true);
         return template;

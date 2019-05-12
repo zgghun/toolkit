@@ -14,9 +14,9 @@ import zgg.toolkit.system.model.vo.LoginInfo;
 public class BaseController {
 
     // 从 Shiro session 获取登录用户信息
-    protected LoginInfo getLoginInfo(){
+    protected LoginInfo getLoginInfo() {
         Subject subject = SecurityUtils.getSubject();
-        if (!subject.isAuthenticated()){
+        if (!subject.isAuthenticated()) {
             throw new BaseException(ResultCode.UNAUTHENTICATED);
         }
         return (LoginInfo) subject.getSession().getAttribute(SysConst.SESSION_LOGIN_INFO);

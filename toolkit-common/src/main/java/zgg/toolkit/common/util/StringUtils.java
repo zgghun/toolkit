@@ -8,6 +8,7 @@ public class StringUtils {
 
     /**
      * 判断字符串是否全是数字
+     *
      * @param str
      * @return
      */

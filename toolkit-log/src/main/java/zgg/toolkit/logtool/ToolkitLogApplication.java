@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ToolkitLogApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ToolkitLogApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ToolkitLogApplication.class, args);
+    }
 }

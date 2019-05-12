@@ -1,8 +1,9 @@
 package zgg.toolkit.system.model.entity;
 
+import zgg.toolkit.system.enums.StatusEnum;
+
 import java.util.ArrayList;
 import java.util.List;
-import zgg.toolkit.system.enums.StatusEnum;
 
 public class RoleExample {
     /**

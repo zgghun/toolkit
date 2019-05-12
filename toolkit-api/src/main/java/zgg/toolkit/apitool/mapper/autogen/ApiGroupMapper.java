@@ -1,9 +1,10 @@
 package zgg.toolkit.apitool.mapper.autogen;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import zgg.toolkit.apitool.model.entity.ApiGroup;
 import zgg.toolkit.apitool.model.entity.ApiGroupExample;
+
+import java.util.List;
 
 public interface ApiGroupMapper {
     /**

@@ -26,10 +26,17 @@ import java.time.format.DateTimeFormatter;
  * <p>
  * 对 jackson 的自定义配置
  * 参考 https://github.com/FasterXML/jackson-docs/wiki/JacksonHowToCustomSerializers
- **/
+ *
+ * @author nerve
+ */
 @Configuration
 public class MyJacksonConfig {
 
+    /**
+     * 在保留默认配置的情况下添加额外自定义配置(如果默认配置中已经配置了,则会覆盖默认配置)
+     *
+     * @return
+     */
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer customizeJackson2ObjectMapper() {
         return (Jackson2ObjectMapperBuilder builder) -> {

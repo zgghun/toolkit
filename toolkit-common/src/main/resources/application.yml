@@ -1,2 +1,7 @@
 
-myconfig: ${JASYPT_ENCRYPTOR_PASSWORD:123}
+spring:
+  rabbitmq:
+    host: ENC(L9FqkAsdZH4r/TdQ1XlPb6yTi4i9XLHD)
+    port: 5672
+    username: ENC(nlsqMQVkglEe2eO31dGGeQ==)
+    password: ENC(0G4dGHX9PBTSq9ge4q0h1/SWY7CchlRAVYKHXoDFjZ4=)

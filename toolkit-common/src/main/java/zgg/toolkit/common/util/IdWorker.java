@@ -53,7 +53,7 @@ public class IdWorker {
 
     private static IdWorker INSTANCE = new IdWorker(0, 0);
 
-    public static long nextId(){
+    public static long nextId() {
         return INSTANCE.generateNextId();
     }
 
@@ -128,14 +128,14 @@ public class IdWorker {
         mpid.append(datacenterId);
         String name = ManagementFactory.getRuntimeMXBean().getName();
         if (!name.isEmpty()) {
-         /*
-          * GET jvmPid
-          */
+            /*
+             * GET jvmPid
+             */
             mpid.append(name.split("@")[0]);
         }
-      /*
-       * MAC + PID 的 hashcode 获取16个低位
-       */
+        /*
+         * MAC + PID 的 hashcode 获取16个低位
+         */
         return (mpid.toString().hashCode() & 0xffff) % (maxWorkerId + 1);
     }
 

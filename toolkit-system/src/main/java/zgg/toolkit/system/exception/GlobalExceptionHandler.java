@@ -9,11 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import zgg.toolkit.common.util.JsonUtils;
 import zgg.toolkit.system.base.BaseException;
 import zgg.toolkit.system.enums.RequestType;
 import zgg.toolkit.system.enums.ResultCode;
 import zgg.toolkit.system.model.common.CommonResult;
-import zgg.toolkit.common.util.JsonUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +45,6 @@ public class GlobalExceptionHandler {
         errorDeal(req, rep, result);
     }
 
-    // 登陆错误
     @ExceptionHandler(AuthenticationException.class)
     public Object accountExceptionHandler(HttpServletRequest req, HttpServletResponse rep, AuthenticationException ex) {
         logger.warn(ex.toString());
@@ -53,7 +52,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    public Object permissionExceptionHandler(UnauthorizedException ex){
+    public Object permissionExceptionHandler(UnauthorizedException ex) {
         logger.warn(ex.toString());
         return new CommonResult(ResultCode.UNAUTHORIZED, ex.toString());
     }
@@ -68,7 +67,7 @@ public class GlobalExceptionHandler {
 
     // 数据库错误
     @ExceptionHandler(DataAccessException.class)
-    public void sqlExceptionHandler(HttpServletRequest req, HttpServletResponse rep, DataAccessException ex){
+    public void sqlExceptionHandler(HttpServletRequest req, HttpServletResponse rep, DataAccessException ex) {
         logger.error(ex.getMessage());
         CommonResult result = new CommonResult(ResultCode.DATABASE_ERROR, ex.getCause().getMessage());
         errorDeal(req, rep, result);

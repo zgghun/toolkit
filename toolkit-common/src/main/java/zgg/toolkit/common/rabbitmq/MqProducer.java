@@ -17,14 +17,14 @@ public class MqProducer {
     /**
      * 发送邮件id 到rabbit
      */
-    public void sendEmailToMq(List<Long> emailIds){
+    public void sendEmailToMq(List<Long> emailIds) {
         emailIds.forEach(id -> rabbitTemplate.convertAndSend(MqConst.DIRECT_EXCHANGE, MqConst.EMAIL_QUEUE, id));
     }
 
     /**
      * 发送手机验证码id 到rabbit
      */
-    public void sendVerifyCodeToMq(List<Long> verifyCodeIds){
+    public void sendVerifyCodeToMq(List<Long> verifyCodeIds) {
         verifyCodeIds.forEach(id -> rabbitTemplate.convertAndSend(MqConst.DIRECT_EXCHANGE, MqConst.VERIFY_CODE_QUEUE, id));
     }
 

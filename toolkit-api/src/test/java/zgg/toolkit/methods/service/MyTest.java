@@ -20,6 +20,7 @@ public class MyTest {
         System.out.println("publicKey:" + publicKey);
         System.out.println("password:" + encryptRassword);
     }
+
     @Test
     public void test1() {
 

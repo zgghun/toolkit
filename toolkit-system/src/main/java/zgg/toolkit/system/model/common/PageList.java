@@ -9,7 +9,7 @@ import java.util.List;
  * Created by zgg on 2018/08/29
  */
 @Data
-public class PageList<T>{
+public class PageList<T> {
     private List<T> list;
     private Integer pageNum;
     private Integer pageSize;

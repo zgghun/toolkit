@@ -21,7 +21,7 @@ public class ThreadPoolConfig {
     private static final String THREAD_NAME_PREFIX = "common-thred-";
 
     @Bean("commonTaskExecutor")
-    public Executor commonTaskExecutor(){
+    public Executor commonTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(CORE_POOL_SIZE);
         executor.setMaxPoolSize(MAX_POOL_SIZE);

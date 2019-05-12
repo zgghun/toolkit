@@ -38,6 +38,7 @@ public class ApiService {
 
     /**
      * 项目下所有api
+     *
      * @param projectId
      * @return
      */
@@ -119,6 +120,7 @@ public class ApiService {
 
     /**
      * 添加历史纪录，用projectId和address的MD5作为唯一判断，header和body的mod5判断是否有修改
+     *
      * @param dto
      * @return
      */
@@ -129,7 +131,7 @@ public class ApiService {
         example.or().andApiMd5EqualTo(apiMd5).andPayloadMd5EqualTo(payloadMd5);
         List<ApiHistory> list = historyMapper.selectByExample(example);
         // 新纪录
-        if (list.size() == 0){
+        if (list.size() == 0) {
             ApiHistory history = new ApiHistory();
             history.setId(IdWorker.nextId());
             history.setApiMd5(apiMd5);

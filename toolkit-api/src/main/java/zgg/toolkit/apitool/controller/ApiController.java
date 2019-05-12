@@ -22,48 +22,48 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/apiTool")
-public class ApiController extends BaseController{
+public class ApiController extends BaseController {
     @Autowired
     private ApiService apiService;
 
     // 所有api接口
     @GetMapping("/allApi")
-    public Object findAllApi(@RequestParam Long projectId){
+    public Object findAllApi(@RequestParam Long projectId) {
         List<ApiVo> allApi = apiService.findAllApi(projectId);
         return commonResult(allApi);
     }
 
     // api接口历史，由projectId和address组合的md5区分
     @GetMapping("/apiHistory")
-    public Object findApiHistory(@RequestParam Long projectId, @RequestParam String address){
+    public Object findApiHistory(@RequestParam Long projectId, @RequestParam String address) {
         List<ApiHistory> apiHistory = apiService.findApiHistory(projectId, address);
         return commonResult(apiHistory);
     }
 
     // 添加/修改工程
     @PostMapping("/addProject")
-    public Object addProject(@Valid ProjectSaveDto dto){
+    public Object addProject(@Valid ProjectSaveDto dto) {
         ApiProject apiProject = apiService.saveProject(dto);
         return commonResult(apiProject);
     }
 
     // 添加/修改组
     @PostMapping("/addGroup")
-    public Object addGroup(@Valid GroupSaveDto dto){
+    public Object addGroup(@Valid GroupSaveDto dto) {
         ApiGroup group = apiService.saveGroup(dto);
         return commonResult(group);
     }
 
     // 添加/修改api
     @PostMapping("/addApi")
-    public Object saveApi(@Valid DetailSaveDto dto){
+    public Object saveApi(@Valid DetailSaveDto dto) {
         ApiDetail detail = apiService.saveApi(dto);
         return commonResult(detail);
     }
 
     // 添加api历史
     @PostMapping("/addHistory")
-    public Object addApiHistory(@Valid HistoryAddDto dto){
+    public Object addApiHistory(@Valid HistoryAddDto dto) {
         ApiHistory history = apiService.addApiHistory(dto);
         return commonResult(history);
     }

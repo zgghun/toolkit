@@ -4,7 +4,6 @@ import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorCon
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
@@ -18,8 +17,8 @@ import java.util.HashMap;
  * Created by zgg on 2018/11/10
  * 覆盖spring自带的BasicErrorController，自定义404，500等错误
  */
-@RestController
-@RequestMapping("/error")
+//@RestController
+//@RequestMapping("/error")
 public class MyErrorController extends AbstractErrorController {
 
 

@@ -9,7 +9,10 @@ import zgg.toolkit.system.base.BaseController;
 import zgg.toolkit.system.model.common.DeleteDto;
 import zgg.toolkit.system.model.common.PageList;
 import zgg.toolkit.system.model.common.PageParam;
-import zgg.toolkit.system.model.dto.*;
+import zgg.toolkit.system.model.dto.EnableDto;
+import zgg.toolkit.system.model.dto.RolePerSetDto;
+import zgg.toolkit.system.model.dto.RoleQuery;
+import zgg.toolkit.system.model.dto.RoleSaveDto;
 import zgg.toolkit.system.model.entity.Role;
 import zgg.toolkit.system.service.RoleService;
 
@@ -26,31 +29,31 @@ public class RoleController extends BaseController {
     private RoleService roleService;
 
     @GetMapping("/find")
-    public Object findRole(RoleQuery query, PageParam pageParam){
+    public Object findRole(RoleQuery query, PageParam pageParam) {
         PageList<Role> list = roleService.listRole(query, pageParam);
         return commonResult(list);
     }
 
     @PostMapping("/save")
-    public Object saveRole(@Valid RoleSaveDto dto){
+    public Object saveRole(@Valid RoleSaveDto dto) {
         Role role = roleService.saveOrUpdateRole(dto);
         return commonResult(role);
     }
 
     @PostMapping("/enable")
-    public Object enableRole(@Valid EnableDto dto){
+    public Object enableRole(@Valid EnableDto dto) {
         roleService.enableRole(dto);
         return commonResult();
     }
 
     @PostMapping("/delete")
-    public Object deleteRole(@Valid DeleteDto dto){
+    public Object deleteRole(@Valid DeleteDto dto) {
         roleService.deleteRole(dto.getId());
         return commonResult();
     }
 
     @PostMapping("/setPermission")
-    public Object setRolePermission(@Valid RolePerSetDto dto){
+    public Object setRolePermission(@Valid RolePerSetDto dto) {
         roleService.setRolePermission(dto);
         return commonResult();
     }

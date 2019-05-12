@@ -9,30 +9,32 @@ logging:
       toolkit:
         system:
           mapper: trace
-    com:
-      zaxxer:
-      hikari: debug
 
 spring:
   application:
     name: toolkit-system
   jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+#    date-format: yyyy-MM-dd HH:mm:ss
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: ENC(Xhye9bypq1TuaCrsRH1AfW40fG54Ld3jOvCDdfhyPGCmul3dz/vqvxyth/JBDGG1vnENH2M5T8ohwCDrUlpAMeHvOANOaGF33+8C4Qc4ZhC8kIWrSMs38fONpfexxAjMiC7DkHJDyho=)
-    username: ENC(Z0/JMfHi0wZIddTxjHR9ZA==)
-    password: ENC(NCTQD5AjEwiJImFXRt8KBg4IHJjffI0nz2uBlHNnlRU=)
+    url: ENC(RWSJ2ARZqRWloeBPLriTeBgzt18frPzvIlmvKnIVQEC7BPAjQExVAV+a+/o8H5vO2+MYT32ckpZ4CvXc1Q1KCw==)
+    username: ENC(q+53R50ivBCY12BjCd+q2Q==)
+    password: ENC(oXU7/1OOrGzV8kgLblq331xKxsQpkJmud+XGJcMJeds=)
     druid:
       max-active: 5
       min-idle: 1
       max-wait: 10000
+  rabbitmq:
+    host: ENC(M7yLfyocKDQ7FISHt5JX3hJdNVzZWAdD)
+    port: 5672
+    username: ENC(OUyI70OSdHlT1bN9+MQYMA==)
+    password: ENC(X7CEWdxIP/EOvNSZLqISMCsmuG4zE/TWLE/GcYmGK9o=)
 
 # 解密密匙
 jasypt:
-    encryptor:
-        password: ${JASYPT_ENCRYPTOR_PASSWORD}
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml,classpath:mapper/autogen/*.xml

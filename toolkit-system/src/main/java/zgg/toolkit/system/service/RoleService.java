@@ -9,10 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import zgg.toolkit.common.util.HelpUtils;
 import zgg.toolkit.common.util.IdWorker;
 import zgg.toolkit.common.util.StringUtils;
+import zgg.toolkit.system.base.BaseException;
 import zgg.toolkit.system.base.BaseService;
 import zgg.toolkit.system.enums.ResultCode;
 import zgg.toolkit.system.enums.StatusEnum;
-import zgg.toolkit.system.base.BaseException;
 import zgg.toolkit.system.mapper.autogen.RoleMapper;
 import zgg.toolkit.system.mapper.autogen.RolePermissionMapper;
 import zgg.toolkit.system.mapper.autogen.UserRoleMapper;
@@ -41,8 +41,6 @@ public class RoleService extends BaseService {
     private UserRoleMapper userRoleMapper;
 
 
-
-
     /**
      * 添加/更新角色
      *
@@ -69,9 +67,10 @@ public class RoleService extends BaseService {
 
     /**
      * 启用/停用角色
+     *
      * @param dto
      */
-    public void enableRole(EnableDto dto){
+    public void enableRole(EnableDto dto) {
         Role role = new Role();
         role.setId(dto.getId());
         role.setStatus(dto.getStatus());
@@ -80,10 +79,11 @@ public class RoleService extends BaseService {
 
     /**
      * 删除角色(会删除所有用户与角色的关联，角色与权限的关联)
+     *
      * @param id
      */
     @Transactional(rollbackFor = Exception.class)
-    public void deleteRole(Long id){
+    public void deleteRole(Long id) {
         roleMapper.deleteByPrimaryKey(id);
         UserRoleExample example = new UserRoleExample();
         example.or().andRoleIdEqualTo(id);
@@ -95,20 +95,21 @@ public class RoleService extends BaseService {
 
     /**
      * 查询角色
+     *
      * @param query
      * @param pageParam
      * @return
      */
-    public PageList<Role> listRole(RoleQuery query, PageParam pageParam){
+    public PageList<Role> listRole(RoleQuery query, PageParam pageParam) {
         RoleExample example = new RoleExample();
         example.setOrderByClause("sort ASC");
         RoleExample.Criteria criteria = example.or();
-        if (StringUtils.hasText(query.getKeyword())){
+        if (StringUtils.hasText(query.getKeyword())) {
             criteria.andNameLike("%" + query.getKeyword() + "%");
         }
         if (query.getStatus() != null) {
             criteria.andStatusEqualTo(query.getStatus());
-        }else {
+        } else {
             criteria.andStatusNotEqualTo(StatusEnum.DELETE);
         }
         PageHelper.startPage(pageParam);
@@ -118,6 +119,7 @@ public class RoleService extends BaseService {
 
     /**
      * 角色权限设置
+     *
      * @param dto
      */
     public void setRolePermission(RolePerSetDto dto) {

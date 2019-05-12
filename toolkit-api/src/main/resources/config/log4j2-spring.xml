@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration  status="WARN" monitorInterval="5">
+<Configuration status="WARN" monitorInterval="5">
     <!--参考文档http://logging.apache.org/log4j/2.x/manual/index.html-->
     <Properties>
         <Property name="PID">????</Property>
-        <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
+        <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta}
+            %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx
+        </Property>
     </Properties>
 
     <Appenders>
@@ -12,10 +14,10 @@
         </Console>
 
         <!--<RollingFile name="RollingFile" fileName="d:/logs/api.log" filePattern="d:/logs/api-%i.log">-->
-            <!--<PatternLayout pattern="${LOG_PATTERN}"/>-->
-            <!--<Policies>-->
-                <!--<SizeBasedTriggeringPolicy size="5 MB"/>-->
-            <!--</Policies>-->
+        <!--<PatternLayout pattern="${LOG_PATTERN}"/>-->
+        <!--<Policies>-->
+        <!--<SizeBasedTriggeringPolicy size="5 MB"/>-->
+        <!--</Policies>-->
         <!--</RollingFile>-->
     </Appenders>
 

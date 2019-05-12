@@ -50,7 +50,7 @@
 
         <!-- ************* 数据表数据表数据表 *************-->
         <!--<table tableName="sys_module" domainObjectName="Module">-->
-            <!--<columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>-->
+        <!--<columnOverride column="status" javaType="zgg.toolkit.core.enums.StatusEnum"/>-->
         <!--</table>-->
         <!--<table tableName="sys_permission" domainObjectName="Permission"/>-->
         <!--<table tableName="sys_role" domainObjectName="Role">-->

@@ -17,84 +17,90 @@ public class DateUtils {
 
     /**
      * {@link LocalDateTime} 解析
+     *
      * @param dateTime
-     * @param pattern 默认 {@value YMDHMS}
+     * @param pattern  默认 {@value YMDHMS}
      * @return
      */
-    public static LocalDateTime parse(String dateTime, String... pattern){
-        if (pattern.length == 0){
+    public static LocalDateTime parse(String dateTime, String... pattern) {
+        if (pattern.length == 0) {
             return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(YMDHMS));
-        }else {
+        } else {
             return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(pattern[0]));
         }
     }
 
     /**
      * {@link LocalDate} 解析
+     *
      * @param localDate
-     * @param pattern 默认 {@value YMD}
+     * @param pattern   默认 {@value YMD}
      * @return
      */
-    public static LocalDate parseDate(String localDate, String... pattern){
-        if (pattern.length == 0){
+    public static LocalDate parseDate(String localDate, String... pattern) {
+        if (pattern.length == 0) {
             return LocalDate.parse(localDate, DateTimeFormatter.ofPattern(YMD));
-        }else {
+        } else {
             return LocalDate.parse(localDate, DateTimeFormatter.ofPattern(pattern[0]));
         }
     }
 
     /**
      * {@link LocalTime} 解析
+     *
      * @param localTime
-     * @param pattern 默认 {@value HMS}
+     * @param pattern   默认 {@value HMS}
      * @return
      */
-    public static LocalTime parseTime(String localTime, String... pattern){
-        if (pattern.length == 0){
+    public static LocalTime parseTime(String localTime, String... pattern) {
+        if (pattern.length == 0) {
             return LocalTime.parse(localTime, DateTimeFormatter.ofPattern(HMS));
-        }else {
+        } else {
             return LocalTime.parse(localTime, DateTimeFormatter.ofPattern(pattern[0]));
         }
     }
 
     /**
      * {@link LocalDateTime} 格式化
+     *
      * @param dateTime
-     * @param pattern 默认 {@value YMDHMS}
+     * @param pattern  默认 {@value YMDHMS}
      * @return
      */
-    public static String format(LocalDateTime dateTime, String... pattern){
-        if (pattern.length == 0){
+    public static String format(LocalDateTime dateTime, String... pattern) {
+        if (pattern.length == 0) {
             return dateTime.format(DateTimeFormatter.ofPattern(YMDHMS));
-        }else {
+        } else {
             return dateTime.format(DateTimeFormatter.ofPattern(pattern[0]));
         }
     }
 
     /**
      * {@link LocalDate} 格式化
+     *
      * @param localDate
-     * @param pattern 默认 {@value YMD}
+     * @param pattern   默认 {@value YMD}
      * @return
      */
-    public static String formatDate(LocalDate localDate, String... pattern){
-        if (pattern.length == 0){
+    public static String formatDate(LocalDate localDate, String... pattern) {
+        if (pattern.length == 0) {
             return localDate.format(DateTimeFormatter.ofPattern(YMD));
-        }else {
+        } else {
             return localDate.format(DateTimeFormatter.ofPattern(pattern[0]));
         }
     }
 
     /**
      * {@link LocalTime} 格式化
+     *
      * @param localTime
-     * @param pattern 默认 {@value HMS}
+     * @param pattern   默认 {@value HMS}
      * @return
      */
-    public static String formatTime(LocalTime localTime, String... pattern){
-        if (pattern.length == 0){
+    public static String formatTime(LocalTime localTime, String... pattern) {
+        if (pattern.length == 0) {
             return localTime.format(DateTimeFormatter.ofPattern(HMS));
-        }else {
+        } else {
             return localTime.format(DateTimeFormatter.ofPattern(pattern[0]));
         }
     }

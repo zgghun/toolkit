@@ -1,9 +1,10 @@
 package zgg.toolkit.system.mapper.autogen;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import zgg.toolkit.system.model.entity.UserRole;
 import zgg.toolkit.system.model.entity.UserRoleExample;
+
+import java.util.List;
 
 public interface UserRoleMapper {
     /**

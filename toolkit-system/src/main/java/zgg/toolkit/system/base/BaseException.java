@@ -14,11 +14,11 @@ public class BaseException extends RuntimeException {
         super();
     }
 
-    public BaseException(String msg){
+    public BaseException(String msg) {
         super(msg);
     }
 
-    public BaseException(ResultCode resultCode){
+    public BaseException(ResultCode resultCode) {
         super(resultCode.getNote());
         this.resultCode = resultCode;
     }

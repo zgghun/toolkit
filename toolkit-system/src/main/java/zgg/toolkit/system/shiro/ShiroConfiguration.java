@@ -15,7 +15,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by zgg on 2018/10/31
  * shiro的springboot集成 http://shiro.apache.org/spring-boot.html，
- *                      https://github.com/apache/shiro/tree/master/samples/spring-boot-web
+ * https://github.com/apache/shiro/tree/master/samples/spring-boot-web
  * 利用redis管理缓存参考shiro-redis： https://github.com/alexxiyang/shiro-redis-spring-tutorial
  */
 @Configuration
