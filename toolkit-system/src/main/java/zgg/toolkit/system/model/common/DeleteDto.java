@@ -6,8 +6,9 @@ import zgg.toolkit.system.enums.StatusEnum;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by zgg on 2018/10/19
- * <p>通用单个删除 Dto</p>
+ * 通用单个删除 Dto
+ * @date 2018/10/19
+ * @author nerve
  */
 @Data
 public class DeleteDto {

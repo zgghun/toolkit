@@ -6,26 +6,29 @@ package zgg.toolkit.system.constant;
  */
 
 public class PerConst {
+    private static final String CREATE = ":create";
+    private static final String READ = ":read";
+    private static final String UPDATE = ":update";
+    private static final String DELETE = ":delete";
 
-    // user
-    public static final String user_view = "user:view";
-    public static final String user_save = "user:save";
-    public static final String user_enable = "user:enable";
-    public static final String user_set_role = "user:setRole";
+    public static final String USER_VIEW = "user" + READ;
+    public static final String USER_SAVE = "user" + CREATE;
+    public static final String USER_ENABLE = "user:enable";
+    public static final String USER_SET_ROLE = "user:setRole";
 
     // role
-    public static final String role_view = "role:view";
-    public static final String role_save = "role:save";
-    public static final String role_enable = "role:enable";
-    public static final String role_del = "role:del";
-    public static final String role_set_per = "role:setPer";
+    public static final String ROLE_VIEW = "role:view";
+    public static final String ROLE_SAVE = "role:save";
+    public static final String ROLE_ENABLE = "role:enable";
+    public static final String ROLE_DEL = "role:del";
+    public static final String ROLE_SET_PER = "role:setPer";
 
     // permission
-    public static final String per_view = "per:view";
-    public static final String per_save = "per:save";
-    public static final String per_del = "per:del";
-    public static final String per_module_save = "per:moduleSave";
-    public static final String per_module_enable = "per:moduleEnable";
-    public static final String per_module_del = "per:moduleDel";
+    public static final String PER_VIEW = "per:view";
+    public static final String PER_SAVE = "per:save";
+    public static final String PER_DEL = "per:del";
+    public static final String PER_MODULE_SAVE = "per:moduleSave";
+    public static final String PER_MODULE_ENABLE = "per:moduleEnable";
+    public static final String PER_MODULE_DEL = "per:moduleDel";
 
 }

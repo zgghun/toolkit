@@ -72,7 +72,7 @@ public class PermissionService extends BaseService {
         } else {
             Module module = moduleMapper.selectByPrimaryKey(dto.getId());
             if (module == null) {
-                throw new BaseException(ResultCode.DATA_ERROR);
+                throw new BaseException(ResultCode.ERROR_DATA_NOT_EXIST);
             }
             HelpUtils.copyProperties(dto, module);
             moduleMapper.updateByPrimaryKey(module);
@@ -92,7 +92,7 @@ public class PermissionService extends BaseService {
     public void enableModule(EnableDto dto) {
         Module module = moduleMapper.selectByPrimaryKey(dto.getId());
         if (module == null) {
-            throw new BaseException(ResultCode.DATA_ERROR);
+            throw new BaseException(ResultCode.ERROR_DATA_NOT_EXIST);
         }
         // 开启模块
         if (dto.getStatus() == StatusEnum.ENABLE) {
@@ -160,10 +160,10 @@ public class PermissionService extends BaseService {
     }
 
     /**
-     * 根据id或模块id删除权限
+     * 根据权限id或模块id删除权限
      *
-     * @param perId
-     * @param moduleId
+     * @param perId 权限 ID
+     * @param moduleId 模块 ID
      */
     public void deletePermission(Long perId, Long moduleId) {
         if (perId != null) {

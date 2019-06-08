@@ -1,26 +1,28 @@
 package zgg.toolkit.system.enums;
 
 /**
- * Created by zgg on 2018/10/19
- * 返回状态码<br>
+ * 返回状态码
  * 只有 1 为正常
+ * @date 2018/10/19
+ * @author nerve
  */
 public enum ResultCode {
-
-    //
+    // 全局统一异常代码
     OK(1, "OK"),
 
     ERROR(100, "系统异常"),
-    URI_ERROR(101, "请求地址不存在"),
-    PARAM_BIND_ERROR(103, "参数绑定错误"),
-    DATABASE_ERROR(104, "数据库错误"),
+    ERROR_OTHERS(200, "其他异常"),
 
-    BASE_ERROR(200, "其他异常"),
+    ERROR_URI_NOT_FOUND(101, "请求地址不存在"),
+    ERROR_PARAM_BIND(103, "参数绑定错误"),
+
     UNAUTHENTICATED(201, "未登录"),
     UNAUTHORIZED(202, "未授权"),
-    LOGIN_ERROR(203, "用户名或密码错误"),
+    ERROR_LOGIN(203, "用户名或密码错误"),
 
-    DATA_ERROR(210, "数据不存在或不唯一");
+    ERROR_DATABASE(104, "数据库错误"),
+    ERROR_DATA_NOT_EXIST(210, "数据不存在"),
+    ERROR_DATA_NOT_UNIQUE(211, "数据不唯一");
 
     private int code;
     private String note;

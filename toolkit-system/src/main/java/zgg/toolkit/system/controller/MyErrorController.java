@@ -31,7 +31,7 @@ public class MyErrorController extends AbstractErrorController {
         HashMap<Object, Object> map = new HashMap<>(16);
         map.put("status", status.value());
         map.put("uri", path);
-        return new CommonResult(ResultCode.URI_ERROR, map);
+        return new CommonResult(ResultCode.ERROR_URI_NOT_FOUND, map);
     }
 
 

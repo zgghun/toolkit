@@ -26,11 +26,11 @@ public class BaseController {
         return new CommonResult();
     }
 
-    protected CommonResult commonResult(ResultCode resultCode) {
-        return new CommonResult(resultCode);
-    }
-
     protected CommonResult commonResult(Object date) {
         return new CommonResult(date);
+    }
+
+    protected CommonResult commonResult(ResultCode resultCode) {
+        return new CommonResult(resultCode);
     }
 }

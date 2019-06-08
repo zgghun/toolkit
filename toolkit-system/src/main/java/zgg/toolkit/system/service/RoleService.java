@@ -57,7 +57,7 @@ public class RoleService extends BaseService {
         } else {
             Role role = roleMapper.selectByPrimaryKey(dto.getId());
             if (role == null) {
-                throw new BaseException(ResultCode.DATA_ERROR);
+                throw new BaseException(ResultCode.ERROR_DATA_NOT_EXIST);
             }
             HelpUtils.copyProperties(dto, role);
             roleMapper.updateByPrimaryKeySelective(role);

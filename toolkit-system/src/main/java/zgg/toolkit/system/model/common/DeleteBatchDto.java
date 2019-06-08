@@ -8,8 +8,9 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * Created by zgg on 2018/10/19
- * <p>通用批量删除 Dto</p>
+ * 通用批量删除 Dto
+ * @date 2018/10/19
+ * @author nerve
  */
 @Data
 public class DeleteBatchDto {

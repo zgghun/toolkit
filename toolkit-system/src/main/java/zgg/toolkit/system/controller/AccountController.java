@@ -74,9 +74,9 @@ public class AccountController extends BaseController {
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expire", 0);
         HttpSession session = request.getSession();
-        Integer height = 40;
-        Integer width = 140;
-        Integer count = 4;
+        int height = 40;
+        int width = 140;
+        int count = 4;
         Generator generator = new PngVCGenerator(width, height, count);
         try {
             generator.write2out(response.getOutputStream());

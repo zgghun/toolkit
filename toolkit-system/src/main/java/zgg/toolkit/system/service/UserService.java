@@ -73,7 +73,7 @@ public class UserService extends BaseService {
         } else {
             User user = userMapper.selectByPrimaryKey(dto.getId());
             if (user == null) {
-                throw new BaseException(ResultCode.DATA_ERROR);
+                throw new BaseException(ResultCode.ERROR_DATA_NOT_EXIST);
             }
             HelpUtils.copyProperties(dto, user);
             user.setPassword(HelpUtils.md5(dto.getPassword()));
@@ -196,7 +196,7 @@ public class UserService extends BaseService {
             return users.get(0);
         }
         if (users.size() > 1) {
-            throw new BaseException(ResultCode.DATA_ERROR);
+            throw new BaseException(ResultCode.ERROR_DATA_NOT_EXIST);
         }
         return null;
     }

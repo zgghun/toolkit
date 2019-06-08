@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import zgg.toolkit.common.util.JsonUtils;
 import zgg.toolkit.system.base.BaseException;
 import zgg.toolkit.system.enums.RequestType;
@@ -24,11 +25,11 @@ import java.util.Map;
 
 /**
  * 全局异常处理类
- * Created by zgg on 2018/08/27
- * 可使用@RestControllerAdvice 直接返回 json 对象
+ * @date 2018/08/27
+ * @author nerve
  */
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
     private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
@@ -36,49 +37,45 @@ public class GlobalExceptionHandler {
 
     // 参数绑定错误
     @ExceptionHandler(BindException.class)
-    public void bindExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BindException ex) {
+    public CommonResult bindExceptionHandler(BindException ex) {
         logger.warn(ex.toString());
         Map<String, String> map = new HashMap<>(16);
         ex.getFieldErrors()
                 .forEach(it -> map.put(it.getField(), it.getDefaultMessage()));
-        CommonResult result = new CommonResult(ResultCode.PARAM_BIND_ERROR, map);
-        errorDeal(req, rep, result);
+        return new CommonResult(ResultCode.ERROR_PARAM_BIND, map);
     }
 
     @ExceptionHandler(AuthenticationException.class)
-    public Object accountExceptionHandler(HttpServletRequest req, HttpServletResponse rep, AuthenticationException ex) {
+    public CommonResult accountExceptionHandler(AuthenticationException ex) {
         logger.warn(ex.toString());
-        return new CommonResult(ResultCode.LOGIN_ERROR);
+        return new CommonResult(ResultCode.ERROR_LOGIN);
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    public Object permissionExceptionHandler(UnauthorizedException ex) {
+    public CommonResult permissionExceptionHandler(UnauthorizedException ex) {
         logger.warn(ex.toString());
         return new CommonResult(ResultCode.UNAUTHORIZED, ex.toString());
     }
 
     // 自定义通用错误
     @ExceptionHandler(BaseException.class)
-    public void baseExceptionHandler(HttpServletRequest req, HttpServletResponse rep, BaseException ex) {
+    public CommonResult baseExceptionHandler(BaseException ex) {
         logger.error(ex.toString());
-        CommonResult result = new CommonResult(ResultCode.BASE_ERROR, ex.getMessage());
-        errorDeal(req, rep, result);
+        return new CommonResult(ResultCode.ERROR_OTHERS, ex.getMessage());
     }
 
     // 数据库错误
     @ExceptionHandler(DataAccessException.class)
-    public void sqlExceptionHandler(HttpServletRequest req, HttpServletResponse rep, DataAccessException ex) {
+    public CommonResult sqlExceptionHandler(DataAccessException ex) {
         logger.error(ex.getMessage());
-        CommonResult result = new CommonResult(ResultCode.DATABASE_ERROR, ex.getCause().getMessage());
-        errorDeal(req, rep, result);
+        return new CommonResult(ResultCode.ERROR_DATABASE, ex.getCause().getMessage());
     }
 
     // 系统错误
     @ExceptionHandler(Exception.class)
-    public void exceptionHandler(HttpServletRequest req, HttpServletResponse rep, Exception ex) {
+    public CommonResult exceptionHandler(Exception ex) {
         logger.error(ex.toString());
-        CommonResult result = new CommonResult(ResultCode.ERROR, ex.getMessage());
-        errorDeal(req, rep, result);
+        return new CommonResult(ResultCode.ERROR, ex.getMessage());
     }
 
 

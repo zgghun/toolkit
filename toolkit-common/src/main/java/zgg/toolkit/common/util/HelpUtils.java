@@ -4,8 +4,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.util.DigestUtils;
 
 /**
- * Created by zgg on 2018/10/26
  * 工具类
+ * @Date 2018/10/26
+ * @author nerve
  */
 
 public class HelpUtils {

@@ -8,6 +8,6 @@ public enum GenderEnum {
     MALE,
     // 女
     FEMALE,
-    // 未知
+    // 未知/保密
     UNKNOWN
 }
