@@ -36,12 +36,12 @@ public class MyWebMvcConfig implements WebMvcConfigurer {
         registry.addFormatter(new Formatter<LocalDateTime>() {
             @Override
             public LocalDateTime parse(String s, Locale locale) throws ParseException {
-                return DateUtils.parse(s);
+                return DateUtils.parseDateTime(s);
             }
 
             @Override
             public String print(LocalDateTime dateTime, Locale locale) {
-                return DateUtils.format(dateTime);
+                return DateUtils.formatDateTime(dateTime);
             }
         });
         registry.addFormatter(new Formatter<LocalDate>() {

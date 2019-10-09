@@ -15,7 +15,7 @@ spring:
     name: toolkit-system
   jackson:
     time-zone: GMT+8
-#    date-format: yyyy-MM-dd HH:mm:ss
+#    date-formatDateTime: yyyy-MM-dd HH:mm:ss
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: ENC(RWSJ2ARZqRWloeBPLriTeBgzt18frPzvIlmvKnIVQEC7BPAjQExVAV+a+/o8H5vO2+MYT32ckpZ4CvXc1Q1KCw==)

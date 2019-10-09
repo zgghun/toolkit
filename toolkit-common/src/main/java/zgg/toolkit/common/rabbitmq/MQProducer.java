@@ -10,7 +10,7 @@ import java.util.List;
  * Created by zgg on 2018/12/11
  */
 @Component
-public class MqProducer {
+public class MQProducer {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
@@ -18,14 +18,14 @@ public class MqProducer {
      * 发送邮件id 到rabbit
      */
     public void sendEmailToMq(List<Long> emailIds) {
-        emailIds.forEach(id -> rabbitTemplate.convertAndSend(MqConst.DIRECT_EXCHANGE, MqConst.EMAIL_QUEUE, id));
+        emailIds.forEach(id -> rabbitTemplate.convertAndSend(MQConst.DIRECT_EXCHANGE, MQConst.EMAIL_QUEUE, id));
     }
 
     /**
      * 发送手机验证码id 到rabbit
      */
     public void sendVerifyCodeToMq(List<Long> verifyCodeIds) {
-        verifyCodeIds.forEach(id -> rabbitTemplate.convertAndSend(MqConst.DIRECT_EXCHANGE, MqConst.VERIFY_CODE_QUEUE, id));
+        verifyCodeIds.forEach(id -> rabbitTemplate.convertAndSend(MQConst.DIRECT_EXCHANGE, MQConst.VERIFY_CODE_QUEUE, id));
     }
 
 }

@@ -31,7 +31,7 @@ public class JsonUtils {
             .registerTypeAdapter(LocalDateTime.class, new JsonSerializer<LocalDateTime>() {
                 @Override
                 public JsonElement serialize(LocalDateTime src, Type typeOfT, JsonSerializationContext context) {
-                    return new JsonPrimitive(DateUtils.format(src));
+                    return new JsonPrimitive(DateUtils.formatDateTime(src));
                 }
             })
             .registerTypeAdapter(LocalDate.class, new JsonSerializer<LocalDate>() {
@@ -45,7 +45,7 @@ public class JsonUtils {
             .registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
                 @Override
                 public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-                    return DateUtils.parse(json.getAsString());
+                    return DateUtils.parseDateTime(json.getAsString());
                 }
             })
             .registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {

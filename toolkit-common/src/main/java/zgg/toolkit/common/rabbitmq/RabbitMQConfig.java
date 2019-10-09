@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * 初始化 queues, exchanges 并且将 queues 和 exchanges 绑定
  */
 @Configuration
-public class RabbitMqConfig {
+public class RabbitMQConfig {
     @Autowired
     private ConnectionFactory connectionFactory;
 
@@ -28,27 +28,27 @@ public class RabbitMqConfig {
 
     @Bean
     public Queue emailQueue() {
-        return new Queue(MqConst.EMAIL_QUEUE);
+        return new Queue(MQConst.EMAIL_QUEUE);
     }
 
     @Bean
     public Queue verifyCodeQueue() {
-        return new Queue(MqConst.VERIFY_CODE_QUEUE);
+        return new Queue(MQConst.VERIFY_CODE_QUEUE);
     }
 
     @Bean
     public DirectExchange directExchange() {
-        return new DirectExchange(MqConst.DIRECT_EXCHANGE);
+        return new DirectExchange(MQConst.DIRECT_EXCHANGE);
     }
 
     @Bean
     public FanoutExchange fanoutExchange() {
-        return new FanoutExchange(MqConst.FANOUT_EXCHANGE);
+        return new FanoutExchange(MQConst.FANOUT_EXCHANGE);
     }
 
     @Bean
     public TopicExchange topicExchange() {
-        return new TopicExchange(MqConst.TOPIC_EXCHANGE);
+        return new TopicExchange(MQConst.TOPIC_EXCHANGE);
     }
 
     /**
@@ -57,12 +57,12 @@ public class RabbitMqConfig {
      */
     @Bean
     public Binding bindingTopicExchangeWithEmailQueue(Queue emailQueue, DirectExchange directExchange) {
-        return BindingBuilder.bind(emailQueue).to(directExchange).with(MqConst.EMAIL_QUEUE);
+        return BindingBuilder.bind(emailQueue).to(directExchange).with(MQConst.EMAIL_QUEUE);
     }
 
     @Bean
     public Binding bindingTopicExchangeWithVerifyCodeQueue(@Qualifier("verifyCodeQueue") Queue queue, DirectExchange directExchange) {
-        return BindingBuilder.bind(queue).to(directExchange).with(MqConst.VERIFY_CODE_QUEUE);
+        return BindingBuilder.bind(queue).to(directExchange).with(MQConst.VERIFY_CODE_QUEUE);
     }
 
 }

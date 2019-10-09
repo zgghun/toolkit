@@ -8,7 +8,7 @@ import java.time.LocalTime;
 /**
  * <p>分布式自增长ID</p>
  * <pre>
- *     Twitter 的 Snowflake　JAVA实现方案
+ *     Twitter 的 Snowflake JAVA实现方案
  * </pre>
  * 其核心代码为IdWorker这个类，原理、结构如下，我们分别用一个 0 表示一位，用—分割各个部分：
  * 0 - 0000000000 0000000000 0000000000 0000000000 0 - 00000 - 00000 - 000000000000
@@ -81,7 +81,7 @@ public class IdWorker {
     /**
      * 获取下一个ID
      */
-    public synchronized long generateNextId() {
+    private synchronized long generateNextId() {
         long timestamp = timeGen();
         if (timestamp < lastTimestamp) {
             throw new RuntimeException(String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));

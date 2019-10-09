@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import zgg.toolkit.apitool.ToolkitApiApplication;
 import zgg.toolkit.common.ToolkitCommonApplication;
-import zgg.toolkit.common.rabbitmq.MqProducer;
+import zgg.toolkit.common.rabbitmq.MQProducer;
 import zgg.toolkit.system.ToolkitSystemApplication;
 
 import java.util.Arrays;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 @SpringBootTest(classes = {ToolkitApiApplication.class, ToolkitSystemApplication.class, ToolkitCommonApplication.class})
 public class ToolkitApiApplicationTests {
     @Autowired
-    private MqProducer mqService;
+    private MQProducer mqService;
 
 
     @Test

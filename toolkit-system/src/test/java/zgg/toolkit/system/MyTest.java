@@ -74,11 +74,11 @@ public class MyTest {
     @Test
     public void test4() {
         String dateTime = "2018-10-11 10:23:00";
-        log.info(DateUtils.parse(dateTime).toString());
+        log.info(DateUtils.parseDateTime(dateTime).toString());
 
         LocalDateTime dateTime1 = LocalDateTime.now();
-        log.info(DateUtils.format(dateTime1));
-        log.info(DateUtils.format(dateTime1, "yyyy年MM月dd HH:mm:ss"));
+        log.info(DateUtils.formatDateTime(dateTime1));
+        log.info(DateUtils.formatDateTime(dateTime1, "yyyy年MM月dd HH:mm:ss"));
     }
 
 

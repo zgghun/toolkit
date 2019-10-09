@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Created by zgg on 2018/10/25
@@ -18,11 +19,12 @@ public class DateUtils {
     /**
      * {@link LocalDateTime} 解析
      *
-     * @param dateTime
+     * @param dateTime 日期时间字符串
      * @param pattern  默认 {@value YMDHMS}
-     * @return
+     * @return LocalDateTime实例
+     * @throws DateTimeParseException if the text cannot be parsed
      */
-    public static LocalDateTime parse(String dateTime, String... pattern) {
+    public static LocalDateTime parseDateTime(String dateTime, String... pattern) {
         if (pattern.length == 0) {
             return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(YMDHMS));
         } else {
@@ -33,8 +35,8 @@ public class DateUtils {
     /**
      * {@link LocalDate} 解析
      *
-     * @param localDate
-     * @param pattern   默认 {@value YMD}
+     * @param localDate 日期字符串
+     * @param pattern   默认解析格式 {@value YMD}
      * @return
      */
     public static LocalDate parseDate(String localDate, String... pattern) {
@@ -48,8 +50,8 @@ public class DateUtils {
     /**
      * {@link LocalTime} 解析
      *
-     * @param localTime
-     * @param pattern   默认 {@value HMS}
+     * @param localTime 时间字符串
+     * @param pattern   默认解析格式 {@value HMS}
      * @return
      */
     public static LocalTime parseTime(String localTime, String... pattern) {
@@ -63,11 +65,11 @@ public class DateUtils {
     /**
      * {@link LocalDateTime} 格式化
      *
-     * @param dateTime
-     * @param pattern  默认 {@value YMDHMS}
-     * @return
+     * @param dateTime LocalDateTime
+     * @param pattern  默认解析格式 {@value YMDHMS}
+     * @return 格式化的日期时间字符串
      */
-    public static String format(LocalDateTime dateTime, String... pattern) {
+    public static String formatDateTime(LocalDateTime dateTime, String... pattern) {
         if (pattern.length == 0) {
             return dateTime.format(DateTimeFormatter.ofPattern(YMDHMS));
         } else {
@@ -78,9 +80,9 @@ public class DateUtils {
     /**
      * {@link LocalDate} 格式化
      *
-     * @param localDate
+     * @param localDate LocalDate
      * @param pattern   默认 {@value YMD}
-     * @return
+     * @return 格式化的日期字符串
      */
     public static String formatDate(LocalDate localDate, String... pattern) {
         if (pattern.length == 0) {
@@ -93,9 +95,9 @@ public class DateUtils {
     /**
      * {@link LocalTime} 格式化
      *
-     * @param localTime
+     * @param localTime LocalTime
      * @param pattern   默认 {@value HMS}
-     * @return
+     * @return 格式化的时间字符串
      */
     public static String formatTime(LocalTime localTime, String... pattern) {
         if (pattern.length == 0) {
